@@ -6,7 +6,100 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : May 23, 2023, 10:59:43 PM
     Author     : Admin
 */
+body {
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+}
 
-section {
-    height:100vh;
+.img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.social-login a.facebook {
+    background: #3b5998;
+}
+
+.social-login a.facebook:hover {
+    background: #344e86;
+}
+
+.social-login a.twitter {
+    background: #1da1f2;
+}
+
+.social-login a.twitter:hover {
+    background: #0d95e8;
+}
+
+.social-login a.google {
+    background: #ea4335;
+}
+
+.social-login a.google:hover {
+    background: #e82e1e;
+}
+
+.form-group {
+    overflow: hidden;
+    margin-bottom: 0;
+    padding: 15px 15px;
+    border-bottom: none;
+    position: relative;
+}
+
+.form-label {
+    position: absolute;
+    top: 50%;
+    pointer-events: none;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}
+
+
+.form-group input:valid ~ label , 
+.form-group input:focus ~ label {
+
+    z-index: 1;
+    padding: 0 10px;
+    background: #fff;
+    font-size: 0.7rem;
+    color: #31acf8;
+    transition: .3s all ease;
+    transform: translateY(-28px);
+
+}
+
+.form-group label {
+    margin-left: 10px;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 0;
+    color: #b3b3b3;
+}
+.divider::before , .divider::after{
+
+}
+@media   (max-width: 991.98px) {
+    .img {
+        height: 500px;
+    }
+}
+
+.contents,
+.img {
+    width: 50%;
+}
+
+@media (max-width: 1200px) {
+
+    .contents,
+    .img {
+        width: 100%;
+    }
 }
