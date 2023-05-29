@@ -13,10 +13,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="../../template/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../template/login.css">
+        <link rel="stylesheet" href="../../template/signup.css">
+        <link rel="stylesheet" href="../../../../Satoshi_Complete/Fonts/WEB/css/satoshi.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <div class="d-lg-flex half min-vh-100 login-page">
+        <div class="d-lg-flex min-vh-100 login-page">
             <div class="img-fluid img"
                  style="background-image: url('https://static.vecteezy.com/system/resources/previews/008/454/774/original/landscape-web-banner-template-in-blue-background-with-sneaker-shoes-design-vector.jpg');">
             </div>
@@ -31,12 +33,15 @@
                             </div>
                             <form>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" required name="username">
                                     <label class="form-label" for="">Username</label>
+                                    <input class="form-control" type="text" required>
+
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" required name="password">
                                     <label class="form-label" for="">Password</label>
+                                    <input id="password-input" class="form-control" type="password" required>
+                                    <i class="fa fa-eye" id="togglePassword" style=" cursor: pointer;"></i>
+
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="checkbox-area">
@@ -51,35 +56,51 @@
                                 <input class=" w-100 mt-3 p-2 btn btn-block btn-primary" type="submit" value="Log In">
 
                                 <div class="divider">
-                                    <span class="d-block text-center my-4 text-muted"> or</span>
+                                    <span class=" d-block text-center my-4 text-muted"> or</span>
                                 </div>
                                 <div class="social-login">
                                     <div class="mb-2">
                                         <a href="#"
                                            class="facebook text-light btn d-flex justify-content-center align-items-center">
-                                            <span class=""></span> Login with Facebook
+                                            <span class=""><i class="fa fa-facebook"></i></span>&nbsp; Login with Facebook
                                         </a>
                                     </div>
                                     <div class="mb-2">
                                         <a href="#"
                                            class="google text-light  btn d-flex justify-content-center align-items-center">
-                                            <span class=""></span> Login with Google
+                                            <span class=""><i class="fa fa-google"></i></span>&nbsp; Login with Google
                                         </a>
                                     </div>
                                     <div class="mb-2">
                                         <a href="#"
                                            class="twitter btn text-light  d-flex justify-content-center align-items-center">
-                                            <span class=" "></span> Login with Twitter
+                                            <span class=""><i class="fa fa-twitter"></i></span>&nbsp;  Login with Twitter
                                         </a>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
+
                     </div>
                 </div>
             </div>
 
         </div>
+
+
+        <script>
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password-input');
+
+            togglePassword.addEventListener('click', function (e) {
+                // toggle the type attribute
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                // toggle the eye slash icon
+                this.classList.toggle('fa-eye-slash');
+            });
+        </script>
 
     </body>
 </html>

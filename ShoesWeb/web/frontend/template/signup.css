@@ -1,3 +1,12 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 28, 2023, 4:19:10 PM
+    Author     : Admin
+*/
+
 body {
     background-color: #fff;
     font-family: 'Satoshi-Medium';
@@ -33,14 +42,18 @@ body {
     background: #e82e1e;
 }
 
+.social-login a {
+    font-size: 13px;
+}
+
+.social-login div {
+}
 
 .form-group {
     position: relative;
 }
-.social-login a{
-    font-size:13px;
 
-}
+
 
 #togglePassword {
     position: absolute;
@@ -52,7 +65,6 @@ body {
 
     color: #303030a8;
 }
-
 
 @media (max-width: 991.98px) {
     .img {
@@ -71,4 +83,39 @@ body {
     .img {
         width: 100%;
     }
+}
+
+#message {
+    display: none;
+
+}
+
+.invalid {
+    color: red;
+}
+
+.invalid:after {
+    position: relative;
+    right: -20px;
+    content: "✖";
+}
+
+.valid {
+    color: green;
+}
+
+.valid:after {
+    position: relative;
+    right: -20px;
+    content: "✔";
+}
+
+#alert-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 12px;
+    padding: 10px;
+    background: rgba(250, 60, 60, 0.404);
+    border-radius: 5px;
+    display: none;
 }
