@@ -13,13 +13,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.auth.UserLogin;
-import utils.EmailSending;
 
 /**
  *
  * @author Admin
  */
-public class SignupServlet extends HttpServlet {
+public class VerifyCode extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +35,10 @@ public class SignupServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignupServlet</title>");  
+            out.println("<title>Servlet VerifyCode</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignupServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet VerifyCode at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,9 +55,12 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-        
-        
+        HttpSession session = request.getSession();
+        UserLogin user =(UserLogin) session.getAttribute("user");
+        String inputAuthCode = request.getParameter("authCode");
+        if(user.getEmailConfirmationCode().equals(inputAuthCode)) {
+            
+        }
     } 
 
     /** 
@@ -71,23 +73,9 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        
-        UserLogin user = new UserLogin(username , email , password);
-        
-        EmailSending emailSending = new EmailSending();
-        boolean send = emailSending.sendEmail(user);
-        
-        if(send) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect("Verification.jsp");
-        }
-       
+        processRequest(request, response);
     }
-   
+
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

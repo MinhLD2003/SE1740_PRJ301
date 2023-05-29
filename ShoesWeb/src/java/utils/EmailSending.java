@@ -7,6 +7,7 @@ package utils;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -25,13 +26,15 @@ public class EmailSending {
         String usernameSender = "minhld8403@gmail.com";
         String passwordSender = "#anhlamk2003";
         try {
-            Properties pr = new Properties();
-            pr.setProperty("mail.smtp.host", "smtp.mail.com");
-            pr.setProperty("mail.smtp.host", "587");
-            pr.setProperty("mail.smtp.auth", "true");
-            pr.setProperty("mail.smtp.starttls.enable", "true");
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+            props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
+            props.put("mail.smtp.socketFactory.class",
+                    "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
+            props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
+            props.put("mail.smtp.port", "465"); //SMTP Port
 
-            Session session = Session.getInstance(pr, new Authenticator() {
+            Session session = Session.getInstance(props, new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(usernameSender, passwordSender);
@@ -45,7 +48,8 @@ public class EmailSending {
             mess.setText("Registerd successfully. Please verify your account with this code:" + user.getEmailConfirmationCode());
             Transport.send(mess);
             isSended = true;
-        } catch (Exception ex) {
+        } catch (MessagingException ex) {
+            System.out.println("Fail");
         }
         return isSended;
     }

@@ -27,7 +27,7 @@ public class UserLogin {
         PasswordHashing pswHash = new PasswordHashing();
         byte salt[] = pswHash.generateSalt();
         String passwordSalt1 = new String(salt, StandardCharsets.UTF_8);
-        String passwordHash1 = pswHash.generateHash(password, salt, emailAddress);
+        String passwordHash1 = pswHash.generateHash(password, salt, "SHA-256");
         
         this.emailConfirmationCode = "123456";
         this.username =  username;
