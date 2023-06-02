@@ -7,15 +7,18 @@ package utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Random;
+
 
 /**
  *
  * @author Admin
  */
-public class PasswordHashing {
-
+public class CodeProcessing {
+    public String getOtpCode() {
+        int otp = new Random().nextInt(900000) + 100000;
+        return Integer.toString(otp);
+    }
     public byte[] generateSalt() {
         byte[] bytes = new byte[20];
         SecureRandom scRnd = new SecureRandom();
@@ -31,7 +34,7 @@ public class PasswordHashing {
             byte[] hash = digest.digest(password.getBytes());
             return byteToStringHex(hash);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(PasswordHashing.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return null;
     }

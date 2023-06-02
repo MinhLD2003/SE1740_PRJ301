@@ -4,6 +4,7 @@
  */
 package utils;
 
+import java.util.Date;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -23,8 +24,8 @@ public class EmailSending {
 
     public boolean sendEmail(UserLogin user) {
         boolean isSended = false;
-        String usernameSender = "minhld8403@gmail.com";
-        String passwordSender = "#anhlamk2003";
+        String usernameSender = "bestshoesvietnam@gmail.com";
+        String passwordSender = "vnrzcqpntzjbzaog";
         try {
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,13 +44,14 @@ public class EmailSending {
             mess.setFrom(new InternetAddress(usernameSender));
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmailAddress()));
             mess.setSubject("User Email Verification.");
+            mess.setSentDate(new Date());
             mess.setText("Registerd successfully. Please verify your account with this code:" + user.getEmailConfirmationCode());
             Transport.send(mess);
-            
             isSended = true;
         } catch (MessagingException ex) {
             System.out.println(ex);
         }
+       
         return isSended;
     }
 

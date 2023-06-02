@@ -5,7 +5,7 @@
 package model.auth;
 
 import java.nio.charset.StandardCharsets;
-import utils.PasswordHashing;
+import utils.CodeProcessing;
 
 /**
  *
@@ -24,13 +24,11 @@ public class UserLogin {
     }
 
     public UserLogin(String username, String emailAddress, String password) {
-        PasswordHashing pswHash = new PasswordHashing();
+        CodeProcessing pswHash = new CodeProcessing();
         byte salt[] = pswHash.generateSalt();
         String passwordSalt1 = new String(salt, StandardCharsets.UTF_8);
         String passwordHash1 = pswHash.generateHash(password, salt, "SHA-256");
-        
-        this.emailConfirmationCode = "123456";
-        this.username =  username;
+        this.username = username;
         this.passwordHash = passwordHash1;
         this.passwordSalt = passwordSalt1;
         this.emailAddress = emailAddress;
