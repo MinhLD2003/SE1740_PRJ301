@@ -77,20 +77,20 @@ public class VerifyCode extends HttpServlet {
         HttpSession session = request.getSession();
         UserLogin user = (UserLogin) session.getAttribute("user");
         String authCode = request.getParameter("otpCode");
-        System.out.println(user.getEmailConfirmationCode());
+
         if (user.getEmailConfirmationCode().equals(authCode)) {
             response.sendRedirect("homepage.jsp");
         } else {
-            OTPTracker otpTracker = new OTPTracker();
-            if (otpTracker.isMaxAttempts(user)) {
-                response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
+            OTPTracker.inputNewOtp(user);
+            if (OTPTracker.isMaxAttempts(user)) {
+                int resendMessCode = 500;
+                request.setAttribute("resendMessCode", resendMessCode);
+                request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
+            } else {
+                int numsOfFails = OTPTracker.getNumsOfAttempts(user);
+                request.setAttribute("numsOfFails", numsOfFails);
+                request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
             }
-            else {
-            String warningCode = "500";
-            request.setAttribute("warning", warningCode);
-            int numsOfFails = otpTracker.getNumsOfAttempts(user);
-            request.setAttribute("numsOfFails", numsOfFails);
-            request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);}
         }
     }
 

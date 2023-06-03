@@ -15,9 +15,13 @@ import model.auth.UserLogin;
 public class OTPTracker {
 
     private static final int MAX_OTP_ATTEMPTS = 5;
-    private Map<UserLogin, Map<String, Integer>> otpAttempts = new HashMap<>();
+    private static final HashMap<UserLogin, Map<String, Integer>> otpAttempts = new HashMap<>();
 
-    private void inputNewOtp(UserLogin user) {
+    public OTPTracker() {
+
+    }
+
+    public static void inputNewOtp(UserLogin user) {
         String code = user.getEmailConfirmationCode();
         if (otpAttempts.containsKey(user)) {
             Map<String, Integer> attempts = otpAttempts.get(user);
@@ -33,20 +37,20 @@ public class OTPTracker {
         }
     }
 
-    public boolean isMaxAttempts(UserLogin user) {
+    public static boolean isMaxAttempts(UserLogin user) {
         String code = user.getEmailConfirmationCode();
-        inputNewOtp(user);
         Map<String, Integer> personalAttempts = otpAttempts.get(user);
         if (personalAttempts.get(code) > MAX_OTP_ATTEMPTS) {
-            personalAttempts.clear();
+            personalAttempts.remove(code);
             return true;
         }
-
         return false;
     }
 
-    public int getNumsOfAttempts(UserLogin user) {
+    public static int getNumsOfAttempts(UserLogin user) {
         Map<String, Integer> personalAttempts = otpAttempts.get(user);
         return personalAttempts.get(user.getEmailConfirmationCode());
     }
+
+    
 }

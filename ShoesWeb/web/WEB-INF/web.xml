@@ -8,6 +8,10 @@
         <servlet-name>VerifyCode</servlet-name>
         <servlet-class>controller.VerifyCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResendEmail</servlet-name>
+        <servlet-class>controller.ResendEmail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verifycode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResendEmail</servlet-name>
+        <url-pattern>/resend</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

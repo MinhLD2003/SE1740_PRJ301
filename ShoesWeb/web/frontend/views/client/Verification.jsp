@@ -12,36 +12,52 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../template/verification.css">
-        <link rel="stylesheet" href="../../template/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/verification.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/bootstrap.min.css">
     </head>
     <body>
-        <c:set var="numsOfFails" value= "${requestScope.numsOfFails}"></c:set>
-        <c:set var="warningCode" value= "${requestScope.warningCode}"></c:set>
-            <section class="mt-4 d-flex ">
-                <div class="container1">
-                    <div>
-                        <h1 class="title">Check your mail <span> <img style="width:40px" src="../../../images/email.png"></span></h1>
-                        <p>Please enter the 6-digit veritification code that was sent to your email.</p>
-                    </div>
-                    <form id="otp-form" method="post" action="<c:url value='/verifycode'/>">
-                    <input class="input-line" type="text" name="otpCode" pattern="[0-9]{6}">
+        <c:set var="failAttempts" value= "${requestScope.numsOfFails}"/>
+        <c:set var="resendMessCode" value= "${requestScope.resendMessCode}"/>
+        <c:set var="resendSuccessMessCode" value= "${requestScope.resendSuccessMessCode}"/>
+        <section class="mt-4 d-flex ">
+            <div class="container1">
+                <div>
+                    <h1 class="title">Check your mail <span> <img style="width:40px" src="${pageContext.request.contextPath}/images/email.png"></span></h1>
+                    <p>Please enter the 6-digit veritification code that was sent to your email.</p>
+                </div>
+                <form id="otp-form" method="post" action="<c:url value='/verifycode'/>">
+                    <input class="input-line" type="text" name="otpCode" pattern="[0-9]{6}" placeholder="######">
                     <input type="submit" id="verify-btn" value="Verify OTP">
-                    </form>
+                </form>
 
-
-
-                <a class="resend-link"href="#">Resend OTP code?</a>
-                <c:if test="${warningCode == 500}">
-                    <div class="warning">
+                <a id="resend-btn" class="resend-link"href="<c:url value='/resend'/>">Resend OTP code?</a>
+               
+                <c:if test="${alertResend eq 'resendMessage'}">
+                    <div style="color:red;">
+                        <p>Your OTP verification failed !!!</p>
+                        <p>Please click on the <strong>resend button </strong> for a new OTP !!!</p>
+                    </div>
+                </c:if>
+                <c:if test="${failAttempts > 0 && alertResend == null}">
+                    <div style="color:red;">
                         <p><strong>Warning!</strong> Invalid OTP Code</p>
-                        <p>You have attempted ${numsOfFails} times.</p>
+                        <p>You have attempted ${failAttempts} times.</p>
                     </div>
                 </c:if>
             </div>
         </section>
         <script type="text/javascript">
-
+              var resendAlert = "${resendMessCode}";
+              var resendSuccess = "${resendSuccessMessCode}";
+              if(resendAlert === "500") {
+                  document.getElementById('verify-btn').setAttribute('disabled' , '');
+              }
+             
+              if(resendSuccess === "200" ) {
+                  document.getElementById('verify-btn').removeAttribute('disabled');
+                  
+              }
         </script>
     </body>
 </html>

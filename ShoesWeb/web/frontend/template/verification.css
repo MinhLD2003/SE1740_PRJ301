@@ -62,11 +62,3 @@ section {
   display: block;
   margin-bottom: 10px;
 }
-.warning {
-  display: none;
-  
-}
-.warning p  {
-  margin-bottom:  0;
-  color:red;
-}
