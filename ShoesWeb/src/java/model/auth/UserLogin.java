@@ -5,6 +5,7 @@
 package model.auth;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import utils.CodeProcessing;
 
 /**
@@ -17,8 +18,11 @@ public class UserLogin {
     private String emailAddress;
     private String passwordSalt;
     private String passwordHash;
-    private String isActive;
     private String emailConfirmationCode;
+    private Date emailCofirmationTime;
+    private String passwordRecoveryToken;
+    private Date recoveryTokenTime;
+    private boolean isActive;
 
     public UserLogin() {
     }
@@ -28,6 +32,8 @@ public class UserLogin {
         byte salt[] = pswHash.generateSalt();
         String passwordSalt1 = new String(salt, StandardCharsets.UTF_8);
         String passwordHash1 = pswHash.generateHash(password, salt, "SHA-256");
+        Date now = new Date();
+        this.emailCofirmationTime = now;
         this.username = username;
         this.passwordHash = passwordHash1;
         this.passwordSalt = passwordSalt1;
@@ -66,11 +72,11 @@ public class UserLogin {
         this.passwordHash = passwordHash;
     }
 
-    public String getIsActive() {
+    public boolean isIsActive() {
         return isActive;
     }
 
-    public void setIsActive(String isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 
@@ -80,5 +86,29 @@ public class UserLogin {
 
     public void setEmailConfirmationCode(String emailConfirmationCode) {
         this.emailConfirmationCode = emailConfirmationCode;
+    }
+
+    public Date getEmailCofirmationTime() {
+        return emailCofirmationTime;
+    }
+
+    public void setEmailCofirmationTime(Date emailCofirmationTime) {
+        this.emailCofirmationTime = emailCofirmationTime;
+    }
+
+    public String getPasswordRecoveryToken() {
+        return passwordRecoveryToken;
+    }
+
+    public void setPasswordRecoveryToken(String passwordRecoveryToken) {
+        this.passwordRecoveryToken = passwordRecoveryToken;
+    }
+
+    public Date getRecoveryTokenTime() {
+        return recoveryTokenTime;
+    }
+
+    public void setRecoveryTokenTime(Date recoveryTokenTime) {
+        this.recoveryTokenTime = recoveryTokenTime;
     }
 }

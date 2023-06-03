@@ -11,9 +11,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Date;
 import model.auth.UserLogin;
 import utils.CodeProcessing;
 import utils.EmailSending;
+import utils.TimeConversion;
 
 /**
  *
@@ -79,6 +81,7 @@ public class SignupServlet extends HttpServlet {
         //-------------------------------
         UserLogin user = new UserLogin(username, email, password);
         CodeProcessing code = new CodeProcessing();
+     
         user.setEmailConfirmationCode(code.getOtpCode());
         //----------------------------------
         EmailSending emailSending = new EmailSending();

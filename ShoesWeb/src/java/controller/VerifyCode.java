@@ -12,8 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.auth.UserLogin;
-import utils.CodeProcessing;
-import utils.EmailSending;
+import service.UserLoginService;
 import utils.OTPTracker;
 
 /**
@@ -77,8 +76,9 @@ public class VerifyCode extends HttpServlet {
         HttpSession session = request.getSession();
         UserLogin user = (UserLogin) session.getAttribute("user");
         String authCode = request.getParameter("otpCode");
-
+        UserLoginService uLService = new UserLoginService();
         if (user.getEmailConfirmationCode().equals(authCode)) {
+            uLService.insertUserLogin(user);
             response.sendRedirect("homepage.jsp");
         } else {
             OTPTracker.inputNewOtp(user);

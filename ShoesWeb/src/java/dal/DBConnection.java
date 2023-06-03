@@ -13,10 +13,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-
-    public Connection connection;
-
-    public DBConnection() {
+    public Connection getConnection() {
+        Connection connection = null;
         try {
             // Edit URL , username, password to authenticate with your MS SQL Server
             String url = "jdbc:sqlserver://localhost:1433;databaseName= ShoesEcommerceWeb";
@@ -25,7 +23,8 @@ public class DBConnection {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+            return null;
         }
+        return connection;
     }
 }
