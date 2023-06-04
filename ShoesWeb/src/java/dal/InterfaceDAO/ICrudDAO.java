@@ -4,12 +4,15 @@
  */
 package dal.InterfaceDAO;
 
+import dal.MappingDAO.AttributesMapping;
+import java.util.List;
+
 /**
  *
  * @author Admin
  */
-public interface ICrudDAO {
+public interface ICrudDAO<T> {
     void update(String sql , Object... parameters);
     void insert(String sql , Object... parameters);
-    
+    <T> List<T> query(String sql , AttributesMapping <T> mapping ,  Object... parameters);
 }

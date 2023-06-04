@@ -10,12 +10,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.Date;
 import model.auth.UserLogin;
+import service.UserLoginService;
 import utils.CodeProcessing;
 import utils.EmailSending;
-import utils.TimeConversion;
+
 
 /**
  *
@@ -81,18 +80,17 @@ public class SignupServlet extends HttpServlet {
         //-------------------------------
         UserLogin user = new UserLogin(username, email, password);
         CodeProcessing code = new CodeProcessing();
-     
+
         user.setEmailConfirmationCode(code.getOtpCode());
         //----------------------------------
         EmailSending emailSending = new EmailSending();
         boolean isSent = emailSending.sendEmail(user);
 
         if (isSent) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect(request.getContextPath()+"/frontend/views/client/verification.jsp");
+            UserLoginService UService = new UserLoginService();
+            UService.insertUserLogin(user);
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
         }
-        
 
     }
 

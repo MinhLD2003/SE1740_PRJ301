@@ -6,20 +6,25 @@ package dal.ImplementDAO;
 
 import dal.DBConnection;
 import dal.InterfaceDAO.ICrudDAO;
+import dal.MappingDAO.AttributesMapping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class GenericDAO<T> implements ICrudDAO {
+public class GenericDAO<T> implements ICrudDAO<T> {
 
     private DBConnection db = new DBConnection();
 
     @Override
+
     public void update(String sql, Object... parameters) {
         PreparedStatement statement = null;
         Connection connection = null;
@@ -79,14 +84,45 @@ public class GenericDAO<T> implements ICrudDAO {
                     statement.setString(index, (String) param);
                 } else if (param instanceof Integer) {
                     statement.setInt(index, (Integer) param);
-                }else if (param instanceof Timestamp) {
+                } else if (param instanceof Timestamp) {
                     statement.setTimestamp(index, (Timestamp) param);
                 }
-                
 
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public <T> List<T> query(String sql, AttributesMapping<T> mapping, Object... parameters) {
+        List<T> queryList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection = db.getConnection();
+            statement = connection.prepareStatement(sql);
+            setParameters(statement, parameters);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                T newObject = mapping.mapAttributes(rs);
+                queryList.add(newObject);
+            }
+            return queryList;
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
         }
     }
 

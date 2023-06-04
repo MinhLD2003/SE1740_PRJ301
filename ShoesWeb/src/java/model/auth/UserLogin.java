@@ -19,10 +19,8 @@ public class UserLogin {
     private String passwordSalt;
     private String passwordHash;
     private String emailConfirmationCode;
-    private Date emailCofirmationTime;
     private String passwordRecoveryToken;
-    private Date recoveryTokenTime;
-    private boolean isActive;
+    private int isActive;
 
     public UserLogin() {
     }
@@ -32,12 +30,11 @@ public class UserLogin {
         byte salt[] = pswHash.generateSalt();
         String passwordSalt1 = new String(salt, StandardCharsets.UTF_8);
         String passwordHash1 = pswHash.generateHash(password, salt, "SHA-256");
-        Date now = new Date();
-        this.emailCofirmationTime = now;
         this.username = username;
         this.passwordHash = passwordHash1;
         this.passwordSalt = passwordSalt1;
         this.emailAddress = emailAddress;
+        this.isActive = 0;
     }
 
     public String getUsername() {
@@ -72,11 +69,11 @@ public class UserLogin {
         this.passwordHash = passwordHash;
     }
 
-    public boolean isIsActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
+    public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
 
@@ -88,14 +85,6 @@ public class UserLogin {
         this.emailConfirmationCode = emailConfirmationCode;
     }
 
-    public Date getEmailCofirmationTime() {
-        return emailCofirmationTime;
-    }
-
-    public void setEmailCofirmationTime(Date emailCofirmationTime) {
-        this.emailCofirmationTime = emailCofirmationTime;
-    }
-
     public String getPasswordRecoveryToken() {
         return passwordRecoveryToken;
     }
@@ -104,11 +93,4 @@ public class UserLogin {
         this.passwordRecoveryToken = passwordRecoveryToken;
     }
 
-    public Date getRecoveryTokenTime() {
-        return recoveryTokenTime;
-    }
-
-    public void setRecoveryTokenTime(Date recoveryTokenTime) {
-        this.recoveryTokenTime = recoveryTokenTime;
-    }
 }

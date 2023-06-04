@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
+
     public Connection getConnection() {
         Connection connection = null;
         try {
@@ -22,9 +23,10 @@ public class DBConnection {
             String password = "1234";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
+            return connection;
         } catch (ClassNotFoundException | SQLException ex) {
             return null;
         }
-        return connection;
+
     }
 }

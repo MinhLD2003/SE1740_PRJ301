@@ -35,7 +35,7 @@ public class ResendEmail extends HttpServlet {
         UserLogin user = (UserLogin)session.getAttribute("user");
         CodeProcessing codeProcessing = new CodeProcessing();
         user.setEmailConfirmationCode(codeProcessing.getOtpCode());
-        user.setEmailCofirmationTime(new Date());
+        
         EmailSending emailSending = new EmailSending();
         boolean isSent = emailSending.sendEmail(user);
         if(isSent) {

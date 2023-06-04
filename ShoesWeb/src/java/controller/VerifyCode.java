@@ -78,8 +78,9 @@ public class VerifyCode extends HttpServlet {
         String authCode = request.getParameter("otpCode");
         UserLoginService uLService = new UserLoginService();
         if (user.getEmailConfirmationCode().equals(authCode)) {
+            user.setIsActive(1);
             uLService.insertUserLogin(user);
-            response.sendRedirect("homepage.jsp");
+            response.sendRedirect("frontend/views/client/homepage.jsp");
         } else {
             OTPTracker.inputNewOtp(user);
             if (OTPTracker.isMaxAttempts(user)) {
