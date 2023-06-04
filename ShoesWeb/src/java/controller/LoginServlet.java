@@ -7,6 +7,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -73,8 +74,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("useranme");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String isRemembered = request.getParameter("remember");
         UserAccountService uAService = new UserAccountService();
         UserAccount foundAccount = uAService.getUserByUserName(username);
         CodeProcessing codeProcess = new CodeProcessing();
@@ -86,7 +88,25 @@ public class LoginServlet extends HttpServlet {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", foundAccount);
+
+                //------------------- Cookie Session
+                Cookie usernameCookie = new Cookie("username", username);
+                Cookie passwordCookie = new Cookie("password", password);
+                Cookie rememberCookie = new Cookie("isRemembered", isRemembered);
+                if (isRemembered != null) {
+                    usernameCookie.setMaxAge(60 * 60 * 24);
+                    passwordCookie.setMaxAge(60 * 60 * 24);
+                    rememberCookie.setMaxAge(60 * 60 * 24);
+                } else {
+                    usernameCookie.setMaxAge(0);
+                    passwordCookie.setMaxAge(0);
+                    rememberCookie.setMaxAge(0);
+                }
+                response.addCookie(usernameCookie);
+                response.addCookie(passwordCookie);
+
                 response.sendRedirect("frontend/views/client/homepage.jsp");
+
             } else {
                 String failLoginMess = "fail";
                 request.setAttribute("failLoginMess", failLoginMess);

@@ -79,9 +79,15 @@ public class SignupServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         //-------------------------------
+        UserAccountService uAService = new UserAccountService();
+        if(uAService.getUserByEmailAddress(email) != null ) {
+            String invalidAlert = "invalid";
+            request.setAttribute("invalidAlert", invalidAlert);
+            request.getRequestDispatcher(request.getContextPath() + "/frontend/views/client/signup.jsp").forward(request, response);
+        }
         UserAccount user = new UserAccount(username, email, password);
         CodeProcessing code = new CodeProcessing();
-       
+        
         user.setEmailConfirmationCode(code.getOtpCode());
         //----------------------------------
         EmailSending emailSending = new EmailSending();

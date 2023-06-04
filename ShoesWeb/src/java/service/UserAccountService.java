@@ -16,8 +16,11 @@ public class UserAccountService {
    
     public UserAccount getUserByUserName(String username) {
         String sql = "SELECT * FROM user_login WHERE username = ? and isActive = 1";
-        return uADAO.getUserByUserName(sql, username);
-        
+        return uADAO.getUserByAccountInfo(sql, username);   
+    } 
+    public UserAccount getUserByEmailAddress(String email) {
+        String sql = "SELECT * FROM user_login WHERE email_address = ? and isActive = 1";
+        return uADAO.getUserByAccountInfo(sql, email);   
     } 
     public void insertUserLogin(UserAccount user) {
         String sql = "INSERT INTO [user_login]\n"

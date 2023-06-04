@@ -70,9 +70,11 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     }
 
     protected void setParameters(PreparedStatement statement, Object... parameters) {
+        
         try {
             for (int i = 0; i < parameters.length; i++) {
                 Object param = parameters[i];
+                System.out.println(param);
                 int index = i + 1;
                 if (param instanceof String) {
                     statement.setString(index, (String) param);

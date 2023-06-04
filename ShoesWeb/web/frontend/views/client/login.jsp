@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="checkbox-area">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="remember">
                                         <span class="checkmark"></span>
                                         <span class="text-muted">Remember me</span>
                                     </div>

@@ -4,7 +4,7 @@
  */
 package dal.ImplementDAO;
 
-import dal.DBConnection;
+
 import dal.MappingDAO.UserMapping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class UserAccountDAO extends GenericDAO<UserAccount> {
 
     private UserMapping userMapping = new UserMapping();
 
-    public UserAccount getUserByUserName(String sql, Object... parameters) {
+    public UserAccount getUserByAccountInfo(String sql, Object... parameters) {
         
         Connection con = null;
         PreparedStatement statement = null;
@@ -36,7 +36,7 @@ public class UserAccountDAO extends GenericDAO<UserAccount> {
             }
             return userAccount;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
         } finally {
             try {
                 if (con != null) {
