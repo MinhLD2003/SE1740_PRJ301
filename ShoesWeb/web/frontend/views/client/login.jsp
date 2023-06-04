@@ -12,9 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../../template/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../template/signup.css">
-        <link rel="stylesheet" href="../../../../Satoshi_Complete/Fonts/WEB/css/satoshi.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/login.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/Satoshi_Complete/Fonts/WEB/css/satoshi.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
@@ -22,7 +22,7 @@
             <div class="img-fluid img"
                  style="background-image: url('https://static.vecteezy.com/system/resources/previews/008/454/774/original/landscape-web-banner-template-in-blue-background-with-sneaker-shoes-design-vector.jpg');">
             </div>
-
+            <c:set var="failLoginMess" value="${requestScope.failLoginMess}" />
             <div class="contents">
                 <div class="container">
                     <div class="d-flex justify-content-center align-content-center">
@@ -31,15 +31,20 @@
                                 <h3>Log in</h3>
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, ullam!</p>
                             </div>
-                            <form>
+                            <c:if test="${failLoginMess != null}">
+                                <div class="login-fail-alert">
+                                    Invalid username or password.Please try again.
+                                </div>
+                            </c:if>
+                            <form action="<c:url value='/login'/>" method ="post">
                                 <div class="form-group">
                                     <label class="form-label" for="">Username</label>
-                                    <input class="form-control" type="text" required>
+                                    <input class="form-control" type="text" name="username" required>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="">Password</label>
-                                    <input id="password-input" class="form-control" type="password" required>
+                                    <input id="password-input" class="form-control" type="password" name="password" required>
                                     <i class="fa fa-eye" id="togglePassword" style=" cursor: pointer;"></i>
 
                                 </div>
@@ -87,8 +92,6 @@
             </div>
 
         </div>
-
-
         <script>
             const togglePassword = document.getElementById('togglePassword');
             const password = document.getElementById('password-input');

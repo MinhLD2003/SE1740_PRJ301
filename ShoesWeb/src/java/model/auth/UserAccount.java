@@ -4,15 +4,13 @@
  */
 package model.auth;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import utils.CodeProcessing;
 
 /**
  *
  * @author Admin
  */
-public class UserLogin {
+public class UserAccount {
 
     private String username;
     private String emailAddress;
@@ -22,19 +20,20 @@ public class UserLogin {
     private String passwordRecoveryToken;
     private int isActive;
 
-    public UserLogin() {
+    public UserAccount() {
     }
 
-    public UserLogin(String username, String emailAddress, String password) {
-        CodeProcessing pswHash = new CodeProcessing();
-        byte salt[] = pswHash.generateSalt();
-        String passwordSalt1 = new String(salt, StandardCharsets.UTF_8);
-        String passwordHash1 = pswHash.generateHash(password, salt, "SHA-256");
+    public UserAccount(String username, String emailAddress, String password) {
+        CodeProcessing codeProcessing = new CodeProcessing();
+        byte[] salt = codeProcessing.generateSalt();
+        byte[] passwordhash = codeProcessing.getEncryptedPassword(password, salt);
         this.username = username;
-        this.passwordHash = passwordHash1;
-        this.passwordSalt = passwordSalt1;
+        this.passwordHash = codeProcessing.bytesToString(passwordhash);
+        this.passwordSalt = codeProcessing.bytesToString(salt);
         this.emailAddress = emailAddress;
         this.isActive = 0;
+        System.out.println(passwordHash);
+        System.out.println(passwordSalt);
     }
 
     public String getUsername() {

@@ -4,33 +4,34 @@
  */
 package service;
 
-import dal.ImplementDAO.UserLoginDAO;
-import model.auth.UserLogin;
-import utils.TimeConversion;
-
+import dal.ImplementDAO.UserAccountDAO;
+import model.auth.UserAccount;
 /**
  *
  * @author Admin
  */
-public class UserLoginService {
+public class UserAccountService {
 
-    private UserLoginDAO ulDAO = new UserLoginDAO();
-    TimeConversion timeconversion = new TimeConversion();
-
-    public void insertUserLogin(UserLogin user) {
+    UserAccountDAO uADAO = new UserAccountDAO();
+   
+    public UserAccount getUserByUserName(String username) {
+        String sql = "SELECT * FROM user_login WHERE username = ? and isActive = 1";
+        return uADAO.getUserByUserName(sql, username);
+        
+    } 
+    public void insertUserLogin(UserAccount user) {
         String sql = "INSERT INTO [user_login]\n"
                 + "           ([username]\n"
                 + "           ,[passwordhash]\n"
                 + "           ,[passwordsalt]\n"
                 + "           ,[email_address]\n"
-                + "           ,[email_confirmation_token]\n"
                 + "           ,[isActive])\n"
-                + "     VALUES ( ?, ? , ? , ? , ?, ? );";
-        ulDAO.insert(sql, user.getUsername(),
+                + "     VALUES ( ?, ? , ? , ? , ?);";
+        uADAO.insert(sql, 
+                user.getUsername(),
                 user.getPasswordHash(),
                 user.getPasswordSalt(),
                 user.getEmailAddress(),
-                user.getEmailConfirmationCode(),
                 user.getIsActive());
     }
 }

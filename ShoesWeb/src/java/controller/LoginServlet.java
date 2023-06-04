@@ -14,14 +14,12 @@ import jakarta.servlet.http.HttpSession;
 import model.auth.UserAccount;
 import service.UserAccountService;
 import utils.CodeProcessing;
-import utils.EmailSending;
-
 
 /**
  *
  * @author Admin
  */
-public class SignupServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class SignupServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignupServlet</title>");
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignupServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +59,7 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
@@ -75,24 +73,27 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String username = request.getParameter("useranme");
         String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        //-------------------------------
-        UserAccount user = new UserAccount(username, email, password);
-        CodeProcessing code = new CodeProcessing();
-       
-        user.setEmailConfirmationCode(code.getOtpCode());
-        //----------------------------------
-        EmailSending emailSending = new EmailSending();
-        boolean isSent = emailSending.sendEmail(user);
+        UserAccountService uAService = new UserAccountService();
+        UserAccount foundAccount = uAService.getUserByUserName(username);
+        CodeProcessing codeProcess = new CodeProcessing();
+        if (foundAccount == null) {
+            String failLoginMess = "fail";
+            request.setAttribute("failLoginMess", failLoginMess);
+            request.getRequestDispatcher("/frontend/views/client/login.jsp").forward(request, response);
+        } else {
+            if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", foundAccount);
+                response.sendRedirect("frontend/views/client/homepage.jsp");
+            } else {
+                String failLoginMess = "fail";
+                request.setAttribute("failLoginMess", failLoginMess);
+                request.getRequestDispatcher("/frontend/views/client/login.jsp").forward(request, response);
+            }
 
-        if (isSent) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
         }
-
     }
 
     /**

@@ -6,7 +6,7 @@ package utils;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.auth.UserLogin;
+import model.auth.UserAccount;
 
 /**
  *
@@ -15,13 +15,13 @@ import model.auth.UserLogin;
 public class OTPTracker {
 
     private static final int MAX_OTP_ATTEMPTS = 5;
-    private static final HashMap<UserLogin, Map<String, Integer>> otpAttempts = new HashMap<>();
+    private static final HashMap<UserAccount, Map<String, Integer>> otpAttempts = new HashMap<>();
 
     public OTPTracker() {
 
     }
 
-    public static void inputNewOtp(UserLogin user) {
+    public static void inputNewOtp(UserAccount user) {
         String code = user.getEmailConfirmationCode();
         if (otpAttempts.containsKey(user)) {
             Map<String, Integer> attempts = otpAttempts.get(user);
@@ -37,7 +37,7 @@ public class OTPTracker {
         }
     }
 
-    public static boolean isMaxAttempts(UserLogin user) {
+    public static boolean isMaxAttempts(UserAccount user) {
         String code = user.getEmailConfirmationCode();
         Map<String, Integer> personalAttempts = otpAttempts.get(user);
         if (personalAttempts.get(code) > MAX_OTP_ATTEMPTS) {
@@ -47,7 +47,7 @@ public class OTPTracker {
         return false;
     }
 
-    public static int getNumsOfAttempts(UserLogin user) {
+    public static int getNumsOfAttempts(UserAccount user) {
         Map<String, Integer> personalAttempts = otpAttempts.get(user);
         return personalAttempts.get(user.getEmailConfirmationCode());
     }

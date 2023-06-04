@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.auth.UserLogin;
-import service.UserLoginService;
+import model.auth.UserAccount;
+import service.UserAccountService;
 import utils.OTPTracker;
 
 /**
@@ -74,9 +74,9 @@ public class VerifyCode extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserLogin user = (UserLogin) session.getAttribute("user");
+        UserAccount user = (UserAccount) session.getAttribute("user");
         String authCode = request.getParameter("otpCode");
-        UserLoginService uLService = new UserLoginService();
+        UserAccountService uLService = new UserAccountService();
         if (user.getEmailConfirmationCode().equals(authCode)) {
             user.setIsActive(1);
             uLService.insertUserLogin(user);

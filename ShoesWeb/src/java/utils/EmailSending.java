@@ -14,7 +14,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.auth.UserLogin;
+import model.auth.UserAccount;
 
 /**
  *
@@ -22,7 +22,7 @@ import model.auth.UserLogin;
  */
 public class EmailSending {
 
-    public boolean sendEmail(UserLogin user) {
+    public boolean sendEmail(UserAccount user) {
         boolean isSended = false;
         String usernameSender = "bestshoesvietnam@gmail.com";
         String passwordSender = "vnrzcqpntzjbzaog";

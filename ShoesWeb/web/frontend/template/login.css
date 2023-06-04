@@ -47,12 +47,18 @@ body {
     top: 63%;
     right: 10px;
 }
-
-.form-label {
-
-    color: #303030a8;
+input::-ms-clear, input::-ms-reveal {
+    display: none;
 }
-
+.form-label {
+    color: #303038;
+}
+.login-fail-alert {
+    padding:10px 0;
+    background:#FB998D;
+    color:#FF4B47;
+    text-align: center;
+}
 
 @media (max-width: 991.98px) {
     .img {

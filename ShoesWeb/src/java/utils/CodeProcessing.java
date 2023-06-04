@@ -4,50 +4,76 @@
  */
 package utils;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Random;
-
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 /**
  *
  * @author Admin
  */
 public class CodeProcessing {
+
     public String getOtpCode() {
         int otp = new Random().nextInt(900000) + 100000;
         return Integer.toString(otp);
     }
+
     public byte[] generateSalt() {
-        byte[] bytes = new byte[20];
+        byte[] bytes = new byte[8];
         SecureRandom scRnd = new SecureRandom();
         scRnd.nextBytes(bytes);
         return bytes;
     }
 
-    public String generateHash(String password, byte[] salt, String algorithm) {
+    public boolean authenticate(String attemptedPassword, String encryptedPassword, String salt) {
+        // Encrypt the clear-text password using the same salt that was used to
+        // encrypt the original password
+        byte[] encryptedPasswordBytes = stringToBytes(encryptedPassword);
+        byte[] saltBytes = stringToBytes(salt);
+        byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, saltBytes);
+        // Authentication succeeds if encrypted password that the user entered
+        // is equal to the stored hash
+        return Arrays.equals(encryptedPasswordBytes, encryptedAttemptedPassword);
+    }
+
+    public byte[] getEncryptedPassword(String password, byte[] salt) {
         try {
-            MessageDigest digest = MessageDigest.getInstance(algorithm);
-            digest.reset();
-            digest.update(salt);
-            byte[] hash = digest.digest(password.getBytes());
-            return byteToStringHex(hash);
+           
+            String algorithm = "PBKDF2WithHmacSHA1";    
+            int derivedKeyLength = 512;
+            int iterations = 4096;
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
+            SecretKeyFactory f = SecretKeyFactory.getInstance(algorithm);
+            try {
+                return f.generateSecret(spec).getEncoded();
+            } catch (InvalidKeySpecException ex) {
+                System.out.println(ex);
+            }
         } catch (NoSuchAlgorithmException ex) {
             System.out.println(ex);
         }
         return null;
     }
-
-    private String byteToStringHex(byte[] hash) {
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
+    public String bytesToString(byte[] bytes) {
+        StringBuilder str = new StringBuilder();
+        for(int i = 0 ; i < bytes.length ;i++) {
+            str.append(bytes[i]).append(",");
         }
-        return hexString.toString();
+        return str.toString();
     }
+    public byte[] stringToBytes(String str) {
+        String[] splitArray = str.split(",");
+        byte[] bytes = new byte[splitArray.length];
+        for(int i = 0 ;i < splitArray.length ;i++) {
+            bytes[i] = Byte.parseByte(splitArray[i]);
+        }
+        return bytes;
+    }
+    
 }

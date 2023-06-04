@@ -6,17 +6,17 @@ package dal.MappingDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.auth.UserLogin;
+import model.auth.UserAccount;
 
 /**
  *
  * @author Admin
  */
-public class UserMapping implements AttributesMapping<UserLogin> {
+public class UserMapping implements AttributesMapping<UserAccount> {
 
     @Override
-    public UserLogin mapAttributes(ResultSet rs) {
-       UserLogin user = new UserLogin();
+    public UserAccount mapAttributes(ResultSet rs) {
+       UserAccount user = new UserAccount();
        try {
            user.setUsername(rs.getString("username"));
            user.setPasswordHash(rs.getString("passwordhash"));

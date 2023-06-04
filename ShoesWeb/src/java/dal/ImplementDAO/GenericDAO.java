@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class GenericDAO<T> implements ICrudDAO<T> {
 
-    private DBConnection db = new DBConnection();
+    protected DBConnection db = new DBConnection();
 
     @Override
 
@@ -35,14 +35,11 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             statement.executeUpdate();
 
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         } finally {
             try {
                 if (connection != null) {
                     connection.close();
-                }
-                if (statement != null) {
-                    statement.close();
                 }
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
@@ -60,14 +57,11 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             setParameters(statement, parameters);
             statement.executeUpdate();
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         } finally {
             try {
                 if (connection != null) {
                     connection.close();
-                }
-                if (statement != null) {
-                    statement.close();
                 }
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
@@ -75,7 +69,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         }
     }
 
-    private void setParameters(PreparedStatement statement, Object... parameters) {
+    protected void setParameters(PreparedStatement statement, Object... parameters) {
         try {
             for (int i = 0; i < parameters.length; i++) {
                 Object param = parameters[i];

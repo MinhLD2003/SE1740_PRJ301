@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
-import model.auth.UserLogin;
+import model.auth.UserAccount;
 import utils.CodeProcessing;
 import utils.EmailSending;
 
@@ -32,7 +32,7 @@ public class ResendEmail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserLogin user = (UserLogin)session.getAttribute("user");
+        UserAccount user = (UserAccount)session.getAttribute("user");
         CodeProcessing codeProcessing = new CodeProcessing();
         user.setEmailConfirmationCode(codeProcessing.getOtpCode());
         
