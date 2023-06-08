@@ -12,10 +12,9 @@ body {
     font-family: 'Satoshi-Medium';
 }
 
-.img {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.inner-image img {
+    width:110vh;
+    height: 110vh;
 }
 
 .social-login a.facebook {
@@ -51,10 +50,11 @@ body {
 
 .form-group {
     position: relative;
+
 }
-
-
-
+input{
+    border-radius:10px;
+}
 #togglePassword {
     position: absolute;
     top: 63%;
@@ -65,7 +65,10 @@ body {
 
     color: #303030a8;
 }
-
+#inuse-alert {
+    color:red;
+    display :none;
+}
 @media (max-width: 991.98px) {
     .img {
         height: 500px;
@@ -91,6 +94,7 @@ body {
 }
 
 .invalid {
+    margin:10px 0px;
     color: red;
 }
 
@@ -102,6 +106,7 @@ body {
 
 .valid {
     color: green;
+    margin:10px 0px;
 }
 
 .valid:after {

@@ -19,9 +19,8 @@ import model.auth.UserAccount;
 public class UserAccountDAO extends GenericDAO<UserAccount> {
 
     private UserMapping userMapping = new UserMapping();
-
+    
     public UserAccount getUserByAccountInfo(String sql, Object... parameters) {
-        
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet rs = null;

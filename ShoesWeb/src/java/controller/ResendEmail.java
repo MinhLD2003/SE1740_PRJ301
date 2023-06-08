@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
 import model.auth.UserAccount;
+import service.UserAccountService;
 import utils.CodeProcessing;
 import utils.EmailSending;
 
@@ -35,7 +35,7 @@ public class ResendEmail extends HttpServlet {
         UserAccount user = (UserAccount)session.getAttribute("user");
         CodeProcessing codeProcessing = new CodeProcessing();
         user.setEmailConfirmationCode(codeProcessing.getOtpCode());
-        
+        UserAccountService uAService = new UserAccountService();
         EmailSending emailSending = new EmailSending();
         boolean isSent = emailSending.sendEmail(user);
         if(isSent) {

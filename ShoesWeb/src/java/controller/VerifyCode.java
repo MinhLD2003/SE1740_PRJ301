@@ -76,23 +76,41 @@ public class VerifyCode extends HttpServlet {
         HttpSession session = request.getSession();
         UserAccount user = (UserAccount) session.getAttribute("user");
         String authCode = request.getParameter("otpCode");
-        UserAccountService uLService = new UserAccountService();
-        if (user.getEmailConfirmationCode().equals(authCode)) {
-            user.setIsActive(1);
-            uLService.insertUserLogin(user);
+
+        if (user == null || authCode == null) {
+            // Handle missing session or authentication code
+            // Redirect to an error page or display an error message
+            return;
+        }
+
+        UserAccountService userAccountService = new UserAccountService();
+        UserAccount foundUser = userAccountService.getUserByEmailAddress(user.getEmailAddress());
+
+        if (foundUser.getEmailConfirmationCode().equals(authCode)) {
+            setAccountActive(userAccountService, user);
             response.sendRedirect("frontend/views/client/homepage.jsp");
         } else {
-            OTPTracker.inputNewOtp(user);
-            if (OTPTracker.isMaxAttempts(user)) {
-                int resendMessCode = 500;
-                request.setAttribute("resendMessCode", resendMessCode);
-                request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
-            } else {
-                int numsOfFails = OTPTracker.getNumsOfAttempts(user);
-                request.setAttribute("numsOfFails", numsOfFails);
-                request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
-            }
+            handleInvalidAuthCode(request, response, user);
         }
+    }
+
+    private void setAccountActive(UserAccountService userAccountService, UserAccount user) {
+        user.setIsActive(1);
+        userAccountService.insertUserAccount(user);
+    }
+
+    private void handleInvalidAuthCode(HttpServletRequest request, HttpServletResponse response, UserAccount user) throws ServletException, IOException {
+        OTPTracker.inputNewOtp(user);
+
+        if (OTPTracker.isMaxAttempts(user)) {
+            int resendMessCode = 500;
+            request.setAttribute("resendMessCode", resendMessCode);
+        } else {
+            int numsOfFails = OTPTracker.getNumsOfAttempts(user);
+            request.setAttribute("numsOfFails", numsOfFails);
+        }
+
+        request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
     }
 
     /**

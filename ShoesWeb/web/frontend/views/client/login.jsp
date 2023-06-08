@@ -55,7 +55,7 @@
                                         <span class="text-muted">Remember me</span>
                                     </div>
                                     <div>
-                                        <a href="#">Forgot password</a>
+                                        <a href="${pageContext.request.contextPath}/frontend/views/client/forgotpassword.jsp">Forgot password</a>
                                     </div>
                                 </div>
                                 <input class=" w-100 mt-3 p-2 btn btn-block btn-primary" type="submit" value="Log In">

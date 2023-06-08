@@ -4,6 +4,7 @@
  */
 package model.auth;
 
+import java.sql.Timestamp;
 import utils.CodeProcessing;
 
 /**
@@ -17,7 +18,25 @@ public class UserAccount {
     private String passwordSalt;
     private String passwordHash;
     private String emailConfirmationCode;
-    private String passwordRecoveryToken;
+    Timestamp expirationTimeEmail ;
+    Timestamp createdTimeEmail ;
+
+    public Timestamp getExpirationTimeEmail() {
+        return expirationTimeEmail;
+    }
+
+    public void setExpirationTimeEmail(Timestamp expirationTimeEmail) {
+        this.expirationTimeEmail = expirationTimeEmail;
+    }
+
+    public Timestamp getCreatedTimeEmail() {
+        return createdTimeEmail;
+    }
+
+    public void setCreatedTimeEmail(Timestamp createdTimeEmail) {
+        this.createdTimeEmail = createdTimeEmail;
+    }
+   
     private int isActive;
 
     public UserAccount() {
@@ -32,8 +51,6 @@ public class UserAccount {
         this.passwordSalt = codeProcessing.bytesToString(salt);
         this.emailAddress = emailAddress;
         this.isActive = 0;
-        System.out.println(passwordHash);
-        System.out.println(passwordSalt);
     }
 
     public String getUsername() {
@@ -84,12 +101,5 @@ public class UserAccount {
         this.emailConfirmationCode = emailConfirmationCode;
     }
 
-    public String getPasswordRecoveryToken() {
-        return passwordRecoveryToken;
-    }
-
-    public void setPasswordRecoveryToken(String passwordRecoveryToken) {
-        this.passwordRecoveryToken = passwordRecoveryToken;
-    }
-
+    
 }

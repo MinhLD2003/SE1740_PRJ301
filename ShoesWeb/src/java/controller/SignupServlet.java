@@ -16,7 +16,6 @@ import service.UserAccountService;
 import utils.CodeProcessing;
 import utils.EmailSending;
 
-
 /**
  *
  * @author Admin
@@ -75,30 +74,50 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // get form input data 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         //-------------------------------
-        UserAccountService uAService = new UserAccountService();
-        if(uAService.getUserByEmailAddress(email) != null ) {
-            String invalidAlert = "invalid";
-            request.setAttribute("invalidAlert", invalidAlert);
-            request.getRequestDispatcher(request.getContextPath() + "/frontend/views/client/signup.jsp").forward(request, response);
-        }
+
+        UserAccountService userAccountService = new UserAccountService();
         UserAccount user = new UserAccount(username, email, password);
-        CodeProcessing code = new CodeProcessing();
-        
-        user.setEmailConfirmationCode(code.getOtpCode());
-        //----------------------------------
-        EmailSending emailSending = new EmailSending();
-        boolean isSent = emailSending.sendEmail(user);
 
-        if (isSent) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
+        // Check if email address is already in use
+        if (userAccountService.getUserByEmailAddress(email) != null) {
+            String invalidAlert ="inuse";
+            request.setAttribute("invalidAlert", invalidAlert);
+            request.getRequestDispatcher("/frontend/views/client/signup.jsp").forward(request, response);
+        } else {
+            // Generate email confirmation code
+            CodeProcessing codeProcessing = new CodeProcessing();
+            user.setEmailConfirmationCode(codeProcessing.getOtpCode());
+
+            // Send email
+            boolean isSent = sendEmail(user);
+
+            if (isSent) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                userAccountService.insertUserAccount(user);
+                response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
+            } else {
+                // Handle email sending failure
+                // Redirect to an error page or display an error message
+            }
         }
 
+    }
+
+    private boolean sendEmail(UserAccount user) {
+        try {
+            EmailSending emailSending = new EmailSending();
+            return emailSending.sendEmail(user);
+        } catch (Exception e) {
+            // Handle email sending failure
+            // Log the exception or perform necessary error handling
+            return false;
+        }
     }
 
     /**
