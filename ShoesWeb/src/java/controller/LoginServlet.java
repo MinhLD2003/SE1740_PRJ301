@@ -80,6 +80,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String isRemembered = request.getParameter("remember");
+        
         UserAccountService uAService = new UserAccountService();
         UserAccount foundAccount = uAService.getUserByUserName(username);
         CodeProcessing codeProcess = new CodeProcessing();

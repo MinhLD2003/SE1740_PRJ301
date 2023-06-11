@@ -9,179 +9,135 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/signup.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/Satoshi_Complete/Fonts/WEB/css/satoshi.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet"
+              href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+        <link rel="stylesheet" id="roboto-subset.css-css"
+              href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
+              type="text/css" media="all">
     </head>
 
     <body>
         <c:set var="inuseAlert" value='${requestScope.invalidAlert}'/>
-        <div class="d-lg-flex half min-vh-100 login-page">
-            <div class="img-fluid img">
-                <div class="img-left">
-                    <div class="inner-image" > <img src="https://static.vecteezy.com/system/resources/previews/008/454/774/original/landscape-web-banner-template-in-blue-background-with-sneaker-shoes-design-vector.jpg" alt=""></div>
-                </div>
-            </div>
+        <section class="vh-100" style="background-color: #eee;">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-11">
+                        <div class="card text-black" style="border-radius: 25px;">
+                            <div class="card-body p-md-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-            <div class="contents">
-                <div class="container">
-                    <div class="d-flex justify-content-center align-content-center">
-                        <div class="col-md-7">
-                            <div class="mb-4">
-                                <h3>Sign Up</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, ullam!</p>
+                                        <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-2">Sign up</p>
+
+                                        <form class="mx-1 mx-md-4" action="<c:url value='/signup'/>" method="post">
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" name="username" required/>
+                                                    <label class="form-label" for="form3Example1c">UserName</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="email" id="form3Example3c" class="form-control" name="email" required />
+                                                    <label class="form-label" for="form3Example3c">Email</label>
+                                                </div>
+                                            </div>
+                                            <div id="in_use_alert" style="display: none;">
+                                                <small style="color:red;"><strong>Warning !</strong> The email has been taken.</small>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input id="psword" class="form-control" type="password" name="password"
+                                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$" 
+                                                           required />
+                                                    <label class="form-label" for="form3Example4c">Password</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input id="confirm_psword" type="password" id="form3Example4cd" class="form-control" required />
+                                                    <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-check d-flex justify-content-center mb-4">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                                <label class="form-check-label" for="form2Example3">
+                                                    I agree all statements in <a href="#!">Terms of service</a>
+                                                </label>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="Register">
+                                            </div>
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade show active" id="pills-login" role="tabpanel"
+                                                     aria-labelledby="tab-login">
+                                                    <form>
+                                                        <div class="text-center mb-3">
+                                                            <p class="divider-horizontal-blurry" style="border-top:1px solid #e3e3e3">or</p>
+
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-facebook-f"></i>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-google"></i>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-twitter"></i>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-github"></i>
+                                                            </button>
+                                                        </div>
+                                                </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                         class="img-fluid" alt="Sample image">
+
+                                </div>
                             </div>
-                            <form action="<c:url value='/signup'/>" method="post">
-                                <div class="form-group">
-                                    <label class="form-label" for="">Username</label>
-                                    <input class="form-control" type="text" name="username"required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="">Email</label>
-                                    <input id="" class="form-control" type="email" name="email" placeholder="name@gmail.com" required>
-                                    <small id="inuse-alert" >The email has already been taken.</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label" for="">Password</label>
-                                    <input id="psw" class="form-control" type="password" name="password"
-                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                                          
-                                           required>
-                                    <div id="message">
-                                        <p>Password must contain the following:</p>
-                                        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-                                        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-                                        <p id="number" class="invalid">A <b>number</b></p>
-                                        <p id="special" class="invalid">A <b>special character</b></p>
-                                        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="">Confirm password</label>
-                                    <input id="cf-psw" class="form-control" type="password" required>
-                                    <div id="alert-message"><strong>Warning !</strong> Your password and confirmation password must match.
-                                    </div>
-                                </div>
-
-                                <input class=" w-100 mt-3 p-2 btn btn-block btn-primary" type="submit" value="Sign up">
-
-                                <div class="divider">
-                                    <span class=" d-block text-center my-4 text-muted"> or </span>
-                                </div>
-                                <div class="social-login d-flex justify-content-around">
-                                    <div class="mb-2">
-                                        <a href="#" class="facebook text-light btn px-4 py-3">
-                                            <span class=""><i class="fa fa-facebook"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="mb-2">
-                                        <a href="#" class="google text-light  btn px-4 py-3 ">
-                                            <span class=""><i class="fa fa-google"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="mb-2">
-                                        <a href="#" class="twitter btn text-light px-4 py-3">
-                                            <span class=" "><i class="fa fa-twitter"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
-        </div>
-
+        </section>
         <script type="text/javascript">
             var inuse = "${inuseAlert}";
-            var password = document.getElementById("psw");
-            var letter = document.getElementById("letter");
-            var capital = document.getElementById("capital");
-            var number = document.getElementById("number");
-            var length = document.getElementById("length");
-            var special = document.getElementById("special");
-            var confirm_password = document.getElementById("cf-psw");
-            // When the user clicks on the password field, show the message box
-            password.onfocus = function () {
-                var message = document.getElementById("message");
-                message.style.display = "block";
+            var password = document.getElementById("psword");
+            var confirm_password = document.getElementById("confirm_psword");
 
-            };
-
-            // When the user clicks outside of the password field, hide the message box
-            password.onblur = function () {
-                document.getElementById("message").style.display = "none";
-            };
-
-            // When the user starts to type something inside the password field
-            password.onkeyup = function () {
-                // Validate lowercase letters
-                var lowerCaseLetters = /[a-z]/g;
-                if (password.value.match(lowerCaseLetters)) {
-                    letter.classList.remove("invalid");
-                    letter.classList.add("valid");
-                } else {
-                    letter.classList.remove("valid");
-                    letter.classList.add("invalid");
-                }
-
-                // Validate capital letters
-                var upperCaseLetters = /[A-Z]/g;
-                if (password.value.match(upperCaseLetters)) {
-                    capital.classList.remove("invalid");
-                    capital.classList.add("valid");
-                } else {
-                    capital.classList.remove("valid");
-                    capital.classList.add("invalid");
-                }
-
-                // Validate numbers
-                var numbers = /[0-9]/g;
-                if (password.value.match(numbers)) {
-                    number.classList.remove("invalid");
-                    number.classList.add("valid");
-                } else {
-                    number.classList.remove("valid");
-                    number.classList.add("invalid");
-                }
-                //.Validate special character
-                var numbers = /[!@#$%^&*_=+-]/g;
-                if (password.value.match(numbers)) {
-                    special.classList.remove("invalid");
-                    special.classList.add("valid");
-                } else {
-                    special.classList.remove("valid");
-                    special.classList.add("invalid");
-                }
-                // Validate length
-                if (password.value.length >= 8) {
-                    length.classList.remove("invalid");
-                    length.classList.add("valid");
-                } else {
-                    length.classList.remove("valid");
-                    length.classList.add("invalid");
-                }
-            };
-
-            confirm_password.onkeyup = function () {
-
-                if (password.value === confirm_password.value) {
-                    document.getElementById("alert-message").style.display = "none";
-                } else
-                    document.getElementById("alert-message").style.display = "block";
-
-            };
-            if (inuse === "inuse") {
-                document.getElementById("inuse-alert").style.display = "block";
-            }
+            const inputs = document.querySelectorAll(".form-control");
+            inputs.forEach(input => {
+                input.addEventListener("input", function (event) {
+                    const currentInput = event.target;
+                    if (currentInput.value.length > 0) {
+                        currentInput.classList.add("active");
+                    } else {
+                        currentInput.classList.remove("active");
+                    }
+                });
+            });
 
             function validatePassword() {
                 if (password.value !== confirm_password.value) {
@@ -191,10 +147,22 @@
                 }
             }
 
-            password.onchange = validatePassword;
+            password.onchange = validatePassword();
             confirm_password.onkeyup = validatePassword;
-        </script>
+            confirm_password.onkeyup = function () {
 
+                if (password.value === confirm_password.value) {
+                    document.getElementById("alert-message").style.display = "none";
+                } else
+                    document.getElementById("alert-message").style.display = "block";
+
+            };
+            console.log(inuse);
+            if ( inuse === "inuse") {
+                document.getElementById("in_use_alert").style.display = "block";
+            }
+
+        </script>
 
     </body>
 </html>

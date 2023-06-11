@@ -10,100 +10,138 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/login.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/Satoshi_Complete/Fonts/WEB/css/satoshi.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet"
+              href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+        <link rel="stylesheet" id="roboto-subset.css-css"
+              href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
+              type="text/css" media="all">
     </head>
     <body>
-        <div class="d-lg-flex min-vh-100 login-page">
-            <div class="img-fluid img"
-                 style="background-image: url('https://static.vecteezy.com/system/resources/previews/008/454/774/original/landscape-web-banner-template-in-blue-background-with-sneaker-shoes-design-vector.jpg');">
-            </div>
-            <c:set var="failLoginMess" value="${requestScope.failLoginMess}" />
-            <div class="contents">
-                <div class="container">
-                    <div class="d-flex justify-content-center align-content-center">
-                        <div class="col-md-7">
-                            <div class="mb-4">
-                                <h3>Log in</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, ullam!</p>
+        <c:set var="failLoginMess" value="${requestScope.failLoginMess}" />
+        <section class="vh-100" style="background-color: #eee;">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-11">
+                        <div class="card text-black" style="border-radius: 25px;">
+                            <div class="card-body p-md-5">
+                                <div class="row justify-content-center">
+
+                                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 ">
+
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                             class="img-fluid" alt="Sample image">
+
+                                    </div>
+                                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 ">
+
+                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-3">Sign In</p>
+                                        <c:if test="${failLoginMess != null}">
+                                            <div style="
+                                                 padding:10px 0;
+                                                 background:#FB998D;
+                                                 color:#FF4B47;
+                                                 text-align: center;
+                                                 margin-bottom:10px;
+                                                 ">
+                                                Invalid username or password.Please try again.
+                                            </div>
+                                        </c:if>
+                                        <form class="mx-1 mx-md-4" action="<c:url value='/login'/>" method ="post">
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" name="username" required/>
+                                                    <label class="form-label" for="form3Example1c">User Name</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input id="psw" class="form-control" type="password" name="password"
+                                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+                                                           required>
+
+                                                    <label class="form-label" for="form3Example4c">Password</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <div class="form-check d-flex justify-content-center mb-3">
+                                                    <input class="form-check-input me-2" type="checkbox" value=""
+                                                           id="form2Example3c" name="remember"/>
+                                                    <label class="form-check-label" for="form2Example3">
+                                                        Rememeber me
+                                                    </label>
+                                                </div>
+                                                <div class="form-check d-flex justify-content-center mb-3">
+                                                    <label class="form-check-label" for="form2Example3">
+                                                        <a href="#">Forgot password?</a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center mx-4 mb-1 mb-lg-4">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="Sign in">
+                                            </div>
+                                            <div class="form-check d-flex justify-content-center mb-2">
+                                                <label class="form-check-label" for="form2Example3">
+                                                    Not a member? &nbsp;<a href="#"> Sign up</a>
+                                                </label>
+                                            </div>
+                                        </form>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="pills-login" role="tabpanel"
+                                                 aria-labelledby="tab-login">
+                                                <form>
+                                                    <div class="text-center mb-3">
+                                                        <p class="divider-horizontal-blurry"
+                                                           style="border-top:1px solid #e3e3e3">or</p>
+
+                                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                                            <i class="fab fa-facebook-f"></i>
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                                            <i class="fab fa-google"></i>
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                                            <i class="fab fa-twitter"></i>
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                                            <i class="fab fa-github"></i>
+                                                        </button>
+                                                    </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <c:if test="${failLoginMess != null}">
-                                <div class="login-fail-alert">
-                                    Invalid username or password.Please try again.
-                                </div>
-                            </c:if>
-                            <form action="<c:url value='/login'/>" method ="post">
-                                <div class="form-group">
-                                    <label class="form-label" for="">Username</label>
-                                    <input class="form-control" type="text" name="username" required>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="">Password</label>
-                                    <input id="password-input" class="form-control" type="password" name="password" required>
-                                    <i class="fa fa-eye" id="togglePassword" style=" cursor: pointer;"></i>
-
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="checkbox-area">
-                                        <input type="checkbox" name="remember">
-                                        <span class="checkmark"></span>
-                                        <span class="text-muted">Remember me</span>
-                                    </div>
-                                    <div>
-                                        <a href="${pageContext.request.contextPath}/frontend/views/client/forgotpassword.jsp">Forgot password</a>
-                                    </div>
-                                </div>
-                                <input class=" w-100 mt-3 p-2 btn btn-block btn-primary" type="submit" value="Log In">
-
-                                <div class="divider">
-                                    <span class=" d-block text-center my-4 text-muted"> or</span>
-                                </div>
-                                <div class="social-login">
-                                    <div class="mb-2">
-                                        <a href="#"
-                                           class="facebook text-light btn d-flex justify-content-center align-items-center">
-                                            <span class=""><i class="fa fa-facebook"></i></span>&nbsp; Login with Facebook
-                                        </a>
-                                    </div>
-                                    <div class="mb-2">
-                                        <a href="#"
-                                           class="google text-light  btn d-flex justify-content-center align-items-center">
-                                            <span class=""><i class="fa fa-google"></i></span>&nbsp; Login with Google
-                                        </a>
-                                    </div>
-                                    <div class="mb-2">
-                                        <a href="#"
-                                           class="twitter btn text-light  d-flex justify-content-center align-items-center">
-                                            <span class=""><i class="fa fa-twitter"></i></span>&nbsp;  Login with Twitter
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-
                         </div>
-
                     </div>
-                </div>
-            </div>
+                    </section>
+                    <script>
+                        const inputs = document.querySelectorAll(".form-control");
+                        inputs.forEach(input => {
+                            input.addEventListener("input", function (event) {
+                                const currentInput = event.target;
+                                if (currentInput.value.length > 0) {
+                                    currentInput.classList.add("active");
+                                } else {
+                                    currentInput.classList.remove("active");
+                                }
+                            });
+                        });
 
-        </div>
-        <script>
-            const togglePassword = document.getElementById('togglePassword');
-            const password = document.getElementById('password-input');
+                    </script>
 
-            togglePassword.addEventListener('click', function (e) {
-                // toggle the type attribute
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                // toggle the eye slash icon
-                this.classList.toggle('fa-eye-slash');
-            });
-        </script>
-
-    </body>
-</html>
+                    </body>
+                    </html>
