@@ -13,37 +13,22 @@ import utils.CodeProcessing;
  */
 public class UserAccount {
 
+    private int id;
     private String username;
     private String emailAddress;
     private String passwordSalt;
     private String passwordHash;
     private String emailConfirmationCode;
-    Timestamp expirationTimeEmail ;
-    Timestamp createdTimeEmail ;
-
-    public Timestamp getExpirationTimeEmail() {
-        return expirationTimeEmail;
-    }
-
-    public void setExpirationTimeEmail(Timestamp expirationTimeEmail) {
-        this.expirationTimeEmail = expirationTimeEmail;
-    }
-
-    public Timestamp getCreatedTimeEmail() {
-        return createdTimeEmail;
-    }
-
-    public void setCreatedTimeEmail(Timestamp createdTimeEmail) {
-        this.createdTimeEmail = createdTimeEmail;
-    }
-   
+    private Timestamp emailCreatedTime;
+    private String passwordRecoveryCode;
+    private Timestamp recoveryTime;
     private int isActive;
 
     public UserAccount() {
     }
+    private CodeProcessing codeProcessing = new CodeProcessing();
 
     public UserAccount(String username, String emailAddress, String password) {
-        CodeProcessing codeProcessing = new CodeProcessing();
         byte[] salt = codeProcessing.generateSalt();
         byte[] passwordhash = codeProcessing.getEncryptedPassword(password, salt);
         this.username = username;
@@ -51,6 +36,14 @@ public class UserAccount {
         this.passwordSalt = codeProcessing.bytesToString(salt);
         this.emailAddress = emailAddress;
         this.isActive = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -101,5 +94,36 @@ public class UserAccount {
         this.emailConfirmationCode = emailConfirmationCode;
     }
 
-    
+    public Timestamp getEmailCreatedTime() {
+        return emailCreatedTime;
+    }
+
+    public void setEmailCreatedTime(Timestamp emailCreatedTime) {
+        this.emailCreatedTime = emailCreatedTime;
+    }
+
+    public String getPasswordRecoveryCode() {
+        return passwordRecoveryCode;
+    }
+
+    public void setPasswordRecoveryCode(String passwordRecoveryCode) {
+        this.passwordRecoveryCode = passwordRecoveryCode;
+    }
+
+    public Timestamp getRecoveryTime() {
+        return recoveryTime;
+    }
+
+    public void setRecoveryTime(Timestamp recoveryTime) {
+        this.recoveryTime = recoveryTime;
+    }
+
+    public CodeProcessing getCodeProcessing() {
+        return codeProcessing;
+    }
+
+    public void setCodeProcessing(CodeProcessing codeProcessing) {
+        this.codeProcessing = codeProcessing;
+    }
+
 }

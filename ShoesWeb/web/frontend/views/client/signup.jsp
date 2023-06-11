@@ -49,7 +49,9 @@
                                 <div class="form-group">
                                     <label class="form-label" for="">Password</label>
                                     <input id="psw" class="form-control" type="password" name="password"
-                                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}" required>
+                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                          
+                                           required>
                                     <div id="message">
                                         <p>Password must contain the following:</p>
                                         <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
@@ -180,7 +182,7 @@
             if (inuse === "inuse") {
                 document.getElementById("inuse-alert").style.display = "block";
             }
-            
+
             function validatePassword() {
                 if (password.value !== confirm_password.value) {
                     confirm_password.setCustomValidity("Passwords Don't Match");

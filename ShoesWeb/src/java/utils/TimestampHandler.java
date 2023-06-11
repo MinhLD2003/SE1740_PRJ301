@@ -12,8 +12,24 @@ import model.auth.UserAccount;
  * @author Admin
  */
 public class TimestampHandler {
-    public void setExpirationTime(UserAccount user) {
-        long expirationTimeMillis = System.currentTimeMillis() + (5 * 60 * 1000); // 10 minutes
-        Timestamp expirationTimestamp = new Timestamp(expirationTimeMillis);
+
+    private final double OTP_EXPIRY_TIME = 1;
+
+    public void setRecoveryCreatedTime(UserAccount user) {
+        long createdTimeMillis = System.currentTimeMillis();
+        Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);
+        user.setRecoveryTime(createdTimeTimeStamp);
+    }
+
+    public void setEmailCreatedTime(UserAccount user) {
+        long createdTimeMillis = System.currentTimeMillis();
+        Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);
+        user.setEmailCreatedTime(createdTimeTimeStamp);
+    }
+
+    public boolean isExpired(Timestamp createdTime) {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        long diffTime = currentTimestamp.getTime() - createdTime.getTime();
+        return (diffTime > OTP_EXPIRY_TIME * 60 * 1000);
     }
 }

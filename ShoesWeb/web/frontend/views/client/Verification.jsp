@@ -8,6 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -20,6 +21,7 @@
         <c:set var="failAttempts" value= "${requestScope.numsOfFails}"/>
         <c:set var="resendMessCode" value= "${requestScope.resendMessCode}"/>
         <c:set var="resendSuccessMessCode" value= "${requestScope.resendSuccessMessCode}"/>
+        <c:set var="expiryMess"  value="${requestScope.expiryMess}"/>
         <section class="mt-4 d-flex ">
             <div class="container1">
                 <div>
@@ -32,14 +34,19 @@
                 </form>
 
                 <a id="resend-btn" class="resend-link"href="<c:url value='/resend'/>">Resend OTP code?</a>
-               
-                <c:if test="${alertResend eq 'resendMessage'}">
+                <c:if test="${expiryMess eq 'expired'}">
+                  <div style="color:red;">
+                        <p>Your OTP verification is expired !!!</p>
+                        <p>Please click on the <strong>resend button </strong> for a new OTP !!!</p>
+                    </div>
+                </c:if>
+                <c:if test="${resendMessCode == 500}">
                     <div style="color:red;">
                         <p>Your OTP verification failed !!!</p>
                         <p>Please click on the <strong>resend button </strong> for a new OTP !!!</p>
                     </div>
                 </c:if>
-                <c:if test="${failAttempts > 0 && alertResend == null}">
+                <c:if test="${failAttempts > 0 && resendMessCode == null}">
                     <div style="color:red;">
                         <p><strong>Warning!</strong> Invalid OTP Code</p>
                         <p>You have attempted ${failAttempts} times.</p>
@@ -48,16 +55,16 @@
             </div>
         </section>
         <script type="text/javascript">
-              var resendAlert = "${resendMessCode}";
-              var resendSuccess = "${resendSuccessMessCode}";
-              if(resendAlert === "500") {
-                  document.getElementById('verify-btn').setAttribute('disabled' , '');
-              }
-             
-              if(resendSuccess === "200" ) {
-                  document.getElementById('verify-btn').removeAttribute('disabled');
-                  
-              }
+            var resendAlertCode = "${resendMessCode}";
+            var resendSuccessCode = "${resendSuccessMessCode}";
+            if (resendAlertCode === "500") {
+                document.getElementById('verify-btn').setAttribute('disabled', '');
+            }
+
+            if (resendSuccessCode === "200") {
+                document.getElementById('verify-btn').removeAttribute('disabled');
+
+            }
         </script>
     </body>
 </html>

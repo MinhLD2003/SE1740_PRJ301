@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,7 +59,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             setParameters(statement, parameters);
             statement.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (connection != null) {
@@ -70,11 +72,10 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     }
 
     protected void setParameters(PreparedStatement statement, Object... parameters) {
-        
+
         try {
             for (int i = 0; i < parameters.length; i++) {
                 Object param = parameters[i];
-                System.out.println(param);
                 int index = i + 1;
                 if (param instanceof String) {
                     statement.setString(index, (String) param);

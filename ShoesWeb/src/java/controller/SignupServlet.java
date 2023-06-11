@@ -15,6 +15,7 @@ import model.auth.UserAccount;
 import service.UserAccountService;
 import utils.CodeProcessing;
 import utils.EmailSending;
+import utils.TimestampHandler;
 
 /**
  *
@@ -74,32 +75,34 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserAccountService uAService = new UserAccountService();
+        TimestampHandler timeHandler = new TimestampHandler();
+        EmailSending emailSending = new EmailSending();
         // get form input data 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         //-------------------------------
-
-        UserAccountService userAccountService = new UserAccountService();
         UserAccount user = new UserAccount(username, email, password);
 
         // Check if email address is already in use
-        if (userAccountService.getUserByEmailAddress(email) != null) {
-            String invalidAlert ="inuse";
+        if (uAService.getUserByEmailAddress(email) != null) {
+            String invalidAlert = "inuse";
             request.setAttribute("invalidAlert", invalidAlert);
             request.getRequestDispatcher("/frontend/views/client/signup.jsp").forward(request, response);
         } else {
-            // Generate email confirmation code
+            // Generate email confirmation code and set expiration
             CodeProcessing codeProcessing = new CodeProcessing();
             user.setEmailConfirmationCode(codeProcessing.getOtpCode());
-
+            timeHandler.setEmailCreatedTime(user);
             // Send email
-            boolean isSent = sendEmail(user);
+            boolean isSent = emailSending.sendEmail(user);
 
             if (isSent) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                userAccountService.insertUserAccount(user);
+                //-----------------------------
+                uAService.insertUserAccount(user);
                 response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
             } else {
                 // Handle email sending failure
@@ -109,16 +112,7 @@ public class SignupServlet extends HttpServlet {
 
     }
 
-    private boolean sendEmail(UserAccount user) {
-        try {
-            EmailSending emailSending = new EmailSending();
-            return emailSending.sendEmail(user);
-        } catch (Exception e) {
-            // Handle email sending failure
-            // Log the exception or perform necessary error handling
-            return false;
-        }
-    }
+ 
 
     /**
      * Returns a short description of the servlet.

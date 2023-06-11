@@ -1,3 +1,5 @@
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -18,14 +20,16 @@ public class UserMapping implements AttributesMapping<UserAccount> {
     public UserAccount mapAttributes(ResultSet rs) {
        UserAccount user = new UserAccount();
        try {
-           user.setUsername(rs.getString("username"));
-           user.setPasswordHash(rs.getString("passwordhash"));
-           user.setPasswordSalt(rs.getString("passwordsalt"));
+           user.setId(rs.getInt("user_account_id"));
+           user.setUsername(rs.getString("user_name"));
+           user.setPasswordHash(rs.getString("password_hash"));
+           user.setPasswordSalt(rs.getString("password_salt"));
            user.setEmailAddress(rs.getString("email_address"));
            return user;    
        } catch(SQLException ex) {
-           return null;
+            System.out.println(ex);
        }
+       return null;
     }
     
 }

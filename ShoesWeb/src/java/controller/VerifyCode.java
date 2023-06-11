@@ -11,9 +11,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import model.auth.UserAccount;
 import service.UserAccountService;
 import utils.OTPTracker;
+import utils.TimestampHandler;
 
 /**
  *
@@ -73,7 +75,10 @@ public class VerifyCode extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserAccountService uAService = new UserAccountService();
         HttpSession session = request.getSession();
+        TimestampHandler timeH = new TimestampHandler();
+
         UserAccount user = (UserAccount) session.getAttribute("user");
         String authCode = request.getParameter("otpCode");
 
@@ -82,21 +87,30 @@ public class VerifyCode extends HttpServlet {
             // Redirect to an error page or display an error message
             return;
         }
+        Timestamp otpCreatedTime = uAService.getEmailConfCreatedTime(user);
+        if (!timeH.isExpired(otpCreatedTime)) {
 
-        UserAccountService userAccountService = new UserAccountService();
-        UserAccount foundUser = userAccountService.getUserByEmailAddress(user.getEmailAddress());
-
-        if (foundUser.getEmailConfirmationCode().equals(authCode)) {
-            setAccountActive(userAccountService, user);
-            response.sendRedirect("frontend/views/client/homepage.jsp");
+            if (uAService.getEmailConfirmationCode(user).equals(authCode)) {
+                setAccountActive(uAService, user);
+                response.sendRedirect("frontend/views/client/homepage.jsp");
+            } else {
+                handleInvalidAuthCode(request, response, user);
+            }
         } else {
-            handleInvalidAuthCode(request, response, user);
+            String expiryMess = "expired";
+            int resendMessCode = 500;
+            request.setAttribute("resendMessCode", resendMessCode);
+            request.setAttribute("expiryMess", expiryMess);
+            request.setAttribute("resendMessCode", resendMessCode);
+            request.getRequestDispatcher("frontend/views/client/homepage.jsp").forward(request, response);
+
         }
+
     }
 
     private void setAccountActive(UserAccountService userAccountService, UserAccount user) {
         user.setIsActive(1);
-        userAccountService.insertUserAccount(user);
+        userAccountService.updateActiveAccount(user);
     }
 
     private void handleInvalidAuthCode(HttpServletRequest request, HttpServletResponse response, UserAccount user) throws ServletException, IOException {
@@ -109,7 +123,6 @@ public class VerifyCode extends HttpServlet {
             int numsOfFails = OTPTracker.getNumsOfAttempts(user);
             request.setAttribute("numsOfFails", numsOfFails);
         }
-
         request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
     }
 

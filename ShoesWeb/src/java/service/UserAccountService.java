@@ -5,6 +5,7 @@
 package service;
 
 import dal.ImplementDAO.UserAccountDAO;
+import java.sql.Timestamp;
 import model.auth.UserAccount;
 
 /**
@@ -15,30 +16,52 @@ public class UserAccountService {
 
     UserAccountDAO uADAO = new UserAccountDAO();
 
-    public void updateConfirmationCode(UserAccount userAccount, String newToken) {
-        String sql = "update [user_account] set email_confirmation_token = ? where email_address = ?";
-        uADAO.insert(sql, newToken, userAccount.getEmailAddress());
+    public Timestamp getEmailConfCreatedTime(UserAccount user) {
+        String sql = "select confirmation_created_timestamp from user_account where email_address = ?";
+        return uADAO.getCreatedTime(sql, user.getEmailAddress());
+    }
+
+    public int getUserAccountId(UserAccount user) {
+        String sql = "select user_account_id from user_account where email_address = ? ";
+        return uADAO.getUserAccountId(sql, user.getEmailAddress());
+    }
+
+    public void updateActiveAccount(UserAccount userAccount) {
+        String sql = "update [user_account] set [is_active] = ? where email_address = ?";
+        uADAO.insert(sql, 1 ,  userAccount.getEmailAddress());
     }
 
     public void insertUserAccount(UserAccount useraccount) {
-        String sql = "INSERT INTO [dbo].[user_account]\n"
-                + "           ([username]\n"
-                + "           ,[passwordhash]\n"
-                + "           ,[passwordsalt]\n"
-                + "           ,[email_address]\n"
-                + "           ,[email_confirmation_token]\n"
-                + "           ,[isActive])\n"
-                + "     VALUES( ? , ? , ? , ? , ? , ?  )";
-        uADAO.insert(sql, useraccount.getUsername(),
+        String sql
+                = "INSERT INTO [dbo].[user_account] "
+                + "([user_name], "
+                + "[password_hash], "
+                + "[password_salt], "
+                + "[email_address], "
+                + "[is_active], "
+                + "[email_confirmation_code], "
+                + "[confirmation_created_timestamp]) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        uADAO.insert(
+                sql,
+                useraccount.getUsername(),
                 useraccount.getPasswordHash(),
                 useraccount.getPasswordSalt(),
                 useraccount.getEmailAddress(),
-                useraccount.getEmailConfirmationCode());
-        useraccount.getIsActive();
+                useraccount.getIsActive(),
+                useraccount.getEmailConfirmationCode(),
+                useraccount.getEmailCreatedTime()
+        );
+    }
+
+    public String getEmailConfirmationCode(UserAccount user) {
+        String sql = "select email_confirmation_code from user_account where email_address = ?";
+        return uADAO.getEmailConfirmationToken(sql, user.getEmailAddress());
     }
 
     public UserAccount getUserByUserName(String username) {
-        String sql = "SELECT * FROM user_account WHERE username = ? and isActive = 1";
+        String sql = "SELECT * FROM user_account WHERE user_name = ? and is_active = 1";
         return uADAO.getUserByAccountInfo(sql, username);
     }
 
