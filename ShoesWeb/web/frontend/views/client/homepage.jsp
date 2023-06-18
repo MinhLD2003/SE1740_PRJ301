@@ -5,26 +5,27 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/linearicons.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/themify-icons.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/owl.carousel.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/nice-select.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/magnific-popup.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/linearicons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/font-awesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/themify-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/owl.carousel.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/nice-select.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/magnific-popup.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/style.css">
     </head>
 
     <body>
 
-
-         <section class="banner-area">
+         <%@include file="/frontend/common/client/header.jsp" %>
+         <section class="banner-arean">
         <div class="container">
             <div class="row fullscreen align-items-center justify-content-start">
                 <div class="col-lg-12">
@@ -33,7 +34,7 @@
                         <div class="row single-slide align-items-center d-flex">
                             <div class="col-lg-5 col-md-6">
                                 <div class="banner-content">
-                                    <h1>Nike New <br>Collection!</h1>
+                                    <h1>New <br>Collection!</h1>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                         incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
