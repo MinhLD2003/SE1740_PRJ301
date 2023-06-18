@@ -82,7 +82,7 @@
                                             </div>
 
                                             <div class="form-check d-flex justify-content-center mb-4">
-                                                <input class="me-2" type="checkbox" value="" id="form2Example3c" />
+                                                <input class="form-check-input me-2" style="position: relative" type="checkbox" value="" id="form2Example3c" />
                                                 <div>
                                                 <label class="form-check-label" for="form2Example3">
                                                     I agree all statements in <a href="#!">Terms of service</a>
