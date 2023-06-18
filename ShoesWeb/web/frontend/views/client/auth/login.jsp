@@ -19,22 +19,22 @@
         <link rel="stylesheet" id="roboto-subset.css-css"
               href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
               type="text/css" media="all">
+        <link ref="stylesheet" href="${pageContext.request.contextPath}/frontend/template/login.css">
     </head>
+
     <body>
+        <%@include file="/frontend/common/client/header.jsp" %>
         <c:set var="failLoginMess" value="${requestScope.failLoginMess}" />
-        <section class="vh-100" style="background-color: #eee;">
+        <section class="vh-120" style="background-color: #eee;">
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-lg-12 col-xl-11">
-                        <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card text-black  my-5" style="border-radius: 25px;">
                             <div class="card-body p-md-5">
                                 <div class="row justify-content-center">
-
                                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 ">
-
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                                              class="img-fluid" alt="Sample image">
-
                                     </div>
                                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 ">
 
@@ -73,9 +73,9 @@
                                             </div>
 
                                             <div class="d-flex justify-content-between">
-                                                <div class="form-check d-flex justify-content-center mb-3">
-                                                    <input class="form-check-input me-2" type="checkbox" value=""
-                                                           id="form2Example3c" name="remember"/>
+                                                <div class="form-check d-flex mb-3">
+                                                    <input class="form-check-input me-2" type="checkbox" value="" name="remember"
+                                                           id="form2Example3c" />
                                                     <label class="form-check-label" for="form2Example3">
                                                         Rememeber me
                                                     </label>
@@ -102,22 +102,23 @@
                                                     <div class="text-center mb-3">
                                                         <p class="divider-horizontal-blurry"
                                                            style="border-top:1px solid #e3e3e3">or</p>
+                                                        <div class="me-4" >
+                                                            <button type="button" class=" text-center btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-facebook-f"></i>
+                                                            </button>
 
-                                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                                            <i class="fab fa-facebook-f"></i>
-                                                        </button>
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-google"></i>
+                                                            </button>
 
-                                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                                            <i class="fab fa-google"></i>
-                                                        </button>
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-twitter"></i>
+                                                            </button>
 
-                                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                                            <i class="fab fa-twitter"></i>
-                                                        </button>
-
-                                                        <button type="button" class="btn btn-link btn-floating mx-1">
-                                                            <i class="fab fa-github"></i>
-                                                        </button>
+                                                            <button type="button" class="btn btn-link btn-floating mx-1">
+                                                                <i class="fab fa-github"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                             </div>
 
@@ -128,6 +129,7 @@
                         </div>
                     </div>
                     </section>
+                    <%@include file="/frontend/common/client/footer.jsp" %>
                     <script>
                         const inputs = document.querySelectorAll(".form-control");
                         inputs.forEach(input => {

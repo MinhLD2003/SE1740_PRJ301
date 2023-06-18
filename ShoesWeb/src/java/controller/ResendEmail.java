@@ -47,7 +47,7 @@ public class ResendEmail extends HttpServlet {
         if (isSent) {
             int resendSuccessMess = 200;
             request.setAttribute("resendSuccessMessCode", resendSuccessMess);
-            request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
+            request.getRequestDispatcher("/frontend/views/client/auth/verification.jsp").forward(request, response);
         }
      
     }

@@ -123,7 +123,7 @@ public class VerifyCode extends HttpServlet {
             int numsOfFails = OTPTracker.getNumsOfAttempts(user);
             request.setAttribute("numsOfFails", numsOfFails);
         }
-        request.getRequestDispatcher("/frontend/views/client/verification.jsp").forward(request, response);
+        request.getRequestDispatcher("/frontend/views/client/auth/verification.jsp").forward(request, response);
     }
 
     /**

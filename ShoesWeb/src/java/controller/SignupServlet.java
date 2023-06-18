@@ -90,7 +90,7 @@ public class SignupServlet extends HttpServlet {
         if (uAService.getUserByEmailAddress(email) != null) {
             String invalidAlert = "inuse";
             request.setAttribute("invalidAlert", invalidAlert);
-            request.getRequestDispatcher("/frontend/views/client/signup.jsp").forward(request, response);
+            request.getRequestDispatcher("/frontend/views/client/auth/signup.jsp").forward(request, response);
         } else {
             // Generate email confirmation code and set expiration
             CodeProcessing codeProcessing = new CodeProcessing();
@@ -104,7 +104,7 @@ public class SignupServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 //-----------------------------
                 uAService.insertUserAccount(user);
-                response.sendRedirect(request.getContextPath() + "/frontend/views/client/verification.jsp");
+                response.sendRedirect(request.getContextPath() + "/frontend/views/client/auth/verification.jsp");
             } else {
                 // Handle email sending failure
                 // Redirect to an error page or display an error message

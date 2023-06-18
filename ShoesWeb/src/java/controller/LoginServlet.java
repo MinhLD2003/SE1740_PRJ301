@@ -87,7 +87,7 @@ public class LoginServlet extends HttpServlet {
         if (foundAccount == null) {
             String failLoginMess = "fail";
             request.setAttribute("failLoginMess", failLoginMess);
-            request.getRequestDispatcher("/frontend/views/client/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/frontend/views/client/auth/login.jsp").forward(request, response);
         } else {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
                 HttpSession session = request.getSession();
@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 String failLoginMess = "fail";
                 request.setAttribute("failLoginMess", failLoginMess);
-                request.getRequestDispatcher("/frontend/views/client/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/frontend/views/client/auth/login.jsp").forward(request, response);
             }
 
         }

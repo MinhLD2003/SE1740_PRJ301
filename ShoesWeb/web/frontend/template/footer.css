@@ -1,0 +1,61 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 11, 2023, 7:42:36 PM
+    Author     : Admin
+*/
+
+
+.main {
+    height: 50vh;
+}
+
+footer {
+    background-color: rgb(19, 19, 19);
+    color:#7e7e7e;
+}
+footer a {
+    color:#7e7e7e;
+}
+footer a:hover{
+    color:white;
+}
+.hover-effect1 {
+    min-height: 20px;
+    text-align: center;
+}
+
+.hover-effect1 ul {
+    padding-top: 10px;
+}
+
+.hover-effect1 ul li {
+    display: inline-block;
+}
+
+.hover-effect1 ul li a {
+    width:35px;
+    border-radius: 50%;
+    height:35px;
+    text-align: center;
+    display: inline-block;
+    background: #c0c0c0;
+    -webkit-transition: all .6s ease;
+    -moz-transition: all .6s ease;
+    -ms-transition: all .6s ease;
+    -o-transition: all .6s ease;
+    transition: all .6s ease;
+}
+svg {
+    color:white;
+}
+hr {
+    background-color: white;
+}
+
+.hover-effect1 ul li:hover a {
+    background-color:white;
+}
+
