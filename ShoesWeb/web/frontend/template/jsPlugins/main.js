@@ -54,7 +54,7 @@ $(document).ready(function () {
     autoplayTimeout: 5000,
     loop: true,
     nav: true,
-    navText: ["<img src='../../../images/icon_images/prev.png'>", "<img src='../../../images/icon_images/next.png'>"],
+    navText: ["<img src=''>", "<img src=''>"],
     dots: false
   });
 
