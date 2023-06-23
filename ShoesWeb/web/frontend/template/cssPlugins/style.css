@@ -1,6 +1,8 @@
 /*--------------------------- Color variations ----------------------*/
 /*--------------------------- Fonts ----------------------*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:500,700|Roboto:400,500");
+@import url("//db.onlinewebfonts.com/c/c0cd6ec8ce6d2bbd315a13b62ed13550?family=AdihausDIN");
+@import url("//db.onlinewebfonts.com/c/95cecf452d3208890088a5b4c19c7ecf?family=Helvetica+Neue+ME");
 
 /* Medium Layout: 1280px */
 /* Tablet Layout: 768px */
@@ -174,8 +176,8 @@
 
 body {
   line-height: 24px;
-  font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-family: "AdihausDIN", "Helvetica Neue", sans-serif;
   font-weight: 400;
   color: #777777;
   background: #fff;
@@ -198,7 +200,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #222222;
   font-weight: 500;
   line-height: 1.2 !important;
@@ -1351,7 +1353,7 @@ h6 {
   right: 20px;
 }
 
-.is-sticky .header_area .main_menu .main_box {
+.is-sticky .header_area menu .main_box {
   max-width: 100%;
   margin-top: 0;
   -webkit-transition: all 0.3s ease 0s;
@@ -1783,7 +1785,7 @@ h6 {
 .add-bag .add-text {
   padding-left: 15px;
   font-size: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "AdihausDINica Neue", sans-serif;
   font-weight: 500;
   color: #222222;
 }
@@ -2266,7 +2268,7 @@ h6 {
   width: 100px;
   left: -40px;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 500;
   font-size: 12px;
   color: #222222;
@@ -2300,7 +2302,7 @@ h6 {
 }
 
 .exclusive-deal-area .exclusive-left {
-  position: relative;
+  position: realtive;
   background: url(../img/exclusive.jpg) center no-repeat;
   background-size: cover;
   text-align: center;
@@ -4188,7 +4190,7 @@ label {
 }
 
 .jewellery-single-product .desc h6 {
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 400;
   margin-bottom: 8px;
 }
@@ -4198,7 +4200,7 @@ label {
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -4515,9 +4517,14 @@ label {
 
 .filter-bar {
   padding: 0px 20px 10px 20px;
-  background: #828bb3;
+ 
 }
-
+.filter-bar2 {
+  max-height: 100vh;
+  overflow-y: scroll;
+  position: sticky;
+  top: 0; 
+}
 .filter-bar a,
 .filter-bar i {
   color: #000;
@@ -4785,12 +4792,11 @@ label {
 }
 
 .sidebar-categories .head {
-  line-height: 60px;
-  background: #828bb3;
+  line-height: 50px;
   padding: 0 30px;
   font-size: 16px;
   font-weight: 400;
-  color: #fff;
+
 }
 
 .sidebar-categories .main-categories {
@@ -4802,7 +4808,7 @@ label {
 .sidebar-categories .main-nav-list a {
   font-size: 14px;
   display: block;
-  line-height: 50px;
+  line-height: 35px;
   padding-left: 10px;
   border-bottom: 1px solid #eee;
 }
@@ -4826,20 +4832,20 @@ label {
 }
 
 .sidebar-filter {
-  margin-top: 50px;
+  margin-top: 10px;
+
 }
 
 .sidebar-filter .top-filter-head {
-  line-height: 60px;
-  background: #828bb3;
+  line-height: 35px;
   padding: 0 30px;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 400;
-  color: #fff;
+  color: #191919;
 }
 
 .sidebar-filter .head {
-  line-height: 60px;
+  line-height: 45px;
   padding: 0 30px;
   font-size: 14px;
   font-weight: 700;
@@ -4860,6 +4866,8 @@ label {
 
 .filter-list {
   line-height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .filter-list i {
@@ -4868,7 +4876,7 @@ label {
 }
 
 .filter-list .number {
-  color: #ccc;
+  color: #979797;
 }
 
 .filter-list label {
@@ -5037,7 +5045,7 @@ label {
 
 .price-range-area .value-wrapper {
   margin-top: 20px;
-  color: #cccccc;
+  color: #494949;
 }
 
 .price-range-area .value-wrapper .to {
@@ -5080,7 +5088,7 @@ label {
   margin-top: 26px;
   margin-left: 26px;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 500;
   font-size: 30px;
 }
@@ -5299,7 +5307,7 @@ label {
 
 .cat_widgets .list li a {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #222222;
 }
 
@@ -5322,7 +5330,7 @@ label {
 .p_filter_widgets h4 {
   color: #222222;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   margin-bottom: 22px;
   margin-top: 10px;
@@ -5335,7 +5343,7 @@ label {
 .p_filter_widgets .list li a {
   padding-left: 30px;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   color: #777777;
   position: relative;
@@ -5408,7 +5416,7 @@ label {
   font-size: 14px;
   font-weight: normal;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-top: 15px;
 }
 
@@ -5418,7 +5426,7 @@ label {
   width: 100px;
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-top: 9px;
   padding-left: 3px;
 }
@@ -5426,25 +5434,25 @@ label {
 .p_filter_widgets .range_item input.placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .p_filter_widgets .range_item input:-moz-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .p_filter_widgets .range_item input::-moz-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .p_filter_widgets .range_item input::-webkit-input-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .product_top_bar {
@@ -5466,7 +5474,7 @@ label {
 
 .product_top_bar .left_dorp .sorting span {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #555555;
 }
 
@@ -5477,7 +5485,7 @@ label {
 
 .product_top_bar .left_dorp .sorting .list li {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #555555;
 }
 
@@ -5505,7 +5513,7 @@ label {
 
 .product_top_bar .left_dorp .show span {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #555555;
 }
 
@@ -5516,7 +5524,7 @@ label {
 
 .product_top_bar .left_dorp .show .list li {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #555555;
 }
 
@@ -5548,7 +5556,7 @@ label {
   font-size: 14px;
   color: #222222;
   font-weight: normal;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .cat_page .pagination li.blank a {
@@ -5627,7 +5635,7 @@ label {
 
 .s_product_text .list li a {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   color: #555555;
 }
@@ -5710,7 +5718,7 @@ label {
 .product_count label {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   padding-right: 10px;
 }
@@ -5842,7 +5850,7 @@ label {
 .product_description_area .tab-content .total_rate .rating_list h3 {
   font-size: 18px;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 500;
   margin-bottom: 10px;
 }
@@ -5873,7 +5881,7 @@ label {
 
 .product_description_area .tab-content .table tbody tr td h5 {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   color: #777777;
   margin-bottom: 0px;
@@ -5909,7 +5917,7 @@ label {
   margin-bottom: 0px;
   font-size: 14px;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-bottom: 8px;
 }
 
@@ -5930,12 +5938,12 @@ label {
   line-height: 32px;
   border-radius: 16px;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #222222;
   position: absolute;
   right: 0px;
   top: 14px;
-
+  transform: rotate();
 }
 
 .review_item .media .media-body .reply_btn:hover {
@@ -6005,7 +6013,7 @@ label {
   border-top: 0px;
   font-size: 14px;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   border-bottom: 0px !important;
 }
@@ -6038,7 +6046,7 @@ label {
 .cart_inner .table tbody tr td h5 {
   font-size: 14px;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-bottom: 0px;
 }
 
@@ -6110,7 +6118,7 @@ label {
   height: 40px;
   font-size: 14px;
   color: #cccccc;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
   margin-right: -3px;
   outline: none;
@@ -6120,28 +6128,28 @@ label {
 .cart_inner .table tbody tr.bottom_button td .cupon_text input.placeholder {
   font-size: 14px;
   color: #cccccc;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .cart_inner .table tbody tr.bottom_button td .cupon_text input:-moz-placeholder {
   font-size: 14px;
   color: #cccccc;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .cart_inner .table tbody tr.bottom_button td .cupon_text input::-moz-placeholder {
   font-size: 14px;
   color: #cccccc;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .cart_inner .table tbody tr.bottom_button td .cupon_text input::-webkit-input-placeholder {
   font-size: 14px;
   color: #cccccc;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
@@ -6217,7 +6225,7 @@ label {
   font-size: 14px;
   font-weight: normal;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -6292,7 +6300,7 @@ label {
 .check_title h2 {
   font-size: 14px;
   font-weight: normal;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   background: #e8f0f2;
   line-height: 40px !important;
   padding-left: 30px;
@@ -6324,35 +6332,35 @@ label {
   height: 40px;
   border-radius: 3px;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
 
 .returning_customer .contact_form .form-group input.placeholder {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
 
 .returning_customer .contact_form .form-group input:-moz-placeholder {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
 
 .returning_customer .contact_form .form-group input::-moz-placeholder {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
 
 .returning_customer .contact_form .form-group input::-webkit-input-placeholder {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
@@ -6380,7 +6388,7 @@ label {
   display: block;
   margin-top: 20px;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   color: #777777;
   font-weight: normal;
 }
@@ -6446,7 +6454,7 @@ label {
   padding: 0px 40px;
   color: #222222;
   text-transform: uppercase;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 500;
   border-radius: 3px;
 }
@@ -6511,7 +6519,7 @@ label {
 
 .billing_details .contact_form .form-group .country_select .list li {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
@@ -6694,7 +6702,7 @@ label {
 .order_d_inner .details_item .list li a {
   font-size: 14px;
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .order_d_inner .details_item .list li a span {
@@ -6728,7 +6736,7 @@ label {
 .order_details_table .table thead tr th {
   border-bottom: 1px solid #ddd;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
@@ -6874,7 +6882,7 @@ label {
 .login_form .form-group a {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   margin-top: 20px;
   display: block;
 }
@@ -6902,35 +6910,35 @@ label {
   border-radius: 0px;
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .tracking_box_area .tracking_box_inner .tracking_form .form-group input.placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .tracking_box_area .tracking_box_inner .tracking_form .form-group input:-moz-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .tracking_box_area .tracking_box_inner .tracking_form .form-group input::-moz-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
 .tracking_box_area .tracking_box_inner .tracking_form .form-group input::-webkit-input-placeholder {
   font-size: 14px;
   color: #777777;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: normal;
 }
 
@@ -6971,7 +6979,7 @@ label {
   z-index: 9;
   cursor: pointer;
   -webkit-transition: all 0.25s linear;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-weight: 500;
   color: #222222;
   font-size: 13px;
@@ -7121,7 +7129,7 @@ label {
 
 .causes_item .causes_text h4 {
   color: #222222;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 15px;
@@ -7148,7 +7156,7 @@ label {
   line-height: 50px;
   background: #c5322d;
   color: #fff;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   font-size: 14px;
   font-weight: 500;
 }
@@ -8012,7 +8020,7 @@ label {
 .contact_info .info_item h6 {
   font-size: 16px;
   line-height: 24px;
-  font-family:  "Roboto", sans-serif;
+  color: "Roboto", sans-serif;
   font-weight: bold;
   margin-bottom: 0px;
   color: #222222;
@@ -8037,7 +8045,7 @@ label {
   line-height: 26px;
   color: #999;
   border: 1px solid #eeeeee;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
   border-radius: 0px;
   padding-left: 20px;
 }
@@ -8114,7 +8122,7 @@ label {
   text-align: center;
   color: #ffba00;
   padding-bottom: 10px;
-  font-family: "Roboto", sans-serif;
+  font-family: "AdihausDIN", sans-serif;
 }
 
 .modal-message .modal-dialog .modal-content .modal-header p {
@@ -8315,6 +8323,326 @@ label {
 .footer-text a,
 .footer-text i {
   color: #ffba00;
+}
+
+.gl-square-list__element {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d3d7da;
+  box-sizing: border-box;
+  color: #000;
+  ;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+
+
+}
+
+.gl-square-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  margin: 0px;
+  padding: 0px;
+  width: 100%
+}
+
+.gl-square-list__item {
+  list-style: none;
+  margin: 0 -1px -1px 0
+}
+
+input[type=checkbox] {
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 2px;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  margin: 0 .6em 0 0;
+  outline: 0;
+  padding: 0 !important;
+  vertical-align: text-top;
+  height: 20px;
+  width: 20px;
+  -webkit-appearance: none;
+  opacity: .5;
+}
+
+input[type=checkbox]:hover {
+  opacity: 1;
+}
+
+input[type=checkbox]:checked {
+  background-color: #000;
+  opacity: 1;
+}
+
+input[type=checkbox]:before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: 4px;
+  height: 10px;
+  border: solid #FFF;
+  border-width: 0 2px 2px 0;
+  margin: -1px -1px 0 -1px;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index: 2;
+}
+
+.gl-square-list__item--active .gl-square-list__element,
+.gl-square-list__item--active .gl-square-list__element:active,
+.gl-square-list__item--active .gl-square-list__element:hover,
+.gl-square-list__item--active .gl-square-list__element:focus {
+  border-color: #000;
+  z-index: 1;
+  font-family: "AdihausDIN", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: none;
+}
+
+.button_function {
+  border: none;
+  font-family: 'AdihausDIN';
+  width: 100%;
+
+  padding:5px 10px;
+  background-color: black;
+  color:white;
+
+}
+
+.button_function:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-price {
+  width: 220px;
+  border: 0;
+  padding: 0;
+  margin: 0; 
+}
+
+.price-title {
+  position: relative;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.2em;
+  font-weight: 400;
+}
+
+.price-field {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  box-sizing: border-box;
+  background: rgba(248, 247, 244, 0.2);
+  padding-top: 15px;
+  padding-left: 16px;
+  border-radius: 3px;
+}
+
+.price-field input[type=range] {
+    position: absolute;
+}
+
+/* Reset style for input range */
+
+.price-field input[type=range] {
+  width: 188px;
+  height: 2px; 
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+
+.price-field input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+.price-field input[type=range]:active,
+.price-field input[type=range]:focus {
+  outline: 0;
+}
+
+.price-field input[type=range]::-ms-track {
+  width: 188px;
+  height: 2px; 
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  pointer-events: none;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  border-radius: 5px;
+}
+
+/* Style toddler input range */
+
+.price-field input[type=range]::-webkit-slider-thumb { 
+  /* WebKit/Blink */
+    position: relative;
+    -webkit-appearance: none;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-top: -4px;
+    background-color: #000;
+    cursor: pointer;
+    cursor: pointer;
+    pointer-events: all;
+    z-index: 100;
+}
+
+.price-field input[type=range]::-moz-range-thumb { 
+  /* Firefox */
+  position: relative;
+  appearance: none;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin-top: -5px;
+  background-color: #fff;
+  cursor: pointer;
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 100;
+}
+
+.price-field input[type=range]::-ms-thumb  { 
+  /* IE */
+  position: relative;
+  appearance: none;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin-top: -5px;
+  background-color: #000;
+  cursor: pointer;
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 100;
+}
+
+/* Style track input range */
+
+.price-field input[type=range]::-webkit-slider-runnable-track { 
+  /* WebKit/Blink */
+  width: 188px;
+  height: 2px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 5px;
+}
+
+.price-field input[type=range]::-moz-range-track { 
+  /* Firefox */
+  width: 188px;
+  height: 2px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 5px;
+}
+
+.price-field input[type=range]::-ms-track { 
+  /* IE */
+  width: 188px;
+  height: 2px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 5px;
+}
+
+/* Style for input value block */
+
+.price-wrap {
+  display: flex;
+  justify-content: center;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.2em;
+  font-weight: 400;
+  margin-bottom: 7px;
+}
+
+.price-wrap-1, 
+.price-wrap-2 {
+  display: flex;
+}
+
+.price-title {
+  margin-right: 5px;
+  backgrund: #d58e32;
+}
+
+.price-wrap_line {
+  margin: 0 10px;
+}
+
+.price-wrap #one, 
+.price-wrap #two {
+  width: 30px;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  margin-right: 2px;
+  background:  0;
+  border: 0;
+  outline: 0;
+  color: #000;
+  font-family: 'Karla', 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.2em;
+  font-weight: 400;
+}
+
+.price-wrap label {
+  text-align: right;
+}
+
+/* Style for active state input */
+    
+.price-field input[type=range]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 0.5px #000;
+  transition-duration: 0.3s;
+}
+
+.price-field input[type=range]:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 0.5px #000;
+  transition-duration: 0.3s;
 }
 
 /*# sourceMappingURL=main.css.map */
