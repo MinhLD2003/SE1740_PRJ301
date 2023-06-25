@@ -28,17 +28,27 @@
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-md-5 filter-bar2">
                         <div class="sidebar-filter">
-                            <div class="head top-filter-head" style="font-size:20px; color:black;">Product Filters</div>
+                            <div class="head top-filter-head" style="font-size:20px; color:black;">
+                                Product Filters
+                            </div>
                             <div class="common-filter">
-                                <div class="head"><a style="color:black;" data-toggle="collapse" href="#shoes_sports"
-                                                     aria-expanded="false" aria-controls="#shoes_sports">
+                                <div class="head d-flex justify-content-between">
+                                    <a style="color:black;" data-toggle="collapse" href="#shoes_sports" aria-expanded="false"
+                                       aria-controls="#shoes_sports">
                                         Sports
                                     </a>
+                                    <div class="" style="width:20px;transform: rotateX(-180deg);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                                             class="cdr-icon_12-1-0">
+                                        <path role="presentation"
+                                              d="M12 8a.997.997 0 00-.702.288l-5.005 5.005a1 1 0 001.414 1.414L12 10.415l4.295 4.295a1 1 0 001.412-1.417l-4.98-4.98A.997.997 0 0012 8z">
+                                        </path>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <ul class="main-categories collapse" id="shoes_sports" data-toggle="collapse"
                                     aria-expanded="false" aria-controls="shoes_sports">
                                     <li class="filter-list">
-
                                         <input class="pixel-checkbox" type="checkbox" value="lifestyle" name="sport">
                                         <label for="">Lifestyle</label>
                                     </li>
@@ -66,11 +76,19 @@
                             </div>
                             <div class="common-filter">
                                 <ul class="main-categories">
-                                    <li class="head">
+                                    <li class="head d-flex justify-content-between">
                                         <a data-toggle="collapse" href="#shoes_brands" aria-expanded="false"
                                            aria-controls="shoes_brands">
                                             Brands
                                         </a>
+                                        <div class="" style="width:20px;transform: rotateX(-180deg);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                                                 class="cdr-icon_12-1-0">
+                                            <path role="presentation"
+                                                  d="M12 8a.997.997 0 00-.702.288l-5.005 5.005a1 1 0 001.414 1.414L12 10.415l4.295 4.295a1 1 0 001.412-1.417l-4.98-4.98A.997.997 0 0012 8z">
+                                            </path>
+                                            </svg>
+                                        </div>
                                     </li>
                                     <form action="">
                                         <ul class="collapse" id="shoes_brands" data-toggle="collapse" aria-expanded="false"
@@ -102,11 +120,19 @@
                             </div>
                             <div class="common-filter">
                                 <ul class="main-categories">
-                                    <li class="head">
+                                    <li class="head d-flex justify-content-between">
                                         <a data-toggle="collapse" href="#shoes_color" aria-expanded="false"
                                            aria-controls="shoes_color">
                                             Color
                                         </a>
+                                        <div class="" style="width:20px;transform: rotateX(-180deg);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                                                 class="cdr-icon_12-1-0">
+                                            <path role="presentation"
+                                                  d="M12 8a.997.997 0 00-.702.288l-5.005 5.005a1 1 0 001.414 1.414L12 10.415l4.295 4.295a1 1 0 001.412-1.417l-4.98-4.98A.997.997 0 0012 8z">
+                                            </path>
+                                            </svg>
+                                        </div>
                                     </li>
                                     <form action="">
                                         <ul class="collapse" id="shoes_color" data-toggle="collapse" aria-expanded="false"
@@ -137,11 +163,19 @@
                             </div>
                             <div class="common-filter">
                                 <ul class="main-categories">
-                                    <li class="head">
+                                    <li class="head d-flex justify-content-between">
                                         <a data-toggle="collapse" href="#shoes_sizes" aria-expanded="false"
                                            aria-controls="shoes_sizes">
                                             Size
                                         </a>
+                                        <div class="" style="width:20px;transform: rotateX(-180deg);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                                                 class="cdr-icon_12-1-0">
+                                            <path role="presentation"
+                                                  d="M12 8a.997.997 0 00-.702.288l-5.005 5.005a1 1 0 001.414 1.414L12 10.415l4.295 4.295a1 1 0 001.412-1.417l-4.98-4.98A.997.997 0 0012 8z">
+                                            </path>
+                                            </svg>
+                                        </div>
                                     </li>
                                     <form action="">
                                         <ul class="collapse" id="shoes_sizes" data-toggle="collapse" aria-expanded="false"
@@ -178,7 +212,7 @@
                                             <input type="range" min="100" max="3000" value="100" id="lower">
                                             <input type="range" min="100" max="3000" value="3000" id="upper">
                                         </div>
-                                        <div class="price-wrap">	
+                                        <div class="price-wrap">
                                             <div class="price-wrap-1">
                                                 <input id="one">
                                                 <label for="one">$</label>
@@ -193,21 +227,20 @@
                                 </div>
                             </div>
                             <div class="common-filter button-area d-flex align-content-center justify-content-center">
-
                                 <button type="submit" class="button_function" id="apply_button" onclick="apply()">Apply</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- Start Filter Bar -->
-                        <div class="filter-bar d-flex flex-wrap align-items-center ">
+                        <div class="filter-bar d-flex flex-wrap align-items-center">
                             <div class="sorting">
-                                <select aria-placeholder="SORT BY">
-                                    <option name="sort"value="" disabled selected>SORT BY</option>
-                                    <option name="sort"value="price-low-to-high">PRICE (LOW - HIGH)</option>
-                                    <option name="sort"value="price-high-to-low">PRICE (HIGH - LOW)</option>
-                                    <option name="sort"value="newest-to-oldest">NEWEST</option>
-                                    <option name="sort"value="top-sellers">TOP SELLERS</option>
+                                <select id="sortSelection" aria-placeholder="SORT BY">
+                                    <option name="sort" value="" disabled selected>SORT BY</option>
+                                    <option name="sort" value="price-low-to-high">PRICE (LOW - HIGH)</option>
+                                    <option name="sort" value="price-high-to-low">PRICE (HIGH - LOW)</option>
+                                    <option name="sort" value="newest-to-oldest">NEWEST</option>
+                                    <option name="sort" value="top-sellers">TOP SELLERS</option>
                                 </select>
                             </div>
                         </div>
@@ -245,7 +278,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <div class="single-product">
@@ -279,110 +311,9 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                      
+                               
                             </div>
                         </section>
                         <!-- End Best Seller -->
@@ -426,5 +357,6 @@
         <script src="../../template/jsPlugins/jquery.magnific-popup.min.js"></script>
         <script src="../../template/jsPlugins/owl.carousel.min.js"></script>
         <script src="../../template/jsPlugins/main.js"></script>
+        <script src="../../template/jsPlugins/filter.js"></script>
     </body>
 </html>
