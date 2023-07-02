@@ -25,6 +25,13 @@
     <body>
         <section id="category">
             <div class="container-fluid">
+                <div class="ml-4 mt-5">
+                    <h2>Men's Shoes
+                        <span id="shoes_counter" style="font-size:14px;">[123]</span>
+                    </h2>
+                </div>
+            </div>
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-md-5 filter-bar2">
                         <div class="sidebar-filter">
@@ -49,28 +56,137 @@
                                 <ul class="main-categories collapse" id="shoes_sports" data-toggle="collapse"
                                     aria-expanded="false" aria-controls="shoes_sports">
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="lifestyle" name="sport">
-                                        <label for="">Lifestyle</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Lifestyle"
+                                                               class="checkbox__input" value="lifestyle">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Lifestyle
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="running" name="sport">
-                                        <label for="">Running</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Football"
+                                                               class="checkbox__input" value="football">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Football
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="hiking" name="sport">
-                                        <label for="">Hiking</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Basketball"
+                                                               class="checkbox__input" value="basketball">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Basketball
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="basketball" name="sport">
-                                        <label for="">Basketball</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Running"
+                                                               class="checkbox__input" value="Running">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Running
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="golf" name="sport">
-                                        <label for="">Golf</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Golf" class="checkbox__input"
+                                                               value="Golf">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Golf
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="filter-list">
-                                        <input class="pixel-checkbox" type="checkbox" value="gym&training" name="sport">
-                                        <label for="">Gym & Training</label>
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Hiking"
+                                                               class="checkbox__input" value="Hiking">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Hiking
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="filter-list">
+                                        <a data-auto-id="" href="" class="active filter_item">
+                                            <div class="form-item">
+                                                <div class="checkbox">
+                                                    <label class="checkbox__label d-flex align-items-center">
+                                                        <input type="checkbox" name="sport" title="Training"
+                                                               class="checkbox__input" value="training">
+                                                        <span class="checkbox__text">
+                                                            <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                Training
+                                                                <span class="counter"
+                                                                      data-auto-id="filter-item-hitcount">(315)</span>
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -94,25 +210,99 @@
                                         <ul class="collapse" id="shoes_brands" data-toggle="collapse" aria-expanded="false"
                                             aria-controls="shoes_brands">
                                             <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="brand" value="Nike">
-                                                <label for="">Nike</label>
+                                                <a data-auto-id="" href="" class="active filter_item">
+                                                    <div class="form-item">
+                                                        <div class="checkbox">
+                                                            <label class="checkbox__label d-flex align-items-center">
+                                                                <input type="checkbox" name="brand" title="Nike"
+                                                                       class="checkbox__input" value="nike">
+                                                                <span class="checkbox__text">
+                                                                    <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                        Nike
+                                                                        <span class="counter"
+                                                                              data-auto-id="filter-item-hitcount">(315)</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                             <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="brand" value="Adidas">
-                                                <label for="">Adidas</label>
+                                                <a data-auto-id="" href="" class="active filter_item">
+                                                    <div class="form-item">
+                                                        <div class="checkbox">
+                                                            <label class="checkbox__label d-flex align-items-center">
+                                                                <input type="checkbox" name="brand" title="Puma"
+                                                                       class="checkbox__input" value="puma">
+                                                                <span class="checkbox__text">
+                                                                    <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                        Puma
+                                                                        <span class="counter"
+                                                                              data-auto-id="filter-item-hitcount">(315)</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                             <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="brand" value="Vanz">
-                                                <label for="">Vanz</label>
+                                                <a data-auto-id="" href="" class="active filter_item">
+                                                    <div class="form-item">
+                                                        <div class="checkbox">
+                                                            <label class="checkbox__label d-flex align-items-center">
+                                                                <input type="checkbox" name="brand" title="Adidas"
+                                                                       class="checkbox__input" value="adidas">
+                                                                <span class="checkbox__text">
+                                                                    <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                        Adidas
+                                                                        <span class="counter"
+                                                                              data-auto-id="filter-item-hitcount">(315)</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                             <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="brand"
-                                                       value="Converse">
-                                                <label for="">Converse</label>
+                                                <a data-auto-id="" href="" class="active filter_item">
+                                                    <div class="form-item">
+                                                        <div class="checkbox">
+                                                            <label class="checkbox__label d-flex align-items-center">
+                                                                <input type="checkbox" name="brand" title="Vans"
+                                                                       class="checkbox__input" value="vans">
+                                                                <span class="checkbox__text">
+                                                                    <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                        Vans
+                                                                        <span class="counter"
+                                                                              data-auto-id="filter-item-hitcount">(315)</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                             <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="brand" value="Puma">
-                                                <label for="">Puma</label>
+                                                <a data-auto-id="" href="" class="active filter_item">
+                                                    <div class="form-item">
+                                                        <div class="checkbox">
+                                                            <label class="checkbox__label d-flex align-items-center">
+                                                                <input type="checkbox" name="brand" title="Converse"
+                                                                       class="checkbox__input" value="converse">
+                                                                <span class="checkbox__text">
+                                                                    <span data-auto-id="plp-sidebar-filter-item-value">
+                                                                        Converse
+                                                                        <span class="counter"
+                                                                              data-auto-id="filter-item-hitcount">(315)</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                         </ul>
                                     </form>
@@ -137,26 +327,106 @@
                                     <form action="">
                                         <ul class="collapse" id="shoes_color" data-toggle="collapse" aria-expanded="false"
                                             aria-controls="shoes_color">
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="color" value="black">
-                                                <label for="">Black</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="color" value="white">
-                                                <label for="">White</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="color" value="brown">
-                                                <label for="">Brown</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="color" value="blue">
-                                                <label for="">Blue</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="color" value="green">
-                                                <label for="">Green</label>
-                                            </li>
+                                            <div class="filter_shoes">
+                                                <div class="filter-group_outer"
+                                                     style="height: auto; transition: height 150ms linear 0s; overflow: hidden;">
+                                                    <div class="filter-group__content for--colors">
+                                                        <div aria-label="Colour, 2 Selected" class="filter-group__items-group"
+                                                             role="group">
+                                                            <button class="filter-color is--selected is--color is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="true"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="black">
+                                                                <div class="filter-color__color-patch is--black ">
+                                                                    <div class="icon-checkmark is--toggled checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Black</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="true"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="blue">
+                                                                <div class="filter-color__color-patch is--blue ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Blue</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="brown">
+                                                                <div class="filter-color__color-patch is--brown ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Brown</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="green">
+                                                                <div class="filter-color__color-patch is--green ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Green</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="grey">
+                                                                <div class="filter-color__color-patch is--grey ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Grey</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="multi">
+                                                                <div class="filter-color__color-patch is--multi-color ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Multi-Colour</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="orange">
+                                                                <div class="filter-color__color-patch is--orange ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Orange</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="red">
+                                                                <div class="filter-color__color-patch is--red ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Red</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="white">
+                                                                <div class="filter-color__color-patch is--white ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">White</span>
+                                                            </button>
+                                                            <button class="filter-color is--color  is--button button_color"
+                                                                    href="" role="checkbox" type="button" aria-checked="false"
+                                                                    data-group-type="filter" data-is-color="true" name="color" 
+                                                                    data-auto-id="white">
+                                                                <div class="filter-color__color-patch is--yellow ">
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
+                                                                </div>
+                                                                <span class="filter-color__item-label">Yellow</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </ul>
                                     </form>
                                 </ul>
@@ -180,26 +450,214 @@
                                     <form action="">
                                         <ul class="collapse" id="shoes_sizes" data-toggle="collapse" aria-expanded="false"
                                             aria-controls="shoes_sizes">
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="size" value="10UK">
-                                                <label for="">10 UK</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="size" value="10.5UK">
-                                                <label for="">10.5 UK</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="size" value="11UK">
-                                                <label for="">11 UK</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="size" value="11.5UK">
-                                                <label for="">11.5 UK</label>
-                                            </li>
-                                            <li class="filter-list">
-                                                <input class="pixel-checkbox" type="checkbox" id="" name="size" value="12UK">
-                                                <label for="">12 UK</label>
-                                            </li>
+                                            <div class="filter_shoes"
+                                                 style="height: auto; transition: height 150ms linear 0s; overflow: hidden">
+                                                <div class="filter-group__content for--sizes">
+                                                    <div aria-label="Size" class="filter-group__items-group" role="group">
+                                                        <button aria-label="Filter for 35.5"
+                                                                class="filter-item is--size is--selected is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="35.5" 
+                                                                >
+                                                            <span class="filter-item__item-label">35.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 36"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="36">
+                                                            <span class="filter-item__item-label">36</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 36.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="36.5">
+                                                            <span class="filter-item__item-label">36.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 37.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="37.5">
+                                                            <span class="filter-item__item-label">37.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 38"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="38">
+                                                            <span class="filter-item__item-label">38</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 38.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="38.5">
+                                                            <span class="filter-item__item-label">38.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 39"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="39">
+                                                            <span class="filter-item__item-label">39</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 40"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="40">
+                                                            <span class="filter-item__item-label">40</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 40.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="40.5">
+                                                            <span class="filter-item__item-label">40.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 41"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="41">
+                                                            <span class="filter-item__item-label">41</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 42"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="42">
+                                                            <span class="filter-item__item-label">42</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 42.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="42.5">
+                                                            <span class="filter-item__item-label">42.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 43"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="43">
+                                                            <span class="filter-item__item-label">43</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 44"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="44">
+                                                            <span class="filter-item__item-label">44</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 44.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="44.5">
+                                                            <span class="filter-item__item-label">44.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 45"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="45">
+                                                            <span class="filter-item__item-label">45</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 45.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="45.5">
+                                                            <span class="filter-item__item-label">45.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 46"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="46">
+                                                            <span class="filter-item__item-label">46</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 47"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="47">
+                                                            <span class="filter-item__item-label">47</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 47.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="47.5">
+                                                            <span class="filter-item__item-label">47.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 48.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="48.5">
+                                                            <span class="filter-item__item-label">48.5</span>
+                                                        </button>
+                                                        <button aria-label="Filter for 49.5"
+                                                                class="filter-item is--size is--button button_color"
+                                                                data-url=""
+                                                                role="checkbox" type="button" aria-checked="false"
+                                                                data-group-ndx="3" data-group-type="filter"
+                                                                name="size"
+                                                                data-auto-id="49.5">
+                                                            <span class="filter-item__item-label">49.5</span>
+                                                        </button>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </ul>
                                     </form>
                                 </ul>
@@ -312,8 +770,105 @@
                                         </div>
                                     </div>
                                 </div>
-                      
-                               
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="single-product">
+                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
+                                        <div class="product-details">
+                                            <h6>
+                                                addidas New Hammer sole
+                                                for Sports person
+                                            </h6>
+                                            <div class="price">
+                                                <h6>$150.00</h6>
+                                                <h6 class="l-through">$210.00</h6>
+                                            </div>
+                                            <div class="prd-bottom">
+                                                <a href="" class="social-info">
+                                                    <span class="ti-bag"></span>
+                                                    <p class="hover-text">add to bag</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-heart"></span>
+                                                    <p class="hover-text">Wishlist</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-sync"></span>
+                                                    <p class="hover-text">compare</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-move"></span>
+                                                    <p class="hover-text">view more</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="single-product">
+                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
+                                        <div class="product-details">
+                                            <h6>
+                                                addidas New Hammer sole
+                                                for Sports person
+                                            </h6>
+                                            <div class="price">
+                                                <h6>$150.00</h6>
+                                                <h6 class="l-through">$210.00</h6>
+                                            </div>
+                                            <div class="prd-bottom">
+                                                <a href="" class="social-info">
+                                                    <span class="ti-bag"></span>
+                                                    <p class="hover-text">add to bag</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-heart"></span>
+                                                    <p class="hover-text">Wishlist</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-sync"></span>
+                                                    <p class="hover-text">compare</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-move"></span>
+                                                    <p class="hover-text">view more</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="single-product">
+                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
+                                        <div class="product-details">
+                                            <h6>
+                                                addidas New Hammer sole
+                                                for Sports person
+                                            </h6>
+                                            <div class="price">
+                                                <h6>$150.00</h6>
+                                                <h6 class="l-through">$210.00</h6>
+                                            </div>
+                                            <div class="prd-bottom">
+                                                <a href="" class="social-info">
+                                                    <span class="ti-bag"></span>
+                                                    <p class="hover-text">add to bag</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-heart"></span>
+                                                    <p class="hover-text">Wishlist</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-sync"></span>
+                                                    <p class="hover-text">compare</p>
+                                                </a>
+                                                <a href="" class="social-info">
+                                                    <span class="lnr lnr-move"></span>
+                                                    <p class="hover-text">view more</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                         <!-- End Best Seller -->
@@ -339,24 +894,21 @@
                     </div>
                 </div>
             </div>
-            <!-- Start related-product Area -->
 
-        </section> 
-
-        <!<!---------------------------------------------------------------------------------- -->
-        <script src="../../template/jsPlugins/vendor/jquery-2.2.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-                integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-        <script src="../../template/jsPlugins/vendor/bootstrap.min.js"></script>
-        <script src="../../template/jsPlugins/jquery.ajaxchimp.min.js"></script>
-        <script src="../../template/jsPlugins/jquery.nice-select.min.js"></script>
-        <script src="../../template/jsPlugins/jquery.sticky.js"></script>
-        <script src="../../template/jsPlugins/nouislider.min.js"></script>
-        <script src="../../template/jsPlugins/countdown.js"></script>
-        <script src="../../template/jsPlugins/jquery.magnific-popup.min.js"></script>
-        <script src="../../template/jsPlugins/owl.carousel.min.js"></script>
-        <script src="../../template/jsPlugins/main.js"></script>
-        <script src="../../template/jsPlugins/filter.js"></script>
+            <!<!---------------------------------------------------------------------------------- -->
+            <script src="../../template/jsPlugins/vendor/jquery-2.2.4.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+                    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+            <script src="../../template/jsPlugins/vendor/bootstrap.min.js"></script>
+            <script src="../../template/jsPlugins/jquery.ajaxchimp.min.js"></script>
+            <script src="../../template/jsPlugins/jquery.nice-select.min.js"></script>
+            <script src="../../template/jsPlugins/jquery.sticky.js"></script>
+            <script src="../../template/jsPlugins/nouislider.min.js"></script>
+            <script src="../../template/jsPlugins/countdown.js"></script>
+            <script src="../../template/jsPlugins/jquery.magnific-popup.min.js"></script>
+            <script src="../../template/jsPlugins/owl.carousel.min.js"></script>
+            <script src="../../template/jsPlugins/main.js"></script>
+            <script src="../../template/jsPlugins/filter.js"></script>
     </body>
 </html>

@@ -14,7 +14,7 @@ import model.auth.UserAccount;
  *
  * @author Admin
  */
-public class UserMapping implements AttributesMapping<UserAccount> {
+public class UserMapping implements ObjectsMapping<UserAccount> {
 
     @Override
     public UserAccount mapAttributes(ResultSet rs) {
@@ -31,5 +31,7 @@ public class UserMapping implements AttributesMapping<UserAccount> {
        }
        return null;
     }
+
+   
     
 }

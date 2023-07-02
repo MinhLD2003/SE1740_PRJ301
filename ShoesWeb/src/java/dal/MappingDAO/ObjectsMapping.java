@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 /**
  *
  * @author Admin
+ * @param <T>
  */
-public interface AttributesMapping<T>{
+public interface ObjectsMapping<T>{
     T mapAttributes(ResultSet rs);
+  
 }

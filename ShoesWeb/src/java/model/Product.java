@@ -5,20 +5,47 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
 public class Product {
+    private int productId;
     private String name;
-    private double price;
     private String brand;
-    private String[] categories;
+    private List<String> categories;
     private String description;
     private Timestamp last_update_time;
-
+    private List<ProductVariant> productVariants;
     public Product() {
+    }
+
+    
+
+    public Product(int productId,String name, double price, String brand, List<String> categories, String description) {
+        this.productId = productId;
+        this.name = name;
+        this.brand = brand;
+        this.categories = categories;
+        this.description = description;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public List<ProductVariant> getProductVariants() {
+        return productVariants;
+    }
+
+    public void setProductVariants(List<ProductVariant> productVariants) {
+        this.productVariants = productVariants;
     }
 
     public String getName() {
@@ -28,15 +55,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getBrand() {
         return brand;
     }
@@ -45,11 +63,11 @@ public class Product {
         this.brand = brand;
     }
 
-    public String[] getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(String[] categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 
@@ -68,6 +86,10 @@ public class Product {
     public void setLast_update_time(Timestamp last_update_time) {
         this.last_update_time = last_update_time;
     }
-    
-    
+    public void addProductVariant(ProductVariant newProductVariant) {
+        this.productVariants.add(newProductVariant);
+    }
+    public List<ProductVariant> getListProductVariants() {
+        return productVariants;
+    }
 }

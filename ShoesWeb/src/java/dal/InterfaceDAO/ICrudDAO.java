@@ -4,8 +4,8 @@
  */
 package dal.InterfaceDAO;
 
-import dal.MappingDAO.AttributesMapping;
 import java.util.List;
+import dal.MappingDAO.ObjectsMapping;
 
 /**
  *
@@ -14,5 +14,5 @@ import java.util.List;
 public interface ICrudDAO<T> {
     void update(String sql , Object... parameters);
     void insert(String sql , Object... parameters);
-    <T> List<T> query(String sql , AttributesMapping <T> mapping ,  Object... parameters);
+    <T> List<T> query(String sql , ObjectsMapping <T> mapping ,  Object... parameters);
 }

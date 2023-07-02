@@ -6,7 +6,7 @@ package dal.ImplementDAO;
 
 import dal.DBConnection;
 import dal.InterfaceDAO.ICrudDAO;
-import dal.MappingDAO.AttributesMapping;
+import dal.MappingDAO.ObjectsMapping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Admin
+ * @param <T>
  */
 public class GenericDAO<T> implements ICrudDAO<T> {
 
@@ -37,7 +38,6 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             statement.executeUpdate();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
         } finally {
             try {
                 if (connection != null) {
@@ -92,7 +92,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     }
 
     @Override
-    public <T> List<T> query(String sql, AttributesMapping<T> mapping, Object... parameters) {
+    public <T> List<T> query(String sql, ObjectsMapping<T> mapping, Object... parameters) {
         List<T> queryList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -122,5 +122,6 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             }
         }
     }
+   
 
 }
