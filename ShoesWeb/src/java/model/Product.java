@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,17 +20,10 @@ public class Product {
     private String description;
     private Timestamp last_update_time;
     private List<ProductVariant> productVariants;
-    public Product() {
-    }
-
     
-
-    public Product(int productId,String name, double price, String brand, List<String> categories, String description) {
-        this.productId = productId;
-        this.name = name;
-        this.brand = brand;
-        this.categories = categories;
-        this.description = description;
+    public Product() {
+        categories = new ArrayList<>();
+        productVariants = new ArrayList<>();
     }
 
     public int getProductId() {
@@ -91,5 +85,8 @@ public class Product {
     }
     public List<ProductVariant> getListProductVariants() {
         return productVariants;
+    }
+    public void addProductCategories(String category) {
+        categories.add(category);
     }
 }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  * @author Admin
  */
-public class NormalDataMapping {
+public class NormalDataMapping  {
 
     public String mapAttributes(String queryCol, ResultSet rs) {
         String returnString = "";
@@ -23,4 +23,5 @@ public class NormalDataMapping {
         }
     }
 
+   
 }

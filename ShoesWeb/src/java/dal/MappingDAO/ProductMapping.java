@@ -28,4 +28,5 @@ public class ProductMapping implements ObjectsMapping<Product> {
             return null;
         }
     }
+    
 }

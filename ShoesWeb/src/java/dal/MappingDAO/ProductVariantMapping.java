@@ -18,11 +18,12 @@ public class ProductVariantMapping implements ObjectsMapping<ProductVariant> {
     public ProductVariant mapAttributes(ResultSet rs) {
         ProductVariant p = new ProductVariant();
         try {
-            p.setId(rs.getInt("product_variant_id"));
-            p.setColor(rs.getString("color"));
-            p.setLastUpdate(rs.getTimestamp("last_update_time"));
+            p.setProductVariantCode(rs.getString("product_variant_code"));
             p.setProductSellingPrice(rs.getFloat("price"));
             p.setProductCost(rs.getFloat("product_cost"));
+            p.setColor(rs.getString("color"));
+            p.setCreatedTime(rs.getTimestamp("create_time"));
+          
             return p;
         } catch (SQLException ex) {
             return null;

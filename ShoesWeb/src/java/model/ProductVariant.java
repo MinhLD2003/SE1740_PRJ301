@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,24 +15,18 @@ import java.util.List;
  */
 public class ProductVariant extends Product {
 
-    private int id;
     private String productVariantCode;
     private double productSellingPrice;
     private double productCost;
     private String color;
-    private HashMap<String, Integer> sizeQuantityMap = new HashMap<>();
+    private HashMap<String, Integer> sizeQuantityMap;
+    private Timestamp createdTime;
     private Timestamp lastUpdate;
-    private List<String> images_urls;
+    private List<String> imagesUrls;
 
     public ProductVariant() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        sizeQuantityMap = new HashMap<>();
+        imagesUrls = new ArrayList<>();
     }
 
     public double getProductSellingPrice() {
@@ -62,6 +57,27 @@ public class ProductVariant extends Product {
         return sizeQuantityMap;
     }
 
+    public void setSizeQuantityMap(HashMap<String, Integer> sizeQuantityMap) {
+        this.sizeQuantityMap = sizeQuantityMap;
+    }
+
+    public void updateSizeQuantityMap(String size, int quantity) {
+        if (sizeQuantityMap.containsKey(size)) {
+            sizeQuantityMap.put(size, sizeQuantityMap.get(size) + quantity);
+        } else {
+            sizeQuantityMap.put(size, quantity);
+
+        }
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -70,8 +86,8 @@ public class ProductVariant extends Product {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<String> getImages_urls() {
-        return images_urls;
+    public List<String> getImagesUrls() {
+        return imagesUrls;
     }
 
     public String getProductVariantCode() {
@@ -82,7 +98,7 @@ public class ProductVariant extends Product {
         this.productVariantCode = productVariantCode;
     }
 
-    public void setImages_urls(List<String> images_urls) {
-        this.images_urls = images_urls;
+    public void setImagesUrls(List<String> images_urls) {
+        this.imagesUrls = images_urls;
     }
 }

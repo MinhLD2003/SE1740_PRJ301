@@ -6,6 +6,7 @@ package dal.ImplementDAO;
 
 import dal.DBConnection;
 import dal.InterfaceDAO.ICrudDAO;
+import dal.MappingDAO.NormalDataMapping;
 import dal.MappingDAO.ObjectsMapping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -122,6 +123,39 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             }
         }
     }
-   
+
+    public List<List<String>> queryData(String sql, NormalDataMapping map, String[] queryCols, Object... params) {
+        List<List<String>> queryList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection = db.getConnection();
+            statement = connection.prepareStatement(sql);
+            setParameters(statement, params);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                List<String> innerQueryString = new ArrayList<>();
+                for(String queryCol : queryCols) {
+                    innerQueryString.add(rs.getString(queryCol));
+                }
+                queryList.add(innerQueryString);
+            }
+            return queryList;
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+    }
 
 }
