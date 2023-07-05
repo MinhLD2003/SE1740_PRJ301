@@ -18,7 +18,8 @@ public class Product {
     private String brand;
     private List<String> categories;
     private String description;
-    private Timestamp last_update_time;
+    private Timestamp createdTime;
+    private Timestamp lastUpdateTime;
     private List<ProductVariant> productVariants;
     
     public Product() {
@@ -73,16 +74,27 @@ public class Product {
         this.description = description;
     }
 
-    public Timestamp getLast_update_time() {
-        return last_update_time;
+    public Timestamp getCreatedTime() {
+        return createdTime;
     }
 
-    public void setLast_update_time(Timestamp last_update_time) {
-        this.last_update_time = last_update_time;
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
     }
+
+    public Timestamp getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
+    
     public void addProductVariant(ProductVariant newProductVariant) {
         this.productVariants.add(newProductVariant);
     }
+    
     public List<ProductVariant> getListProductVariants() {
         return productVariants;
     }

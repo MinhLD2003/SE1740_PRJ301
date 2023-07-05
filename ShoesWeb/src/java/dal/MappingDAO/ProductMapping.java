@@ -21,7 +21,8 @@ public class ProductMapping implements ObjectsMapping<Product> {
             p.setProductId(rs.getInt("product_id"));
             p.setName(rs.getString("name"));
             p.setBrand(rs.getString("brand_name"));
-            p.setLast_update_time(rs.getTimestamp("last_update_time"));
+            p.setCreatedTime(rs.getTimestamp("created_time"));
+            p.setLastUpdateTime(rs.getTimestamp("last_update_time"));
             p.setDescription(rs.getString("description"));
             return p;
         } catch (SQLException ex) {

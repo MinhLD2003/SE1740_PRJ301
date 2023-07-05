@@ -4,10 +4,13 @@
  */
 package service.InterfaceService;
 
+import java.util.List;
+import model.ProductVariant;
+
 /**
  *
  * @author Admin
  */
 public interface IProductVariantService {
-    
+    List<ProductVariant> queryProductVariants(int productId);
 }

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,25 +35,30 @@
                         <div class="collapse navbar-collapse offset " id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto ">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="index.html">All</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=men">Men's</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="index.html">Men's</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=women">Women's</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="index.html">Women's</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=kid">Kid's</a>
                                 </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="index.html">Kid's</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/home?redirect=productpage&page=sale">Sale</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
                             </ul>
                             <ul class="navbar-nav nav navbar-right">
-                                <li class="nav-item"><a href="#"><span class="ti-heart"></span></a></li>
-                                <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+                                <li class="nav-item">
+                                    <a href="/home?redirect=wishlist"><span class="ti-heart"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home?redirect=cart" class="cart"><span class="ti-bag"></span>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <button class="search"><span class="lnr ti-search" id="search"></span></button>
                                 </li>

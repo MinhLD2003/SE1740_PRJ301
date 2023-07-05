@@ -5,6 +5,7 @@
 package dal.ImplementDAO;
 
 import dal.InterfaceDAO.IProductDAO;
+import dal.InterfaceDAO.IProductVariantDAO;
 import dal.MappingDAO.ObjectsMapping;
 import dal.MappingDAO.ProductMapping;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
 
     private ProductDAO pDAO = new ProductDAO();
     private ObjectsMapping obMapping = new ProductMapping();
-
+    private IProductVariantDAO pDAO1;
     @Override
     public List<Product> queryAllProduct() {
         String sql = "select * from product";
@@ -31,6 +32,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         for (Product p : productList) {
             List<String> categoryList = queryProductCategories(p.getProductId());
             p.setCategories(categoryList);
+            p.setProductVariants(pDAO1.queryProductVariants(p.getProductId()));
         }
         return productList;
     }

@@ -4,14 +4,25 @@
  */
 package service;
 
-import dal.ImplementDAO.ProductVariantDAO;
+import dal.InterfaceDAO.IProductVariantDAO;
+import java.util.List;
+import model.ProductVariant;
+import service.InterfaceService.IProductVariantService;
 
 /**
  *
  * @author Admin
  */
-public class ProductVariantService {
+public class ProductVariantService implements IProductVariantService{
 
-   private ProductVariantDAO pDAO;
+    private IProductVariantDAO pDAO;
+    @Override
+    public List<ProductVariant> queryProductVariants(int productId) {
+       return pDAO.queryProductVariants(productId);
+    }
+
+   
+
+
    
 }
