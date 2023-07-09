@@ -2,7 +2,7 @@ const categoryCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 const clearFilterButton = document.getElementById('clearButton');
 const applyButton = document.getElementById("apply_button");
 const sortSelection = document.querySelector('#sortSelection');
-const baseUrl = 'https://example.com/filter?';
+const baseUrl = 'http://localhost:9999/shoesweb/productcontroller?action=filter&';
 const buttons = document.querySelectorAll('button.is--button');
 
 
@@ -19,33 +19,56 @@ var upperVal = parseInt(upper__slider.value);
 function generateFilterLinkURL(categoryMap) {
     var queryString = [];
     //checkbox filter
+    var brandString = 'brand=';
+    var sportString = 'sport=';
+    var brandValuePairs = [];
+    var sportValuePairs = [];
     categoryMap.forEach((innerMap, key) => {
-        var keyValuePairs = [];
-        innerMap.forEach((innerValue, innerKey) => {
-            keyValuePairs.push(`${encodeURIComponent(key)}=${encodeURIComponent(innerValue)}`);
-        });
-        queryString.push(keyValuePairs.join('%7C'));
-    });
+        if (key === 'brand') {
+            innerMap.forEach((innerValue, innerKey) => {
+                brandValuePairs.push(`${encodeURIComponent(innerValue)}`);
+            });
+        }
+        if (key === 'sport') {
+            innerMap.forEach((innerValue, innerKey) => {
+                sportValuePairs.push(`${encodeURIComponent(innerValue)}`);
+            });
+        }
 
+    });
+    if (brandValuePairs.length !== 0) {
+        brandString = brandString + brandValuePairs.join('%7C');
+        queryString.push(brandString);
+    }
+    if (sportValuePairs.length !== 0) {
+        sportString = sportString + sportValuePairs.join('%7C');
+        queryString.push(sportString);
+    }
     //button filter
     var colorKeyValuePairs = [];
     var sizeKeyValuePairs = [];
+
     buttons.forEach(button => {
 
         if (button.classList.contains('is--selected')) {
             if (button.name === 'color')
-                colorKeyValuePairs.push(`${button.name}=${button.getAttribute('data-auto-id')}`);
+                colorKeyValuePairs.push(`${button.getAttribute('data-auto-id')}`);
             if (button.name === 'size')
-                sizeKeyValuePairs.push(`${button.name}=${button.getAttribute('data-auto-id')}`);
+                sizeKeyValuePairs.push(`${button.getAttribute('data-auto-id')}`);
         }
 
     })
     // price filter 
-    if (sizeKeyValuePairs.length !== 0)
-        queryString.push(sizeKeyValuePairs.join('%7C'));
-    if (colorKeyValuePairs.length !== 0)
-        queryString.push(colorKeyValuePairs.join('%7C'));
-
+    if (sizeKeyValuePairs.length !== 0) {
+        var sizeString = sizeKeyValuePairs.join('%7C');
+        sizeString = 'size=' + sizeString;
+        queryString.push(sizeString);
+    }
+    if (colorKeyValuePairs.length !== 0) {
+        var colorString = colorKeyValuePairs.join('%7C');
+        colorString = 'color=' + colorString;
+        queryString.push(colorString);
+    }
     queryString.push(`price_min=${lower_bound}&price_max=${upper_bound}`);
 
     var finalString = queryString.join('&');
@@ -110,7 +133,7 @@ buttons.forEach(button => {
         url_link = generateFilterLinkURL(getCheckedInputMap());
         window.location.href = url_link;
     });
-});
+})
 //-------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -119,13 +142,13 @@ upper__slider.oninput = function () {
     upperVal = parseInt(upper__slider.value);
     if (upperVal < lowerVal + 4) {
         low__slider.value = upperVal - 4;
-        if (lowerVal ===low__slider.min) {
+        if (lowerVal == low__slider.min) {
             upper__slider.value = 4;
         }
     }
 
     upper_bound = this.value;
-    document.querySelector('#two').value = this.value;
+    document.querySelector('#two').value = this.value
 };
 
 low__slider.oninput = function () {
@@ -133,7 +156,7 @@ low__slider.oninput = function () {
     upperVal = parseInt(upper__slider.value);
     if (lowerVal > upperVal - 4) {
         upper__slider.value = lowerVal + 4;
-        if (upperVal === upper__slider.max) {
+        if (upperVal == upper__slider.max) {
             low__slider.value = parseInt(upper__slider.max) - 4;
         }
     }

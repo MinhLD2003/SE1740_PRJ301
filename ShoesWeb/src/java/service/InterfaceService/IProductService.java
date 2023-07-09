@@ -4,6 +4,7 @@
  */
 package service.InterfaceService;
 
+import java.util.HashMap;
 import java.util.List;
 import model.Product;
 
@@ -12,8 +13,7 @@ import model.Product;
  * @author Admin
  */
 public interface IProductService {
-
     List<Product> queryAllProduct();
+    List<Product> queryProductsByCategories(HashMap<String , List<String>> categories);
 
-    
 }

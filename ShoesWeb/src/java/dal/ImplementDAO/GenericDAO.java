@@ -6,7 +6,6 @@ package dal.ImplementDAO;
 
 import dal.DBConnection;
 import dal.InterfaceDAO.ICrudDAO;
-import dal.MappingDAO.NormalDataMapping;
 import dal.MappingDAO.ObjectsMapping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,7 +36,6 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
             statement.executeUpdate();
-
         } catch (SQLException ex) {
         } finally {
             try {
@@ -98,6 +96,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
+        
         try {
             connection = db.getConnection();
             statement = connection.prepareStatement(sql);
@@ -109,7 +108,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             }
             return queryList;
         } catch (SQLException ex) {
-            return null;
+            ex.printStackTrace();
         } finally {
             try {
                 if (connection != null) {
@@ -122,28 +121,25 @@ public class GenericDAO<T> implements ICrudDAO<T> {
                 ex1.printStackTrace();
             }
         }
+        return null;
     }
 
-    public List<List<String>> queryData(String sql, NormalDataMapping map, String[] queryCols, Object... params) {
-        List<List<String>> queryList = new ArrayList<>();
+    public List<String> queryData(String sql, String queryCol ,Object... param) {
+        List<String> queryList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
         try {
             connection = db.getConnection();
             statement = connection.prepareStatement(sql);
-            setParameters(statement, params);
+            setParameters(statement,  param);
             rs = statement.executeQuery();
             while (rs.next()) {
-                List<String> innerQueryString = new ArrayList<>();
-                for(String queryCol : queryCols) {
-                    innerQueryString.add(rs.getString(queryCol));
-                }
-                queryList.add(innerQueryString);
+                queryList.add(rs.getString(queryCol));
             }
             return queryList;
         } catch (SQLException ex) {
-            return null;
+            ex.printStackTrace();
         } finally {
             try {
                 if (connection != null) {
@@ -156,6 +152,6 @@ public class GenericDAO<T> implements ICrudDAO<T> {
                 ex1.printStackTrace();
             }
         }
+        return null;
     }
-
 }

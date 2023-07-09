@@ -38,16 +38,16 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=men">Men's</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Men">Men's</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=women">Women's</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Women">Women's</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=kid">Kid's</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Kid">Kid's</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/home?redirect=productpage&page=sale">Sale</a>
+                                    <a class="nav-link" href="/home?redirect=productpage&page=Sale">Sale</a>
                                 </li>
                             </ul>
                             <ul class="navbar-nav nav navbar-right">

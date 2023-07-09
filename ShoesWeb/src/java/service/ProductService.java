@@ -4,7 +4,8 @@
  */
 package service;
 
-import dal.InterfaceDAO.IProductDAO;
+import dal.ImplementDAO.ProductDAO;
+import java.util.HashMap;
 import java.util.List;
 import model.Product;
 import service.InterfaceService.IProductService;
@@ -14,9 +15,14 @@ import service.InterfaceService.IProductService;
  * @author Admin
  */
 public class ProductService implements IProductService {
-    private IProductDAO pDAO;
+    private ProductDAO pDAO = new ProductDAO();
     @Override
     public List<Product> queryAllProduct() {
         return pDAO.queryAllProduct();
+    }
+
+    @Override
+    public List<Product> queryProductsByCategories(HashMap<String , List<String>> categories) {
+        return pDAO.queryProductsByCategories(categories);
     }
 }

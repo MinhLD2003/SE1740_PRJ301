@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,10 +24,11 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/style.css">
     </head>
     <body>
-        <section id="category">
-            <div class="container-fluid">
-                <div class="ml-4 mt-5">
-                    <h2>Men's Shoes
+        <c:set var="page" value="${sessionScope.pageRequest}"></c:set>
+            <section id="category">
+                <div class="container-fluid">
+                    <div class="ml-4 mt-5">
+                        <h2>${page}'s Shoes
                         <span id="shoes_counter" style="font-size:14px;">[123]</span>
                     </h2>
                 </div>
@@ -61,7 +63,7 @@
                                                 <div class="checkbox">
                                                     <label class="checkbox__label d-flex align-items-center">
                                                         <input type="checkbox" name="sport" title="Lifestyle"
-                                                               class="checkbox__input" value="lifestyle">
+                                                               class="checkbox__input" value="Lifestyle">
                                                         <span class="checkbox__text">
                                                             <span data-auto-id="plp-sidebar-filter-item-value">
                                                                 Lifestyle
@@ -80,7 +82,7 @@
                                                 <div class="checkbox">
                                                     <label class="checkbox__label d-flex align-items-center">
                                                         <input type="checkbox" name="sport" title="Football"
-                                                               class="checkbox__input" value="football">
+                                                               class="checkbox__input" value="Football">
                                                         <span class="checkbox__text">
                                                             <span data-auto-id="plp-sidebar-filter-item-value">
                                                                 Football
@@ -99,7 +101,7 @@
                                                 <div class="checkbox">
                                                     <label class="checkbox__label d-flex align-items-center">
                                                         <input type="checkbox" name="sport" title="Basketball"
-                                                               class="checkbox__input" value="basketball">
+                                                               class="checkbox__input" value="Basketball">
                                                         <span class="checkbox__text">
                                                             <span data-auto-id="plp-sidebar-filter-item-value">
                                                                 Basketball
@@ -175,7 +177,7 @@
                                                 <div class="checkbox">
                                                     <label class="checkbox__label d-flex align-items-center">
                                                         <input type="checkbox" name="sport" title="Training"
-                                                               class="checkbox__input" value="training">
+                                                               class="checkbox__input" value="Training">
                                                         <span class="checkbox__text">
                                                             <span data-auto-id="plp-sidebar-filter-item-value">
                                                                 Training
@@ -215,7 +217,7 @@
                                                         <div class="checkbox">
                                                             <label class="checkbox__label d-flex align-items-center">
                                                                 <input type="checkbox" name="brand" title="Nike"
-                                                                       class="checkbox__input" value="nike">
+                                                                       class="checkbox__input" value="Nike">
                                                                 <span class="checkbox__text">
                                                                     <span data-auto-id="plp-sidebar-filter-item-value">
                                                                         Nike
@@ -234,7 +236,7 @@
                                                         <div class="checkbox">
                                                             <label class="checkbox__label d-flex align-items-center">
                                                                 <input type="checkbox" name="brand" title="Puma"
-                                                                       class="checkbox__input" value="puma">
+                                                                       class="checkbox__input" value="Puma">
                                                                 <span class="checkbox__text">
                                                                     <span data-auto-id="plp-sidebar-filter-item-value">
                                                                         Puma
@@ -253,7 +255,7 @@
                                                         <div class="checkbox">
                                                             <label class="checkbox__label d-flex align-items-center">
                                                                 <input type="checkbox" name="brand" title="Adidas"
-                                                                       class="checkbox__input" value="adidas">
+                                                                       class="checkbox__input" value="Adidas">
                                                                 <span class="checkbox__text">
                                                                     <span data-auto-id="plp-sidebar-filter-item-value">
                                                                         Adidas
@@ -272,7 +274,7 @@
                                                         <div class="checkbox">
                                                             <label class="checkbox__label d-flex align-items-center">
                                                                 <input type="checkbox" name="brand" title="Vans"
-                                                                       class="checkbox__input" value="vans">
+                                                                       class="checkbox__input" value="Vans">
                                                                 <span class="checkbox__text">
                                                                     <span data-auto-id="plp-sidebar-filter-item-value">
                                                                         Vans
@@ -291,7 +293,7 @@
                                                         <div class="checkbox">
                                                             <label class="checkbox__label d-flex align-items-center">
                                                                 <input type="checkbox" name="brand" title="Converse"
-                                                                       class="checkbox__input" value="converse">
+                                                                       class="checkbox__input" value="Converse">
                                                                 <span class="checkbox__text">
                                                                     <span data-auto-id="plp-sidebar-filter-item-value">
                                                                         Converse
@@ -333,12 +335,12 @@
                                                     <div class="filter-group__content for--colors">
                                                         <div aria-label="Colour, 2 Selected" class="filter-group__items-group"
                                                              role="group">
-                                                            <button class="filter-color is--selected is--color is--button button_color"
+                                                            <button class="filter-color  is--color is--button button_color"
                                                                     href="" role="checkbox" type="button" aria-checked="true"
                                                                     data-group-type="filter" data-is-color="true" name="color" 
                                                                     data-auto-id="black">
                                                                 <div class="filter-color__color-patch is--black ">
-                                                                    <div class="icon-checkmark is--toggled checkmark_css"></div>
+                                                                    <div class="icon-checkmark  checkmark_css"></div>
                                                                 </div>
                                                                 <span class="filter-color__item-label">Black</span>
                                                             </button>
@@ -455,7 +457,7 @@
                                                 <div class="filter-group__content for--sizes">
                                                     <div aria-label="Size" class="filter-group__items-group" role="group">
                                                         <button aria-label="Filter for 35.5"
-                                                                class="filter-item is--size is--selected is--button button_color"
+                                                                class="filter-item is--size is--button button_color"
                                                                 data-url=""
                                                                 role="checkbox" type="button" aria-checked="false"
                                                                 data-group-ndx="3" data-group-type="filter"
@@ -667,8 +669,8 @@
                                 <div class="price-range-area">
                                     <div>
                                         <div class="price-field">
-                                            <input type="range" min="100" max="3000" value="100" id="lower">
-                                            <input type="range" min="100" max="3000" value="3000" id="upper">
+                                            <input type="range" min="10" max="3000" value="10" id="lower">
+                                            <input type="range" min="10" max="3000" value="3000" id="upper">
                                         </div>
                                         <div class="price-wrap">
                                             <div class="price-wrap-1">
@@ -704,171 +706,53 @@
                         </div>
                         <section class="lattest-product-area pb-40 category-list">
                             <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
+                                <c:set var="productList" value="${sessionScope.productList}"></c:set>
+                                <c:forEach var="product" items="${productList}">
+                                 
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="single-product">
+                                                <a class="product_link" href="${pageContext.request.contextPath}/productcontroller?action=singleproduct&product=${product.name}&productVariant=${p.productVariantCode}">
+                                                    <img class="img-fluid" src="${product.imageUrls.get(0)}" alt="">
                                                 </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
+                                                <div class="product-details">
+                                                    <a class="product_link" href="${pageContext.request.contextPath}/productcontroller?action=singleproductproduct=${product.name}&productVariant=${p.productVariantCode}   ">
+                                                        <h5>
+                                                            ${product.name}-
+                                                            
+                                                            ${product.productVariantCode}
+                                                        </h5>
+                                                        <h5>
+                                                            ${product.categories} 
+                                                        </h5>
+                                                    </a>
+                                                    <div class="price">
+                                                        <h6>$${product.productSellingPrice}</h6>
+                                                        <h6 class="l-through">$210.00</h6>
+                                                    </div>
+                                                    <div class="prd-bottom">
+                                                        <a href="" class="social-info">
+                                                            <span class="ti-bag"></span>
+                                                            <p class="hover-text">add to bag</p>
+                                                        </a>
+                                                        <a href="" class="social-info">
+                                                            <span class="lnr lnr-heart"></span>
+                                                            <p class="hover-text">Wishlist</p>
+                                                        </a>
+                                                        <a href="" class="social-info">
+                                                            <span class="lnr lnr-sync"></span>
+                                                            <p class="hover-text">compare</p>
+                                                        </a>
+                                                        <a href="" class="social-info">
+                                                            <span class="lnr lnr-move"></span>
+                                                            <p class="hover-text">view more</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="single-product">
-                                        <img class="img-fluid" src="img/product/p6.jpg" alt="">
-                                        <div class="product-details">
-                                            <h6>
-                                                addidas New Hammer sole
-                                                for Sports person
-                                            </h6>
-                                            <div class="price">
-                                                <h6>$150.00</h6>
-                                                <h6 class="l-through">$210.00</h6>
-                                            </div>
-                                            <div class="prd-bottom">
-                                                <a href="" class="social-info">
-                                                    <span class="ti-bag"></span>
-                                                    <p class="hover-text">add to bag</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-heart"></span>
-                                                    <p class="hover-text">Wishlist</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-sync"></span>
-                                                    <p class="hover-text">compare</p>
-                                                </a>
-                                                <a href="" class="social-info">
-                                                    <span class="lnr lnr-move"></span>
-                                                    <p class="hover-text">view more</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                    </c:forEach>
+                               
                             </div>
                         </section>
                         <!-- End Best Seller -->
@@ -895,7 +779,7 @@
                 </div>
             </div>
 
-            <!<!---------------------------------------------------------------------------------- -->
+          <!---------------------------------------------------------------------------------- -->
             <script src="../../template/jsPlugins/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
                     integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"

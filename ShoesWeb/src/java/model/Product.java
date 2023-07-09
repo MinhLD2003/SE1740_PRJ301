@@ -6,6 +6,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,20 +14,27 @@ import java.util.List;
  * @author Admin
  */
 public class Product {
+
     private int productId;
     private String name;
     private String brand;
     private List<String> categories;
     private String description;
+    private String productVariantCode;
+    private double productSellingPrice;
+    private double productCost;
+    private String color;
+    private HashMap<String, Integer> sizeQuantityMap;
     private Timestamp createdTime;
     private Timestamp lastUpdateTime;
-    private List<ProductVariant> productVariants;
-    
+    private List<String> imageUrls;
+
     public Product() {
         categories = new ArrayList<>();
-        productVariants = new ArrayList<>();
+        sizeQuantityMap = new HashMap<>();
+        imageUrls = new ArrayList<>();
     }
-
+    
     public int getProductId() {
         return productId;
     }
@@ -35,14 +43,45 @@ public class Product {
         this.productId = productId;
     }
 
-    public List<ProductVariant> getProductVariants() {
-        return productVariants;
+    public String getProductVariantCode() {
+        return productVariantCode;
     }
 
-    public void setProductVariants(List<ProductVariant> productVariants) {
-        this.productVariants = productVariants;
+    public void setProductVariantCode(String productVariantCode) {
+        this.productVariantCode = productVariantCode;
     }
 
+    public double getProductSellingPrice() {
+        return productSellingPrice;
+    }
+
+    public void setProductSellingPrice(double productSellingPrice) {
+        this.productSellingPrice = productSellingPrice;
+    }
+
+    public double getProductCost() {
+        return productCost;
+    }
+
+    public void setProductCost(double productCost) {
+        this.productCost = productCost;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
     public String getName() {
         return name;
     }
@@ -50,6 +89,7 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getBrand() {
         return brand;
     }
@@ -90,14 +130,19 @@ public class Product {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    
-    public void addProductVariant(ProductVariant newProductVariant) {
-        this.productVariants.add(newProductVariant);
+    public void setSizeQuantityMap(HashMap<String, Integer> sizeQuantityMap) {
+        this.sizeQuantityMap = sizeQuantityMap;
     }
-    
-    public List<ProductVariant> getListProductVariants() {
-        return productVariants;
+
+    public void updateSizeQuantityMap(String size, int quantity) {
+        if (sizeQuantityMap.containsKey(size)) {
+            sizeQuantityMap.put(size, sizeQuantityMap.get(size) + quantity);
+        } else {
+            sizeQuantityMap.put(size, quantity);
+
+        }
     }
+
     public void addProductCategories(String category) {
         categories.add(category);
     }
