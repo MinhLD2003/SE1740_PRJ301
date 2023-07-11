@@ -1,6 +1,3 @@
-
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -14,10 +11,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.auth.UserAccount;
+import model.UserAccount;
+import service.InterfaceService.IUserAccountService;
 import service.UserAccountService;
 import utils.CodeProcessing;
+import utils.SessionUtil;
 
 /**
  *
@@ -80,8 +78,8 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String isRemembered = request.getParameter("remember");
-        
-        UserAccountService uAService = new UserAccountService();
+
+        IUserAccountService uAService = new UserAccountService();
         UserAccount foundAccount = uAService.getUserByUserName(username);
         CodeProcessing codeProcess = new CodeProcessing();
         if (foundAccount == null) {
@@ -90,8 +88,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/frontend/views/client/auth/login.jsp").forward(request, response);
         } else {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", foundAccount);
+                SessionUtil.getInstance().putValue(request, "user", foundAccount);
 
                 //------------------- Cookie Session
                 Cookie usernameCookie = new Cookie("username", username);
@@ -108,7 +105,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 response.addCookie(usernameCookie);
                 response.addCookie(passwordCookie);
-
+                response.addCookie(rememberCookie);
                 response.sendRedirect("frontend/views/client/homepage.jsp");
 
             } else {

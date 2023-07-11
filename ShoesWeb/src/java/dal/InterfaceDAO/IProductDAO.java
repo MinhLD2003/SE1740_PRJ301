@@ -16,5 +16,5 @@ public interface IProductDAO extends ICrudDAO<Product> {
     List<Product> queryAllProduct();
     List<String>  queryProductCategories(String productCode);
     List<Product> queryProductsByCategories(HashMap<String, List<String>> filterMap);
-    
+    List<Product> queryProductBySearching(String search_value);
 }

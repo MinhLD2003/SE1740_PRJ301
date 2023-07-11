@@ -70,7 +70,7 @@ public class Cart {
         }
     }
 
-    public void updateCartLine(Product product , int quantity) {
+    public void updateCartLine(Product product, int quantity) {
         for (CartLine c : cartLine) {
             if (c.getProduct().getProductCode().equals(product.getProductCode())) {
                 c.updateSubtotal(quantity);
@@ -78,4 +78,12 @@ public class Cart {
         }
     }
 
+    public boolean isExistedProduct(Product product) {
+        for (CartLine c : this.cartLine) {
+            if (c.getProduct().getProductCode().equals(product.getProductCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

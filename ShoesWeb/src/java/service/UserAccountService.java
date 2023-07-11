@@ -4,33 +4,38 @@
  */
 package service;
 
+import model.UserAccount;
 import dal.ImplementDAO.UserAccountDAO;
 import java.sql.Timestamp;
-import model.auth.UserAccount;
+import service.InterfaceService.IUserAccountService;
 
 /**
  *
  * @author Admin
  */
-public class UserAccountService {
+public class UserAccountService implements IUserAccountService {
 
     UserAccountDAO uADAO = new UserAccountDAO();
 
+    @Override
     public Timestamp getEmailConfCreatedTime(UserAccount user) {
         String sql = "select confirmation_created_timestamp from user_account where email_address = ?";
         return uADAO.getCreatedTime(sql, user.getEmailAddress());
     }
 
+    @Override
     public int getUserAccountId(UserAccount user) {
         String sql = "select user_account_id from user_account where email_address = ? ";
         return uADAO.getUserAccountId(sql, user.getEmailAddress());
     }
 
+    @Override
     public void updateActiveAccount(UserAccount userAccount) {
         String sql = "update [user_account] set [is_active] = ? where email_address = ?";
-        uADAO.insert(sql, 1 ,  userAccount.getEmailAddress());
+        uADAO.update(sql, 1, userAccount.getEmailAddress());
     }
 
+    @Override
     public void insertUserAccount(UserAccount useraccount) {
         String sql
                 = "INSERT INTO [dbo].[user_account] "
@@ -55,16 +60,19 @@ public class UserAccountService {
         );
     }
 
+    @Override
     public String getEmailConfirmationCode(UserAccount user) {
         String sql = "select email_confirmation_code from user_account where email_address = ?";
         return uADAO.getEmailConfirmationToken(sql, user.getEmailAddress());
     }
 
+    @Override
     public UserAccount getUserByUserName(String username) {
         String sql = "SELECT * FROM user_account WHERE user_name = ? and is_active = 1";
         return uADAO.getUserByAccountInfo(sql, username);
     }
 
+    @Override
     public UserAccount getUserByEmailAddress(String email) {
         String sql = "SELECT * FROM user_account WHERE email_address = ? ";
         return uADAO.getUserByAccountInfo(sql, email);

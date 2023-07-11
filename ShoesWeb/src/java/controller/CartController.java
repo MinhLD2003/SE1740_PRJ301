@@ -14,6 +14,7 @@ import model.Cart;
 import model.CartLine;
 import model.Product;
 import service.InterfaceService.IProductService;
+import service.ProductService;
 import utils.SessionUtil;
 
 /**
@@ -57,32 +58,35 @@ public class CartController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private IProductService IPService;
-    
+    private IProductService IPService = new ProductService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         String product_code = request.getParameter("product_code");
+        String size = request.getParameter("size");
         Cart cart = null;
         if (SessionUtil.getInstance().containsKey(request, "shoppingcart")) {
             cart = (Cart) SessionUtil.getInstance().getValue(request, "shoppingcart");
         } else {
             cart = new Cart();
+            SessionUtil.getInstance().putValue(request, "cart", cart);
         }
         if (action != null && action.equals("add_item")) {
             Product product = IPService.queryProductByCode(product_code);
-            CartLine cartLine = new CartLine(product);
+             
+            CartLine cartLine = new CartLine(product, size);
             cart.addCartLine(cartLine);
         } else if (action != null && action.equals("remove_item")) {
             Product product = IPService.queryProductByCode(product_code);
             cart.removeCartLine(product);
-        } else if(action != null && action.equals("update_qty")) {
-             Product product = IPService.queryProductByCode(product_code);
-             int quantity = Integer.parseInt(request.getParameter("quantity"));
-             cart.updateCartLine(product, quantity);
+        } else if (action != null && action.equals("update_qty")) {
+            Product product = IPService.queryProductByCode(product_code);
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            cart.updateCartLine(product, quantity);
         }
-       
+        response.sendRedirect(request.getContextPath() +"/frontend/views/client/singleproductpage.jsp");
     }
 
     /**

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import model.auth.UserAccount;
+import model.UserAccount;
 import service.UserAccountService;
 import utils.OTPTracker;
 import utils.TimestampHandler;
@@ -92,7 +92,7 @@ public class VerifyCode extends HttpServlet {
 
             if (uAService.getEmailConfirmationCode(user).equals(authCode)) {
                 setAccountActive(uAService, user);
-                response.sendRedirect("frontend/views/client/homepage.jsp");
+                response.sendRedirect(request.getContextPath() + "frontend/views/client/auth/login.jsp");
             } else {
                 handleInvalidAuthCode(request, response, user);
             }

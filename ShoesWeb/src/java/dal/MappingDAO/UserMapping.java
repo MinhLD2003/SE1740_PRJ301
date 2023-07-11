@@ -8,7 +8,7 @@ package dal.MappingDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.auth.UserAccount;
+import model.UserAccount;
 
 /**
  *

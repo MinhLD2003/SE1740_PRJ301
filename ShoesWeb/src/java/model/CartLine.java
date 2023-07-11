@@ -11,20 +11,30 @@ package model;
 public class CartLine {
 
     private Product product;
+    private String size;
     private int quantity;
     private double subtotal;
 
     public CartLine() {
     }
-    public CartLine(Product product) {
+    public CartLine(Product product , String size) {
         this.product = product;
         this.quantity = 1;
+        this.size = size;
         this.subtotal = product.getProductSellingPrice();
     }
     public Product getProduct() {
         return product;
     }
+    
+    public String getSize() {
+        return size;
+    }
 
+    public void setSize(String size) {
+        this.size = size;
+    }
+    
     public void setProduct(Product product) {
         this.product = product;
     }

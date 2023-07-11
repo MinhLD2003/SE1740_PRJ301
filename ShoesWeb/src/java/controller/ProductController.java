@@ -96,12 +96,14 @@ public class ProductController extends HttpServlet {
             }
             productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
             SessionUtil.getInstance().putValue(request, "productList", productList);
+            response.sendRedirect("frontend/views/client/productpage.jsp");
         } else if (action != null && action.equals("singleproduct")) {
             String productCode = request.getParameter("product_variant");
-            
             request.setAttribute("product", IPService.queryProductByCode(productCode));
-            
             request.getRequestDispatcher("frontend/views/client/singleproductpage.jsp").forward(request, response);
+        } else if (action != null && action.equals("search")) {
+            String search_value = request.getParameter("search_value");
+            
         } else {
             List<Product> allProductList = IPService.queryAllProduct();
             SessionUtil.getInstance().putValue(request, "productList", allProductList);

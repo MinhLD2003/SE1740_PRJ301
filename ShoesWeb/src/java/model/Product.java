@@ -20,7 +20,6 @@ public class Product extends ModelPage<Product> {
     private String brand;
     private List<String> categories;
     private String detail;
-
     private String description;
     private double productSellingPrice;
     private double productCost;

@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,52 +23,79 @@
 
     </head>
     <body>
+
         <%@include file="/frontend/common/client/header.jsp" %>
         <section class="cart_area" style="margin-top:150px;">
-            <div class="container d-flex">
+            <div class="container d-md-flex">
                 <div class="cart_inner col-8">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/cart.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>Minimalistic shop for multipurpose use</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$360.00</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <select name="count">
-                                                <option value="1">1</option>
-                                                  <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                  
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$720.00</h5>
-                                    </td>
-                                </tr>
+                    <div class="">
+                        <c:set var="cart" value="${sessionScope.cart}"></c:set>
 
-                            </tbody>
-                        </table>
+                        <c:if test="${cart== null || cart.cartLine.size() == 0}">
+                            <div>
+                                <h1>EMPTY BAG </h1>
+                            </div>
+                        </c:if>
+                        <c:if test="${cart != null && cart.cartLine.size() != 0}">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col">Quantity</th>
+                                          <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="itemCart" items='${cart.cartLine}' >
+                                        <c:set var="productCart" value='${itemCart.product}'></c:set>
+                                            <tr>
+                                                <td>
+                                                    <div class="">
+                                                        <div class="d-flex">
+                                                            <img src="${productCart.imageUrls.get(0)}" alt="" style="width:100px; height:100px; ">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p>${productCart.name}</p>
+                                                        <p>${productCart.productCode}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>$${productCart.productSellingPrice}</h5>
+                                            </td>
+                                            <td>
+                                                <div class="product_sizes">
+                                                    <select name="size">
+                                                        <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
+                                                            <option value="${productSize.key}">${productSize.key}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <select name="count">
+                                                        <option value="1">1</option>
+                                                        <option value="1">2</option>
+                                                        <option value="1">3</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>$${itemCart.subtotal}</h5>
+                                            </td>
+                                            <td><button class="btn" id="removeBtn">
+                                                    <span>Remove</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
                     </div>
                 </div>
                 <div class="summary">
@@ -89,7 +118,13 @@
                 </div>
             </div>
         </section>
-
+        <script>
+            const removeBtn = document.querySelector('#removeBtn');
+            removeBtn.addEventListener('click', () => {
+                var url = "${pageContext.request.contextPath}/cart?action=remove_item&product_code=${product.productCode}";
+                        window.location.href = url;
+                    });
+        </script>
         <%@include file="/frontend/common/client/footer.jsp" %>
         <script src="<c:url value='/frontend/template/jsPlugins/vendor/jquery-2.2.4.min.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"

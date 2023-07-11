@@ -6,7 +6,7 @@ package utils;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.auth.UserAccount;
+import model.UserAccount;
 
 /**
  *

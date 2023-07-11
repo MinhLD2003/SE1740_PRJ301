@@ -5,7 +5,7 @@
 package utils;
 
 import java.sql.Timestamp;
-import model.auth.UserAccount;
+import model.UserAccount;
 
 /**
  *

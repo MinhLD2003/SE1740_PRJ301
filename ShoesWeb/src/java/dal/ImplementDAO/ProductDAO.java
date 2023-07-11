@@ -145,7 +145,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         String sql = "select * from product inner join brand on brand.brand_id = product.brand_id\n" +
 "             				    inner join color on color.color_id = product.color_id  where product_code = ?";
         List<Product> productList = query(sql, new ProductMapping(), code);
-        System.out.println(productList);
+        
         Product foundProduct = productList.get(0);
         List<String> categoryList = queryProductCategories(foundProduct.getProductCode());
         foundProduct.setCategories(categoryList);
@@ -167,7 +167,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         HashMap<String, Integer> hashmap = new HashMap<>();
         String sql = " select * from product_size_stock stock\n"
                 + "               inner join sizes s on s.size_id = stock.size_id\n"
-                + "                where stock.product_code= ?";
+                + "                where stock.product_code= ? order by size asc" ;
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -177,7 +177,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
             setParameters(statement, product_code);
             rs = statement.executeQuery();
             while (rs.next()) {
-                hashmap.put(rs.getString("size_area") + " " + rs.getString("size"), rs.getInt("quantity"));
+                hashmap.put( rs.getString("size"), rs.getInt("quantity"));
             }
             return hashmap;
         } catch (SQLException ex) {
@@ -194,6 +194,11 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                 ex1.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public List<Product> queryProductBySearching(String search_value) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

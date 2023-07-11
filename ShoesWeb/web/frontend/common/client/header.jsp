@@ -68,13 +68,21 @@
                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-user"></i>
                                 </a>
+                                <c:if test="${sessionScope.user != null}">
+                                    <div style="margin-top:11px;">${sessionScope.user.username}</div>
+                                </c:if>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"
                                     style="">
-                                    <li><a class="dropdown-item" href="#">My profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Logout</a></li>
-                                    <li><a class="dropdown-item" href="#">Sign in</a></li>
-                                    <li><a class="dropdown-item" href="#">Sign up</a></li>
+                                    <c:if test="${sessionScope.user != null}">
+                                        <li><a class="dropdown-item" href="#">My profile</a></li>
+                                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                       
+                                    </c:if>
+                                        <c:if test="${sessionScope.user == null}">
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/frontend/views/client/auth/login.jsp">Sign in</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/frontend/views/client/auth/signup.jsp">Sign up</a></li>
+                                     </c:if>
                                 </ul>
 
                             </div>
@@ -85,8 +93,9 @@
             </div>
             <div class="search_input" id="search_input_box">
                 <div class="container">
-                    <form class="d-flex justify-content-between">
-                        <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <form action="<c:url value='/productcontroller'/>" class="d-flex justify-content-between">
+                        <input type="text" class="form-control" id="search_input" name="search_value" placeholder="Search Here">
+                        <input type="hidden" name ="action" value="search">
                         <button type="submit" class="btn"></button>
                         <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
                     </form>

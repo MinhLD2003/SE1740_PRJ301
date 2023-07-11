@@ -32,4 +32,9 @@ public class ProductService implements IProductService {
     public Product queryProductByCode(String code) {
         return pDAO.queryProductByCode(code);
     }
+
+    @Override
+    public List<Product> queryProductBySearching(String search_value) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

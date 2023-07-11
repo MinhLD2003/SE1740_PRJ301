@@ -15,8 +15,7 @@ import model.Product;
 public interface IProductService {
 
     List<Product> queryAllProduct();
-
     List<Product> queryProductsByCategories(HashMap<String, List<String>> categories);
-
     Product queryProductByCode(String code);
+    List<Product> queryProductBySearching(String search_value);
 }

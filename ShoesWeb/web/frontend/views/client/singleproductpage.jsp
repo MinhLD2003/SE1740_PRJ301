@@ -62,8 +62,7 @@
                                                         role="checkbox" type="button" aria-checked="false"
                                                         data-group-ndx="3" data-group-type="filter"
                                                         name="size"
-                                                        data-auto-id="${sizemap.key}" 
-                                                        >
+                                                        data-auto-id="${sizemap.key}">
                                                     <span class="filter-item__item-label">${sizemap.key}</span>
                                                 </button>
                                             </c:forEach>
@@ -72,7 +71,7 @@
 
                                     <div class="card_area d-flex align-items-center" style="margin-top: 30px;" >
                                         <button 
-                                            <a class="button_function" href="#">Add to Cart</a>
+                                            <a class="button_function" onclick="addToCart()">Add to Cart</a>
                                         </button>
                                     </div>
                                 </div>
@@ -106,13 +105,13 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" style="font-size:22px;">
-                                <c:set var="description" value="${product.description}" />
+                                <c:set var="description" value="${product.description}"/>
                                 ${description}
 
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"style="font-size:22px;">
                                 <div class="table-responsive">
-                                    <c:set var="detail" value="${product.detail}" />
+                                    <c:set var="detail" value="${product.detail}"/>
 
                                     ${detail}
 
@@ -371,15 +370,12 @@
                             <div class="col-lg-6 text-center">
                                 <div class="section-title">
                                     <h1>You Might Also Like</h1>
-
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
                                 <div class="row">
-
-
                                     <div class="col-lg-4 col-md-4 col-sm-6">
                                         <div class="single-related-product d-flex">
                                             <a href="#"><img src="" alt=""></a>
@@ -417,6 +413,34 @@
                     </div>
                 </section>
         </section>
+        <script>
+            const buttons = document.querySelectorAll('button.is--button');
+            buttons.forEach(button => {
+
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => {
+                        if (btn.classList.contains('is--selected')) {
+                            btn.classList.remove('is--selected');
+                        }
+                    });
+                    if (button.classList.contains('is--selected')) {
+                        button.classList.remove('is--selected');
+                    } else {
+                        button.classList.add('is--selected');
+                    }
+                });
+            });
+            function addToCart() {
+                var url = '${pageContext.request.contextPath}/cart?action=add_item&product_code=${product.productCode}&';
+                buttons.forEach(btn => {
+                    if (btn.classList.contains('is--selected')) {
+                        
+                        url = url + 'size=' + btn.getAttribute('data-auto-id');
+                    }
+                    window.location.href = url;
+                });
+            }
+        </script>
         <%@include file="/frontend/common/client/footer.jsp" %>
         <script src="<c:url value='/frontend/template/jsPlugins/vendor/jquery-2.2.4.min.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"

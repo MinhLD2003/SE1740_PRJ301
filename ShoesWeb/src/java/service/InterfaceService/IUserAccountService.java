@@ -4,10 +4,26 @@
  */
 package service.InterfaceService;
 
+import java.sql.Timestamp;
+import model.UserAccount;
+
 /**
  *
  * @author Admin
  */
 public interface IUserAccountService {
-    
+
+    public Timestamp getEmailConfCreatedTime(UserAccount user);
+
+    public int getUserAccountId(UserAccount user);
+
+    public void updateActiveAccount(UserAccount userAccount);
+
+    public void insertUserAccount(UserAccount useraccount);
+
+    public String getEmailConfirmationCode(UserAccount user);
+
+    public UserAccount getUserByUserName(String username);
+
+    public UserAccount getUserByEmailAddress(String email);
 }

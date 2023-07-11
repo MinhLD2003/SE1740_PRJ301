@@ -34,7 +34,6 @@ function generateFilterLinkURL(categoryMap) {
                 sportValuePairs.push(`${encodeURIComponent(innerValue)}`);
             });
         }
-
     });
     if (brandValuePairs.length !== 0) {
         brandString = brandString + brandValuePairs.join('%7C');

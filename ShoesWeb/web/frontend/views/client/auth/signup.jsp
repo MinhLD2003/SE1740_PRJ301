@@ -176,18 +176,19 @@
             }
 
         </script>
-        <script src="../../../template/jsPlugins/vendor/jquery-2.2.4.min.js"></script>
+       <script src="<c:url value='/frontend/template/jsPlugins/vendor/jquery-2.2.4.min.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
                 integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
         crossorigin="anonymous"></script>
-        <script src="../../../template/jsPlugins/vendor/bootstrap.min.js"></script>
-        <script src="../../../template/jsPlugins/jquery.ajaxchimp.min.js"></script>
-        <script src="../../../template/jsPlugins/jquery.nice-select.min.js"></script>
-        <script src="../../../template/jsPlugins/jquery.sticky.js"></script>
-        <script src="../../../template/jsPlugins/nouislider.min.js"></script>
-        <script src="../../../template/jsPlugins/countdown.js"></script>
-        <script src="../../../template/jsPlugins/jquery.magnific-popup.min.js"></script>
-        <script src="../../../template/jsPlugins/owl.carousel.min.js"></script>
-        <script src="../../../template/jsPlugins/main.js"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/vendor/bootstrap.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/jquery.ajaxchimp.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/jquery.nice-select.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/jquery.sticky.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/nouislider.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/countdown.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/jquery.magnific-popup.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/owl.carousel.min.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/main.js'/>"></script>
+        <script src="<c:url value='/frontend/template/jsPlugins/filter.js'/>"></script>
     </body>
 </html>
