@@ -10,18 +10,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import model.Cart;
+import model.CartLine;
 import model.Product;
 import service.InterfaceService.IProductService;
-import service.ProductService;
-import utils.FilterCategory;
 import utils.SessionUtil;
 
 /**
  *
  * @author Admin
  */
-public class ProductController extends HttpServlet {
+public class CartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class ProductController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductController</title>");
+            out.println("<title>Servlet CartController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,56 +57,32 @@ public class ProductController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private IProductService IPService = new ProductService();
-
+    private IProductService IPService;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Product> productList = null;
-        FilterCategory.resetFilterMap();
-        String gender = (String) SessionUtil.getInstance().getValue(request, "pageRequest");
-        FilterCategory.addFilterCategory("gender", gender);
         String action = request.getParameter("action");
-        if (action != null && action.equals("filter")) {
-            String brands = request.getParameter("brand");
-            String sports = request.getParameter("sport");
-            String colors = request.getParameter("color");
-            String sizes = request.getParameter("size");
-            String min_price = request.getParameter("price_min");
-            String max_price = request.getParameter("price_max");
-            if (brands != null) {
-                FilterCategory.addFilterCategory("brand", brands);
-            }
-            if (sports != null) {
-                FilterCategory.addFilterCategory("sport", sports);
-            }
-            if (colors != null) {
-                FilterCategory.addFilterCategory("color", colors);
-            }
-            if (sizes != null) {
-                FilterCategory.addFilterCategory("size", sizes);
-            }
-            if (min_price != null) {
-                FilterCategory.addFilterCategory("min_price", min_price);
-            }
-            if (max_price != null) {
-                FilterCategory.addFilterCategory("max_price", max_price);
-            }
-            productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
-            SessionUtil.getInstance().putValue(request, "productList", productList);
-        } else if (action != null && action.equals("singleproduct")) {
-            String productCode = request.getParameter("product_variant");
-            
-            request.setAttribute("product", IPService.queryProductByCode(productCode));
-            
-            request.getRequestDispatcher("frontend/views/client/singleproductpage.jsp").forward(request, response);
+        String product_code = request.getParameter("product_code");
+        Cart cart = null;
+        if (SessionUtil.getInstance().containsKey(request, "shoppingcart")) {
+            cart = (Cart) SessionUtil.getInstance().getValue(request, "shoppingcart");
         } else {
-            List<Product> allProductList = IPService.queryAllProduct();
-            SessionUtil.getInstance().putValue(request, "productList", allProductList);
-            response.sendRedirect("frontend/views/client/productpage.jsp");
+            cart = new Cart();
         }
-
+        if (action != null && action.equals("add_item")) {
+            Product product = IPService.queryProductByCode(product_code);
+            CartLine cartLine = new CartLine(product);
+            cart.addCartLine(cartLine);
+        } else if (action != null && action.equals("remove_item")) {
+            Product product = IPService.queryProductByCode(product_code);
+            cart.removeCartLine(product);
+        } else if(action != null && action.equals("update_qty")) {
+             Product product = IPService.queryProductByCode(product_code);
+             int quantity = Integer.parseInt(request.getParameter("quantity"));
+             cart.updateCartLine(product, quantity);
+        }
+       
     }
 
     /**
@@ -121,7 +96,7 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

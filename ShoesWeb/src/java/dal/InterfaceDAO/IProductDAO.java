@@ -14,7 +14,7 @@ import model.Product;
  */
 public interface IProductDAO extends ICrudDAO<Product> {
     List<Product> queryAllProduct();
-    List<String>  queryProductCategories(int productId);
+    List<String>  queryProductCategories(String productCode);
     List<Product> queryProductsByCategories(HashMap<String, List<String>> filterMap);
-   
+    
 }

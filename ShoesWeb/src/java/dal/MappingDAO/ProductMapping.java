@@ -19,18 +19,20 @@ public class ProductMapping implements ObjectsMapping<Product> {
 
         try {
             Product p = new Product();
-            p.setProductId(rs.getInt("product_id"));
+            p.setProductCode(rs.getString("product_code"));
             p.setName(rs.getString("name"));
             p.setBrand(rs.getString("brand_name"));
-            p.setCreatedTime(rs.getTimestamp("created_time"));
-            p.setLastUpdateTime(rs.getTimestamp("last_update_time"));
+            p.setDetail(rs.getString("details"));
+            if (rs.getTimestamp("last_update_time") != null) {
+                p.setCreatedTime(rs.getTimestamp("created_time"));
+            }
+            if (rs.getTimestamp("last_update_time") != null) {
+                p.setLastUpdateTime(rs.getTimestamp("last_update_time"));
+            }
             p.setDescription(rs.getString("description"));
-            p.setProductVariantCode(rs.getString("product_variant_code"));
             p.setProductSellingPrice(rs.getFloat("price"));
             p.setProductCost(rs.getFloat("product_cost"));
             p.setColor(rs.getString("color"));
-            
-            
             return p;
 
         } catch (SQLException ex) {

@@ -32,4 +32,9 @@ public class SessionUtil {
     public void removeValue(HttpServletRequest request, String key) {
         request.getSession().removeAttribute(key);
     }
+
+    public boolean containsKey(HttpServletRequest request, String key) {
+        return request.getSession().getAttribute(key) != null;
+    }
+
 }

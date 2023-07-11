@@ -57,7 +57,7 @@ function generateFilterLinkURL(categoryMap) {
                 sizeKeyValuePairs.push(`${button.getAttribute('data-auto-id')}`);
         }
 
-    })
+    });
     // price filter 
     if (sizeKeyValuePairs.length !== 0) {
         var sizeString = sizeKeyValuePairs.join('%7C');
@@ -130,10 +130,9 @@ buttons.forEach(button => {
                 button.classList.add('is--selected');
             }
         }
-        url_link = generateFilterLinkURL(getCheckedInputMap());
-        window.location.href = url_link;
+       
     });
-})
+});
 //-------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -142,13 +141,13 @@ upper__slider.oninput = function () {
     upperVal = parseInt(upper__slider.value);
     if (upperVal < lowerVal + 4) {
         low__slider.value = upperVal - 4;
-        if (lowerVal == low__slider.min) {
+        if (lowerVal === low__slider.min) {
             upper__slider.value = 4;
         }
     }
 
     upper_bound = this.value;
-    document.querySelector('#two').value = this.value
+    document.querySelector('#two').value = this.value;
 };
 
 low__slider.oninput = function () {
@@ -156,7 +155,7 @@ low__slider.oninput = function () {
     upperVal = parseInt(upper__slider.value);
     if (lowerVal > upperVal - 4) {
         upper__slider.value = lowerVal + 4;
-        if (upperVal == upper__slider.max) {
+        if (upperVal === upper__slider.max) {
             low__slider.value = parseInt(upper__slider.max) - 4;
         }
     }

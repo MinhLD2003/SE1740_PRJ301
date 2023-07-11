@@ -16,7 +16,7 @@
     </head>
 
     <body>
-        <header class="header_area sticky-header">
+        <header class="header_area ">
             <div class="main_menu">
                 <nav class="navbar navbar-expand-lg navbar-light main_box">
                     <div class="container">

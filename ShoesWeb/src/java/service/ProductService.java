@@ -15,14 +15,21 @@ import service.InterfaceService.IProductService;
  * @author Admin
  */
 public class ProductService implements IProductService {
+
     private ProductDAO pDAO = new ProductDAO();
+
     @Override
     public List<Product> queryAllProduct() {
         return pDAO.queryAllProduct();
     }
 
     @Override
-    public List<Product> queryProductsByCategories(HashMap<String , List<String>> categories) {
+    public List<Product> queryProductsByCategories(HashMap<String, List<String>> categories) {
         return pDAO.queryProductsByCategories(categories);
+    }
+
+    @Override
+    public Product queryProductByCode(String code) {
+        return pDAO.queryProductByCode(code);
     }
 }

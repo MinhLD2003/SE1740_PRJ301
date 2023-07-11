@@ -13,14 +13,15 @@ import java.util.List;
  *
  * @author Admin
  */
-public class Product {
+public class Product extends ModelPage<Product> {
 
-    private int productId;
+    private String productCode;
     private String name;
     private String brand;
     private List<String> categories;
+    private String detail;
+
     private String description;
-    private String productVariantCode;
     private double productSellingPrice;
     private double productCost;
     private String color;
@@ -34,21 +35,15 @@ public class Product {
         sizeQuantityMap = new HashMap<>();
         imageUrls = new ArrayList<>();
     }
-    
-    public int getProductId() {
-        return productId;
+
+   
+
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public String getProductVariantCode() {
-        return productVariantCode;
-    }
-
-    public void setProductVariantCode(String productVariantCode) {
-        this.productVariantCode = productVariantCode;
+    public void setProductCode(String productVariantCode) {
+        this.productCode = productVariantCode;
     }
 
     public double getProductSellingPrice() {
@@ -82,6 +77,7 @@ public class Product {
     public void setImageUrls(List<String> imageUrls) {
         this.imageUrls = imageUrls;
     }
+
     public String getName() {
         return name;
     }
@@ -143,7 +139,24 @@ public class Product {
         }
     }
 
+    public HashMap<String, Integer> getSizeQuantityMap() {
+        return sizeQuantityMap;
+    }
     public void addProductCategories(String category) {
         categories.add(category);
     }
+    
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "productCode=" + productCode + ", name=" + name + ", brand=" + brand + ", categories=" + categories + ", detail=" + detail + ", description=" + description + ", productSellingPrice=" + productSellingPrice + ", productCost=" + productCost + ", color=" + color + ", sizeQuantityMap=" + sizeQuantityMap + ", createdTime=" + createdTime + ", lastUpdateTime=" + lastUpdateTime + ", imageUrls=" + imageUrls + '}';
+    }
+    
 }

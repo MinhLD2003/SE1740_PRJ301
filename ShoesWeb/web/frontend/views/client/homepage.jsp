@@ -24,7 +24,7 @@
 
         <body>
 
-            <%@include file="/frontend/common/client/header.jsp" %>
+           <%@include file="/frontend/common/client/header.jsp" %>
             <section class="banner-arean">
                 <div class="container">
                     <div class="row fullscreen align-items-center justify-content-start">
