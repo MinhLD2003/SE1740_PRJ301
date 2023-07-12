@@ -39,8 +39,8 @@
         <%@include file="/frontend/common/client/header.jsp" %>
         <section class="cart_area" style="margin-top:150px;">
             <div class="container d-md-flex justify-content-sm-center">
-                <div class="cart_inner col-8">
-                    <div class="">
+                <div class="cart_inner col-9">
+                    <div class="table-wrapper">
                         <c:if test="${cart== null || cart.cartLine.size() == 0}">
                             <div>
                                 <h1>EMPTY BAG </h1>
@@ -49,7 +49,7 @@
                         </c:if>
                         <c:if test="${cart != null && cart.cartLine.size() != 0}">
 
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">Product</th>
@@ -70,8 +70,8 @@
                                                             <img src="${productCart.imageUrls.get(0)}" alt="" style="width:100px; height:100px; ">
                                                     </div>
                                                     <div class="media-body">
-                                                        <p>${productCart.name}</p>
-                                                        <p>${productCart.productCode}</p>
+                                                        <small><p>${productCart.name}<br> ${productCart.productCode}</p>
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </td>
@@ -79,11 +79,19 @@
                                                 <h5>$${productCart.productSellingPrice}</h5>
                                             </td>
                                             <td>
-                                                <div class="product_sizes">
-                                                    <select class="form-control" name="size" class="size_selection" data ="${productCart.productCode}>
-                                                            <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
-                                                                <option value="${productSize.key}">${productSize.key}</option>
-                                                            </c:forEach>
+
+                                                <div class="product_count">
+                                                    <select name="size" class="size_selection" data ="${productCart.productCode}">
+                                                        <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
+                                                            <c:choose>
+                                                                <c:when test='${itemCart.size == productSize.key}'>
+                                                                    <option value='${productSize.key}' selected>${productSize.key}</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value='${productSize.key}'>${productSize.key}</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </td>
@@ -91,23 +99,23 @@
                                                 <div class="product_count" >
                                                     <div class="wrapper">
                                                         <select class="product_quantity" onchange="updateQuantity('${productCart.productCode}')"class="form-control" data ="${productCart.productCode}">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
+                                                            <c:forEach var="iteratorQty" begin="1" end="${itemCart.getSizeStock()}">
+                                                                <c:choose>
+                                                                    <c:when test='${itemCart.quantity == iteratorQty}'>
+                                                                        <option value='${iteratorQty}' selected>${iteratorQty}</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value='${iteratorQty}'>${iteratorQty}</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
                                                         </select></div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <h5>$${itemCart.subtotal}</h5>
                                             </td>
-                                            <td><button class="btn" id="removeBtn">
+                                            <td><button class="btn" id="removeBtn" style="color:white;background-color:red;">
                                                     <span>Remove</span>
                                                 </button>
                                             </td>
@@ -130,8 +138,8 @@
                     </div>
                     <div class="out_button_area mt-3">
                         <div class=" d-flex align-items-center">
-                            <a class="button_function" href="#">Continue Shopping</a>
-                            <a class="button_function" href="#">Proceed to checkout</a>
+                            <a class="button_function" href="#">Guest CheckOut</a>
+                            <a class="button_function" href="#">Member CheckOut</a>
                         </div>
                     </div>
 
@@ -142,16 +150,19 @@
 
 
             function updateQuantity(productCode) {
-                var sizeBtn = document.querySelectorAll('.size_selection');
-                var selected_size = '';
+                var sizeBtn = document.querySelectorAll(".size_selection");
+                var selectedSize = '';
+                console.log(sizeBtn);
                 sizeBtn.forEach((btn) => {
+                  
                     if (btn.getAttribute('data') === productCode) {
-                        selected_size = btn.value;
+                        selectedSize = btn.value;
+
                     }
                 });
                 var url = '${pageContext.request.contextPath}/cart?action=update_qty&product_code=';
                 url = url + productCode + '&size=';
-                url = url + selected_size + '&quantity=';
+                url = url + selectedSize + '&quantity=';
                 var selectElement = document.querySelectorAll('.product_quantity');
                 var select_quantity = '';
                 selectElement.forEach((btn) => {
@@ -162,7 +173,6 @@
 
                 url = url + select_quantity;
                 window.location.href = url;
-
             }
             const removeBtn = document.querySelector('#removeBtn');
             removeBtn.addEventListener('click', () => {

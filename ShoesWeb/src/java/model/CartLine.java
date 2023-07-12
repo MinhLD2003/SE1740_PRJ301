@@ -52,17 +52,18 @@ public class CartLine {
     public double getSubtotal() {
         return subtotal;
     }
-
+    
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
 
     public void updateSubtotal(int quantity) {
         setQuantity(quantity);
-        setSubtotal(quantity * this.product.getProductSellingPrice());
-        
+        setSubtotal(quantity * this.product.getProductSellingPrice());    
     }
-
+    public int getSizeStock() {
+        return product.getSizeQuantityMap().get(size);
+    }
     @Override
     public String toString() {
         return "CartLine{" + "product=" + product + ", size=" + size + ", quantity=" + quantity + ", subtotal=" + subtotal + '}';

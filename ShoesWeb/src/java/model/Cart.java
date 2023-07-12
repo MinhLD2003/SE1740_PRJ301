@@ -102,7 +102,9 @@ public class Cart {
 
         return totalSum;
     }
-
+    public int sizeOfCart() {
+        return cartLine.size();
+    }
     @Override
     public String toString() {
         return "Cart{" + "tax=" + tax + ", shippingFee=" + shippingFee + ", discount=" + discount + ", total=" + total + ", cartLine=" + cartLine + '}';

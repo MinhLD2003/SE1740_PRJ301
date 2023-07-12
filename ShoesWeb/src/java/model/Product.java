@@ -34,9 +34,6 @@ public class Product extends ModelPage<Product> {
         sizeQuantityMap = new HashMap<>();
         imageUrls = new ArrayList<>();
     }
-
-   
-
     public String getProductCode() {
         return productCode;
     }
