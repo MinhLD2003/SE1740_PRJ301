@@ -47,16 +47,16 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Kid">Kid's</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/home?redirect=productpage&page=Sale">Sale</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Sale">Sale</a>
                                 </li>
                             </ul>
                             <ul class="navbar-nav nav navbar-right">
                                 <li class="nav-item">
-                                    <a href="/home?redirect=wishlist"><span class="ti-heart"></span>
+                                    <a href="${pageContext.request.contextPath}/frontend/views/client/wishlist.jsp"><span class="ti-heart"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/home?redirect=cart" class="cart"><span class="ti-bag"></span>
+                                    <a href="${pageContext.request.contextPath}/frontend/views/client/cart.jsp" class="cart"><span class="ti-bag"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">

@@ -54,7 +54,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         sql.append(" JOIN color c ON p.color_id = c.color_id");
         sql.append(" JOIN product_size_stock pss ON p.product_code = pss.product_code");
         sql.append(" JOIN sizes s ON pss.size_id = s.size_id WHERE 1 = 1");
-        
+
         params.add(gender.get(0));
         if (sports != null && !sports.isEmpty()) {
             sql.append(" AND (cat.category_value = ? AND EXISTS (\n"
@@ -63,18 +63,17 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                     + "        JOIN category cat2 ON pc2.category_id = cat2.category_id\n"
                     + "        WHERE pc2.product_code = p.product_code\n"
                     + "        AND cat2.category_value IN (");
-                   
+
             for (int i = 0; i < sports.size(); i++) {
                 if (i < sports.size() - 1) {
                     sql.append("?,");
                 } else {
                     sql.append("? )))");
-                }  
+                }
                 params.add(sports.get(i));
             }
-        }
-        else {
-            sql.append(" AND cat.category_value = ?");        
+        } else {
+            sql.append(" AND cat.category_value = ?");
         }
         if (brands != null && !brands.isEmpty()) {
             sql.append(" AND b.brand_name IN (");
@@ -110,11 +109,12 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                 params.add(sizes.get(i));
             }
         }
-        params.add(min_price.get(0));
-        params.add(max_price.get(0));
-        
-        sql.append(" AND p.price BETWEEN ? AND ?");
-        
+        if (min_price != null && !min_price.isEmpty() && max_price != null && !max_price.isEmpty()) {
+            params.add(min_price.get(0));
+            params.add(max_price.get(0));
+            sql.append(" AND p.price BETWEEN ? AND ?");
+        }
+
         List<Product> productList = query(sql.toString(), new ProductMapping(), params.toArray((String[]) new String[params.size()]));
         for (Product p : productList) {
             List<String> categoryList = queryProductCategories(p.getProductCode());
@@ -142,10 +142,9 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
     }
 
     public Product queryProductByCode(String code) {
-        String sql = "select * from product inner join brand on brand.brand_id = product.brand_id\n" +
-"             				    inner join color on color.color_id = product.color_id  where product_code = ?";
+        String sql = "select * from product inner join brand on brand.brand_id = product.brand_id\n"
+                + "  inner join color on color.color_id = product.color_id  where product_code = ?";
         List<Product> productList = query(sql, new ProductMapping(), code);
-        
         Product foundProduct = productList.get(0);
         List<String> categoryList = queryProductCategories(foundProduct.getProductCode());
         foundProduct.setCategories(categoryList);
@@ -167,7 +166,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         HashMap<String, Integer> hashmap = new HashMap<>();
         String sql = " select * from product_size_stock stock\n"
                 + "               inner join sizes s on s.size_id = stock.size_id\n"
-                + "                where stock.product_code= ? order by size asc" ;
+                + "                where stock.product_code= ? order by size asc";
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -177,7 +176,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
             setParameters(statement, product_code);
             rs = statement.executeQuery();
             while (rs.next()) {
-                hashmap.put( rs.getString("size"), rs.getInt("quantity"));
+                hashmap.put(rs.getString("size"), rs.getInt("quantity"));
             }
             return hashmap;
         } catch (SQLException ex) {

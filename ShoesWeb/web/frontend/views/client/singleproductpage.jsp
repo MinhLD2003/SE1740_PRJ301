@@ -26,7 +26,7 @@
     </head>
     <body>
         <%@include file="/frontend/common/client/header.jsp" %>
-        <c:set var="product" value='${requestScope.product}' ></c:set>
+        <c:set var="product" value='${sessionScope.product}' ></c:set>
             <section style="margin-top:180px; background-color:#F5F5F5; border-radius: 30px;">
                 <div class="product_image_area">
                     <div class="container">
@@ -432,14 +432,21 @@
             });
             function addToCart() {
                 var url = '${pageContext.request.contextPath}/cart?action=add_item&product_code=${product.productCode}&';
+                var isSizeButtonSelected = false;
                 buttons.forEach(btn => {
                     if (btn.classList.contains('is--selected')) {
-                        
+                        isSizeButtonSelected = true;
                         url = url + 'size=' + btn.getAttribute('data-auto-id');
                     }
-                    window.location.href = url;
                 });
+                if (isSizeButtonSelected === false) {
+                    window.alert("Please choose a size!!");
+                } else
+                {
+                    window.location.href = url;
+                }
             }
+
         </script>
         <%@include file="/frontend/common/client/footer.jsp" %>
         <script src="<c:url value='/frontend/template/jsPlugins/vendor/jquery-2.2.4.min.js'/>"></script>

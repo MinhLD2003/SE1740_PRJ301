@@ -75,10 +75,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String isRemembered = request.getParameter("remember");
-
         IUserAccountService uAService = new UserAccountService();
         UserAccount foundAccount = uAService.getUserByUserName(username);
         CodeProcessing codeProcess = new CodeProcessing();
@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
                 SessionUtil.getInstance().putValue(request, "user", foundAccount);
-
+                
                 //------------------- Cookie Session
                 Cookie usernameCookie = new Cookie("username", username);
                 Cookie passwordCookie = new Cookie("password", password);

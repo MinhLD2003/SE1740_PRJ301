@@ -101,7 +101,6 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
         ResultSet rs = null;
         Timestamp time = null;
         try {
-
             con = db.getConnection();
             statement = con.prepareStatement(sql);
             setParameters(statement, parameters);
@@ -125,5 +124,46 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
             }
         }
         return time;
+    }
+
+    public int queryRoleId(String roleName) {
+        String sql = "select * from user_role where role_name = ?";
+        Connection con = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        int role_id = -1;
+        try {
+            con = db.getConnection();
+            statement = con.prepareStatement(sql);
+            setParameters(statement, roleName);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                role_id = rs.getInt("role_name");
+            }
+            return role_id;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    public void setUserAccountRole(UserAccount user, String role) {
+        String sql = "update user_account \n"
+                + "set role_id = ? \n"
+                + "where user_account_id = ?";
+        int role_id = queryRoleId(role);
+        update(sql, role_id, user.getId());
     }
 }

@@ -10,7 +10,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.FilterCategory;
 import utils.SessionUtil;
 
 /**
@@ -60,10 +59,13 @@ public class HomeController extends HttpServlet {
         String redirect = request.getParameter("redirect");
         if (redirect != null && redirect.equals("productpage")) {
             String page = request.getParameter("page");
+            
             SessionUtil.getInstance().putValue(request, "pageRequest", page);
+            request.setAttribute("action", "filter");
             request.getRequestDispatcher("productcontroller").forward(request, response);
-        } else {
-            response.sendRedirect("frontend/views/client/homepage.jsp");
+        } 
+        else {
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/homepage.jsp");
         }
     }
 

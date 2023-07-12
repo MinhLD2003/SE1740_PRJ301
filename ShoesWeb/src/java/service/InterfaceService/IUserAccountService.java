@@ -26,4 +26,6 @@ public interface IUserAccountService {
     public UserAccount getUserByUserName(String username);
 
     public UserAccount getUserByEmailAddress(String email);
+
+    public void setUserAccountRole(UserAccount user , String role_name);
 }

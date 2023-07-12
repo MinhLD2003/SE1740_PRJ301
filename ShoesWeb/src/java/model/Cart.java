@@ -16,6 +16,7 @@ public class Cart {
     private double tax;
     private double shippingFee;
     private double discount;
+    private double total;
     private List<CartLine> cartLine;
 
     public Cart() {
@@ -23,6 +24,7 @@ public class Cart {
         discount = 0;
         tax = 0;
         shippingFee = 0;
+
     }
 
     public double getTax() {
@@ -61,29 +63,49 @@ public class Cart {
         this.cartLine.add(cart);
     }
 
-    public void removeCartLine(Product product) {
+    public void removeCartLine(String product_code, String size) {
         for (CartLine c : cartLine) {
-            if (c.getProduct().getProductCode().equals(product.getProductCode())) {
+            if (c.getProduct().getProductCode().equals(product_code)
+                    && size.equals(c.getSize())) {
                 cartLine.remove(c);
                 return;
             }
         }
     }
 
-    public void updateCartLine(Product product, int quantity) {
+    public void updateCartLine(String product_code, int quantity, String size) {
         for (CartLine c : cartLine) {
-            if (c.getProduct().getProductCode().equals(product.getProductCode())) {
+            if (c.getProduct().getProductCode().equals(product_code)) {
+                c.setSize(size);
                 c.updateSubtotal(quantity);
+                setTotal(calculateTotal());
+                System.out.println(c.getProduct().getProductCode() + " " + c.getSubtotal());
+                
             }
         }
+
     }
 
-    public boolean isExistedProduct(Product product) {
-        for (CartLine c : this.cartLine) {
-            if (c.getProduct().getProductCode().equals(product.getProductCode())) {
-                return true;
-            }
-        }
-        return false;
+    public double getTotal() {
+        return total;
     }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double calculateTotal() {
+        double totalSum = 0;
+        for (CartLine c : cartLine) {
+            totalSum = totalSum + c.getSubtotal();
+        }
+
+        return totalSum;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" + "tax=" + tax + ", shippingFee=" + shippingFee + ", discount=" + discount + ", total=" + total + ", cartLine=" + cartLine + '}';
+    }
+
 }

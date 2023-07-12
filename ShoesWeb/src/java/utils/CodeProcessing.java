@@ -41,10 +41,8 @@ public class CodeProcessing {
         // is equal to the stored hash
         return Arrays.equals(encryptedPasswordBytes, encryptedAttemptedPassword);
     }
-
     public byte[] getEncryptedPassword(String password, byte[] salt) {
         try {
-           
             String algorithm = "PBKDF2WithHmacSHA1";    
             int derivedKeyLength = 512;
             int iterations = 4096;

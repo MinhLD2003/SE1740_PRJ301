@@ -67,8 +67,10 @@ public class ProductController extends HttpServlet {
         List<Product> productList = null;
         FilterCategory.resetFilterMap();
         String gender = (String) SessionUtil.getInstance().getValue(request, "pageRequest");
+
         FilterCategory.addFilterCategory("gender", gender);
         String action = request.getParameter("action");
+
         if (action != null && action.equals("filter")) {
             String brands = request.getParameter("brand");
             String sports = request.getParameter("sport");
@@ -76,22 +78,22 @@ public class ProductController extends HttpServlet {
             String sizes = request.getParameter("size");
             String min_price = request.getParameter("price_min");
             String max_price = request.getParameter("price_max");
-            if (brands != null) {
+            if (brands != null && !brands.isEmpty()) {
                 FilterCategory.addFilterCategory("brand", brands);
             }
-            if (sports != null) {
+            if (sports != null && !sports.isEmpty()) {
                 FilterCategory.addFilterCategory("sport", sports);
             }
-            if (colors != null) {
+            if (colors != null && !colors.isEmpty()) {
                 FilterCategory.addFilterCategory("color", colors);
             }
-            if (sizes != null) {
+            if (sizes != null && !sizes.isEmpty()) {
                 FilterCategory.addFilterCategory("size", sizes);
             }
-            if (min_price != null) {
+            if (min_price != null && !min_price.isEmpty()) {
                 FilterCategory.addFilterCategory("min_price", min_price);
             }
-            if (max_price != null) {
+            if (max_price != null && !max_price.isEmpty()) {
                 FilterCategory.addFilterCategory("max_price", max_price);
             }
             productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
@@ -99,14 +101,14 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("frontend/views/client/productpage.jsp");
         } else if (action != null && action.equals("singleproduct")) {
             String productCode = request.getParameter("product_variant");
-            request.setAttribute("product", IPService.queryProductByCode(productCode));
+            Product singleProduct = IPService.queryProductByCode(productCode);
+            SessionUtil.getInstance().putValue(request, "product", singleProduct);
             request.getRequestDispatcher("frontend/views/client/singleproductpage.jsp").forward(request, response);
         } else if (action != null && action.equals("search")) {
             String search_value = request.getParameter("search_value");
-            
         } else {
-            List<Product> allProductList = IPService.queryAllProduct();
-            SessionUtil.getInstance().putValue(request, "productList", allProductList);
+            productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
+            SessionUtil.getInstance().putValue(request, "productList", productList);
             response.sendRedirect("frontend/views/client/productpage.jsp");
         }
 

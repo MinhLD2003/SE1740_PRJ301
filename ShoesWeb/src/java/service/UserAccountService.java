@@ -77,5 +77,9 @@ public class UserAccountService implements IUserAccountService {
         String sql = "SELECT * FROM user_account WHERE email_address = ? ";
         return uADAO.getUserByAccountInfo(sql, email);
     }
+    @Override
+    public void setUserAccountRole(UserAccount account , String role) {
+        uADAO.setUserAccountRole(account, role);
+    }
 
 }

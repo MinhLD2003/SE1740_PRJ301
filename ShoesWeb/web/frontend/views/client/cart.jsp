@@ -21,19 +21,30 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/magnific-popup.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/style.css">
 
+        <style>
+            .wrapper{
+                width:200px;
+                padding:20px;
+                height: 150px;
+            }
+            table, td , tr {
+                text-align: center;
+            }
+
+        </style>
+
     </head>
     <body>
-
+        <c:set var="cart" value="${sessionScope.shoppingcart}"></c:set>
         <%@include file="/frontend/common/client/header.jsp" %>
         <section class="cart_area" style="margin-top:150px;">
-            <div class="container d-md-flex">
+            <div class="container d-md-flex justify-content-sm-center">
                 <div class="cart_inner col-8">
                     <div class="">
-                        <c:set var="cart" value="${sessionScope.cart}"></c:set>
-
                         <c:if test="${cart== null || cart.cartLine.size() == 0}">
                             <div>
                                 <h1>EMPTY BAG </h1>
+                                <p>Your bag is empty now!</p>
                             </div>
                         </c:if>
                         <c:if test="${cart != null && cart.cartLine.size() != 0}">
@@ -45,7 +56,8 @@
                                         <th scope="col">Price</th>
                                         <th scope="col">Size</th>
                                         <th scope="col">Quantity</th>
-                                          <th scope="col">Total</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,8 +65,8 @@
                                         <c:set var="productCart" value='${itemCart.product}'></c:set>
                                             <tr>
                                                 <td>
-                                                    <div class="">
-                                                        <div class="d-flex">
+                                                    <div >
+                                                        <div>
                                                             <img src="${productCart.imageUrls.get(0)}" alt="" style="width:100px; height:100px; ">
                                                     </div>
                                                     <div class="media-body">
@@ -68,20 +80,28 @@
                                             </td>
                                             <td>
                                                 <div class="product_sizes">
-                                                    <select name="size">
-                                                        <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
-                                                            <option value="${productSize.key}">${productSize.key}</option>
-                                                        </c:forEach>
+                                                    <select class="form-control" name="size" class="size_selection" data ="${productCart.productCode}>
+                                                            <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
+                                                                <option value="${productSize.key}">${productSize.key}</option>
+                                                            </c:forEach>
                                                     </select>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <select name="count">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                    </select>
+                                                <div class="product_count" >
+                                                    <div class="wrapper">
+                                                        <select class="product_quantity" onchange="updateQuantity('${productCart.productCode}')"class="form-control" data ="${productCart.productCode}">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select></div>
                                                 </div>
                                             </td>
                                             <td>
@@ -105,7 +125,7 @@
                     <div class="summary_info">
                         <div class="d-flex justify-content-between">
                             <h5>Subtotal</h5>
-                            <h5>$2160.00</h5>
+                            <h5>$${cart.total}</h5>
                         </div>
                     </div>
                     <div class="out_button_area mt-3">
@@ -118,7 +138,32 @@
                 </div>
             </div>
         </section>
-        <script>
+        <script type="text/javascript">
+
+
+            function updateQuantity(productCode) {
+                var sizeBtn = document.querySelectorAll('.size_selection');
+                var selected_size = '';
+                sizeBtn.forEach((btn) => {
+                    if (btn.getAttribute('data') === productCode) {
+                        selected_size = btn.value;
+                    }
+                });
+                var url = '${pageContext.request.contextPath}/cart?action=update_qty&product_code=';
+                url = url + productCode + '&size=';
+                url = url + selected_size + '&quantity=';
+                var selectElement = document.querySelectorAll('.product_quantity');
+                var select_quantity = '';
+                selectElement.forEach((btn) => {
+                    if (btn.getAttribute('data') === productCode) {
+                        select_quantity = btn.value;
+                    }
+                });
+
+                url = url + select_quantity;
+                window.location.href = url;
+
+            }
             const removeBtn = document.querySelector('#removeBtn');
             removeBtn.addEventListener('click', () => {
                 var url = "${pageContext.request.contextPath}/cart?action=remove_item&product_code=${product.productCode}";
@@ -135,7 +180,6 @@
         <script src="<c:url value='/frontend/template/jsPlugins/jquery.nice-select.min.js'/>"></script>
         <script src="<c:url value='/frontend/template/jsPlugins/jquery.sticky.js'/>"></script>
         <script src="<c:url value='/frontend/template/jsPlugins/nouislider.min.js'/>"></script>
-        <script src="<c:url value='/frontend/template/jsPlugins/countdown.js'/>"></script>
         <script src="<c:url value='/frontend/template/jsPlugins/jquery.magnific-popup.min.js'/>"></script>
         <script src="<c:url value='/frontend/template/jsPlugins/owl.carousel.min.js'/>"></script>
         <script src="<c:url value='/frontend/template/jsPlugins/main.js'/>"></script>

@@ -65,28 +65,33 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         String product_code = request.getParameter("product_code");
+        
         String size = request.getParameter("size");
+        Product product = IPService.queryProductByCode(product_code);
         Cart cart = null;
         if (SessionUtil.getInstance().containsKey(request, "shoppingcart")) {
             cart = (Cart) SessionUtil.getInstance().getValue(request, "shoppingcart");
         } else {
             cart = new Cart();
-            SessionUtil.getInstance().putValue(request, "cart", cart);
+            SessionUtil.getInstance().putValue(request, "shoppingcart", cart);
         }
         if (action != null && action.equals("add_item")) {
-            Product product = IPService.queryProductByCode(product_code);
-             
             CartLine cartLine = new CartLine(product, size);
             cart.addCartLine(cartLine);
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/singleproductpage.jsp");
+
         } else if (action != null && action.equals("remove_item")) {
-            Product product = IPService.queryProductByCode(product_code);
-            cart.removeCartLine(product);
+            String size_selected = request.getParameter("size");
+            cart.removeCartLine(product_code, size_selected);
+            
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/cart.jsp");
         } else if (action != null && action.equals("update_qty")) {
-            Product product = IPService.queryProductByCode(product_code);
+            String size_selected = request.getParameter("size");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            cart.updateCartLine(product, quantity);
+            cart.updateCartLine(product_code, quantity, size_selected);
+            System.out.println(product_code + " " + size + " " + quantity);
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/cart.jsp");
         }
-        response.sendRedirect(request.getContextPath() +"/frontend/views/client/singleproductpage.jsp");
     }
 
     /**

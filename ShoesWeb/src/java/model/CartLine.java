@@ -17,16 +17,18 @@ public class CartLine {
 
     public CartLine() {
     }
-    public CartLine(Product product , String size) {
+
+    public CartLine(Product product, String size) {
         this.product = product;
         this.quantity = 1;
         this.size = size;
         this.subtotal = product.getProductSellingPrice();
     }
+
     public Product getProduct() {
-        return product;
+        return this.product;
     }
-    
+
     public String getSize() {
         return size;
     }
@@ -34,7 +36,7 @@ public class CartLine {
     public void setSize(String size) {
         this.size = size;
     }
-    
+
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -57,6 +59,13 @@ public class CartLine {
 
     public void updateSubtotal(int quantity) {
         setQuantity(quantity);
-        this.subtotal = quantity * product.getProductSellingPrice();
+        setSubtotal(quantity * this.product.getProductSellingPrice());
+        
     }
+
+    @Override
+    public String toString() {
+        return "CartLine{" + "product=" + product + ", size=" + size + ", quantity=" + quantity + ", subtotal=" + subtotal + '}';
+    }
+
 }
