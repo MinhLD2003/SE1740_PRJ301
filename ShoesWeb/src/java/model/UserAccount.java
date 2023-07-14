@@ -19,6 +19,7 @@ public class UserAccount {
     private String passwordSalt;
     private String passwordHash;
     private String emailConfirmationCode;
+    private String roleName;
     private Timestamp emailCreatedTime;
     private String passwordRecoveryCode;
     private Timestamp recoveryTime;
@@ -124,6 +125,14 @@ public class UserAccount {
 
     public void setCodeProcessing(CodeProcessing codeProcessing) {
         this.codeProcessing = codeProcessing;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
 }

@@ -22,7 +22,7 @@
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <a class="logo_h" href="index.html"><img src="${pageContext.request.contextPath}/images/sneaker-world-logo.png"
-                                                                              width="150px;" alt=""></a>
+                                                                 width="150px;" alt=""></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -35,35 +35,46 @@
                         <div class="collapse navbar-collapse offset " id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto ">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Men">Men's</a>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Women">Women's</a>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Kid">Kid's</a>
+                                    <a class="nav-link" href="index.html">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=productpage&page=Sale">Sale</a>
+                                    <div class="collapse navbar-collapse" id="navbar-list-3">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Catalog
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Products</a>
+                                                    <a class="dropdown-item" href="#">Categories<a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </li>   
+                                        </ul>
+                                    </div>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="index.html">Orders</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <div class="collapse navbar-collapse" id="navbar-list-3">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                   Account
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                                                    <a class="dropdown-item" href="#">Customers</a>
+                                                    <a class="dropdown-item" href="#">Employee<a>    
+                                                </div>
+                                            </li>   
+                                        </ul>
+                                    </div>
+                                </li>
+
                             </ul>
-                            <ul class="navbar-nav nav navbar-right">
-                                <li class="nav-item">
-                                    <a href="${pageContext.request.contextPath}/frontend/views/client/wishlist.jsp"><span class="ti-heart"></span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="${pageContext.request.contextPath}/frontend/views/client/cart.jsp" class="cart"><span class="ti-bag"></span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="search"><span class="lnr ti-search" id="search"></span></button>
-                                </li>
-                            </ul>
-                            <div class="navbar-right navbar-nav nav-item submenu dropdown">
+
+                            <div class="navbar-right navbar-nav nav-item submenu dropdown ml-2">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-user"></i>
@@ -77,12 +88,12 @@
                                         <li><a class="dropdown-item" href="#">My profile</a></li>
                                         <li><a class="dropdown-item" href="#">Settings</a></li>
                                         <li><a class="dropdown-item" href="#">Logout</a></li>
-                                       
+
                                     </c:if>
-                                        <c:if test="${sessionScope.user == null}">
+                                    <c:if test="${sessionScope.user == null}">
                                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/home?redirect=sign-in">Sign in</a></li>
                                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/home?redirect=sign-up">Sign up</a></li>
-                                     </c:if>
+                                        </c:if>
                                 </ul>
 
                             </div>
@@ -91,16 +102,7 @@
                     </div>
                 </nav>
             </div>
-            <div class="search_input" id="search_input_box">
-                <div class="container">
-                    <form action="<c:url value='/productcontroller'/>" class="d-flex justify-content-between">
-                        <input type="text" class="form-control" id="search_input" name="search_value" placeholder="Search Here">
-                        <input type="hidden" name ="action" value="search">
-                        <button type="submit" class="btn"></button>
-                        <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-                    </form>
-                </div>
-            </div>
+
         </header>
     </section>
     <!--Main Navigation-->

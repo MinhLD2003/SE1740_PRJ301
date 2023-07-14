@@ -37,4 +37,29 @@ public class ProductService implements IProductService {
     public List<Product> queryProductBySearching(String search_value) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<String> queryAllBrandName() {
+        return pDAO.queryAllBrandName();
+    }
+
+    @Override
+    public List<String> queryAllColor() {
+        return pDAO.queryAllColor();
+    }
+
+    @Override
+    public List<String> querySizeByGender(String gender) {
+        return pDAO.querySizeByGender(gender);
+    }
+
+    @Override
+    public List<String> queryAllProductCategories(String categoryName) {
+        return pDAO.queryAllProductCategories(categoryName);
+    }
+
+    @Override
+    public List<String> queryAllSizes() {
+        return pDAO.queryAllSizes();
+    }
 }

@@ -13,8 +13,22 @@ import model.Product;
  * @author Admin
  */
 public interface IProductDAO extends ICrudDAO<Product> {
+
     List<Product> queryAllProduct();
-    List<String>  queryProductCategories(String productCode);
+
+    List<String> queryProductCategories(String productCode);
+
     List<Product> queryProductsByCategories(HashMap<String, List<String>> filterMap);
+
     List<Product> queryProductBySearching(String search_value);
+
+    List<String> queryAllProductCategories(String categoryName);
+
+    List<String> queryAllBrandName();
+
+    List<String> queryAllColor();
+
+    List<String> querySizeByGender(String gender);
+
+    List<String> queryAllSizes();
 }

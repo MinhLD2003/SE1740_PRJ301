@@ -24,35 +24,8 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
 
     @Override
     public String getEmailConfirmationToken(String sql, Object... parameters) {
-        Connection con = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        String token = "";
-        try {
-
-            con = db.getConnection();
-            statement = con.prepareStatement(sql);
-            setParameters(statement, parameters);
-            rs = statement.executeQuery();
-            if (rs.next()) {
-                token = rs.getString("email_confirmation_code");
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return token;
+        List<String> queryResult = queryData(sql, "email_confirmation_code", parameters);
+        return queryResult.get(0);
     }
 
     @Override
@@ -127,7 +100,7 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
     }
 
     public int queryRoleId(String roleName) {
-        String sql = "select * from user_role where role_name = ?";
+        String sql = "select role_id from role where role_name = ?";
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -160,10 +133,14 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
     }
 
     public void setUserAccountRole(UserAccount user, String role) {
-        String sql = "update user_account \n"
-                + "set role_id = ? \n"
-                + "where user_account_id = ?";
+        String sql = "INSERT INTO user_role values( ? , ? , 1 )";
         int role_id = queryRoleId(role);
-        update(sql, role_id, user.getId());
+        update(sql, user.getId(), role_id);
+    }
+
+    @Override
+    public String getUserRole(String sql, UserAccount user, Object... parameters) {
+        List<String> result = queryData(sql, "role_name", parameters);
+        return result.get(0);
     }
 }

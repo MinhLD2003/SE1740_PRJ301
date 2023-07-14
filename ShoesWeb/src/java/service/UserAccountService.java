@@ -68,7 +68,10 @@ public class UserAccountService implements IUserAccountService {
 
     @Override
     public UserAccount getUserByUserName(String username) {
-        String sql = "SELECT * FROM user_account WHERE user_name = ? and is_active = 1";
+        String sql = "SELECT user_account.* , role.role_name FROM user_account\n"
+                + "inner join user_role on user_role.user_account_id = user_account.user_account_id \n"
+                + "inner join role on role.role_id = user_role.role_id\n"
+                + "WHERE user_name = '?' and is_active = 1";
         return uADAO.getUserByAccountInfo(sql, username);
     }
 
@@ -77,8 +80,9 @@ public class UserAccountService implements IUserAccountService {
         String sql = "SELECT * FROM user_account WHERE email_address = ? ";
         return uADAO.getUserByAccountInfo(sql, email);
     }
+
     @Override
-    public void setUserAccountRole(UserAccount account , String role) {
+    public void setUserAccountRole(UserAccount account, String role) {
         uADAO.setUserAccountRole(account, role);
     }
 

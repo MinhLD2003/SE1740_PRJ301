@@ -11,15 +11,19 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import model.UserAccount;
 
 /**
  *
  * @author Admin
  */
-public class Authorization implements Filter{
-    
-    private ServletContext context ;
+public class Authorization implements Filter {
+
+    private ServletContext context;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.context = filterConfig.getServletContext();
@@ -27,12 +31,29 @@ public class Authorization implements Filter{
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        HttpServletRequest request = (HttpServletRequest) sr;
+        HttpServletResponse response = (HttpServletResponse) sr1;
+        String uri = request.getRequestURI();
+        
+        if (uri.startsWith("/shoesweb/admin")) {
+            UserAccount user = (UserAccount) SessionUtil.getInstance().getValue(request, "user");
+            if (user != null) {
+                if (user.getRoleName().equals("ADMIN")) {
+                    fc.doFilter(sr, sr1);
+                } else if (user.getRoleName().equals("CLIENT")) {
+                    response.sendRedirect(request.getContextPath() + "/home");
+                }
+            } else {
+                response.sendRedirect(request.getContextPath() + "/home?redirect=sign-in");
+            }
+        } else {
+            fc.doFilter(sr, sr1);
+        }
     }
 
     @Override
     public void destroy() {
         Filter.super.destroy(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
+
 }

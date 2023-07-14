@@ -72,15 +72,18 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private IUserAccountService uAService = new UserAccountService();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String isRemembered = request.getParameter("remember");
-        IUserAccountService uAService = new UserAccountService();
+
         UserAccount foundAccount = uAService.getUserByUserName(username);
+
         CodeProcessing codeProcess = new CodeProcessing();
         if (foundAccount == null) {
             String failLoginMess = "fail";
@@ -89,8 +92,14 @@ public class LoginServlet extends HttpServlet {
         } else {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
                 SessionUtil.getInstance().putValue(request, "user", foundAccount);
-                
-                //------------------- Cookie Session
+
+                if (foundAccount.getRoleName().equals("ADMIN")) {
+                    response.sendRedirect(request.getContextPath() + "/admin-home");
+                } else if (foundAccount.getRoleName().equals("CLIENT")) {
+                    response.sendRedirect(request.getContextPath() + "/home");
+                }
+
+                //------------------- Cookie -----------------------
                 Cookie usernameCookie = new Cookie("username", username);
                 Cookie passwordCookie = new Cookie("password", password);
                 Cookie rememberCookie = new Cookie("isRemembered", isRemembered);
@@ -106,12 +115,11 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(usernameCookie);
                 response.addCookie(passwordCookie);
                 response.addCookie(rememberCookie);
-                response.sendRedirect("frontend/views/client/homepage.jsp");
 
             } else {
                 String failLoginMess = "fail";
                 request.setAttribute("failLoginMess", failLoginMess);
-                request.getRequestDispatcher("/frontend/views/client/auth/login.jsp").forward(request, response);
+                request.getRequestDispatcher(request.getContextPath() + "/frontend/views/client/auth/login.jsp").forward(request, response);
             }
 
         }

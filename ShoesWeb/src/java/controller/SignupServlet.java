@@ -10,11 +10,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.UserAccount;
 import service.UserAccountService;
 import utils.CodeProcessing;
 import utils.EmailSending;
+import utils.SessionUtil;
 import utils.TimestampHandler;
 
 /**
@@ -82,7 +82,7 @@ public class SignupServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        
+
         //-------------------------------
         UserAccount user = new UserAccount(username, email, password);
 
@@ -100,8 +100,7 @@ public class SignupServlet extends HttpServlet {
             boolean isSent = emailSending.sendEmail(user);
 
             if (isSent) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
+                SessionUtil.getInstance().putValue(request, "user", user);
                 //-----------------------------
                 uAService.insertUserAccount(user);
                 response.sendRedirect(request.getContextPath() + "/frontend/views/client/auth/verification.jsp");
@@ -112,8 +111,6 @@ public class SignupServlet extends HttpServlet {
         }
 
     }
-
- 
 
     /**
      * Returns a short description of the servlet.

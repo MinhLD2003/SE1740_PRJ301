@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Product extends ModelPage<Product> {
     private List<String> categories;
     private String detail;
     private String description;
+    private int stock;
     private double productSellingPrice;
     private double productCost;
     private String color;
@@ -34,6 +36,7 @@ public class Product extends ModelPage<Product> {
         sizeQuantityMap = new HashMap<>();
         imageUrls = new ArrayList<>();
     }
+
     public String getProductCode() {
         return productCode;
     }
@@ -138,10 +141,11 @@ public class Product extends ModelPage<Product> {
     public HashMap<String, Integer> getSizeQuantityMap() {
         return sizeQuantityMap;
     }
+
     public void addProductCategories(String category) {
         categories.add(category);
     }
-    
+
     public String getDetail() {
         return detail;
     }
@@ -150,9 +154,22 @@ public class Product extends ModelPage<Product> {
         this.detail = detail;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void updateStock() {
+        int total = 0;
+        for (Map.Entry<String, Integer> entry : sizeQuantityMap.entrySet()) {
+            int value = entry.getValue();
+            total = total + value; 
+        }
+        this.stock = total;
+    }
+
     @Override
     public String toString() {
         return "Product{" + "productCode=" + productCode + ", name=" + name + ", brand=" + brand + ", categories=" + categories + ", detail=" + detail + ", description=" + description + ", productSellingPrice=" + productSellingPrice + ", productCost=" + productCost + ", color=" + color + ", sizeQuantityMap=" + sizeQuantityMap + ", createdTime=" + createdTime + ", lastUpdateTime=" + lastUpdateTime + ", imageUrls=" + imageUrls + '}';
     }
-    
+
 }

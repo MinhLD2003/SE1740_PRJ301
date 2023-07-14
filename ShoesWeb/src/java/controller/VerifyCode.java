@@ -111,6 +111,7 @@ public class VerifyCode extends HttpServlet {
     private void setAccountActive(UserAccountService userAccountService, UserAccount user) {
         user.setIsActive(1);
         userAccountService.updateActiveAccount(user);
+        userAccountService.setUserAccountRole(user, "CLIENT");
     }
 
     private void handleInvalidAuthCode(HttpServletRequest request, HttpServletResponse response, UserAccount user) throws ServletException, IOException {

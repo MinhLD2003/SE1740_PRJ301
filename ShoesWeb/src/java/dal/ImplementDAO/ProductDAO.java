@@ -20,7 +20,7 @@ import model.Product;
  * @author Admin
  */
 public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
-
+    
     @Override
     public List<Product> queryAllProduct() {
         String sql = "select * from product inner join brand on brand.brand_id = product.brand_id\n"
@@ -31,10 +31,11 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
             p.setCategories(categoryList);
             p.setImageUrls(queryImageUrls(p.getProductCode()));
             p.setSizeQuantityMap(querySizeAndQuantity(p.getProductCode()));
+            p.updateStock();
         }
         return productList;
     }
-
+    
     @Override
     public List<Product> queryProductsByCategories(HashMap<String, List<String>> filterMap) {
         List<String> brands = filterMap.get("brand");
@@ -54,7 +55,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         sql.append(" JOIN color c ON p.color_id = c.color_id");
         sql.append(" JOIN product_size_stock pss ON p.product_code = pss.product_code");
         sql.append(" JOIN sizes s ON pss.size_id = s.size_id WHERE 1 = 1");
-
+        
         params.add(gender.get(0));
         if (sports != null && !sports.isEmpty()) {
             sql.append(" AND (cat.category_value = ? AND EXISTS (\n"
@@ -63,7 +64,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                     + "        JOIN category cat2 ON pc2.category_id = cat2.category_id\n"
                     + "        WHERE pc2.product_code = p.product_code\n"
                     + "        AND cat2.category_value IN (");
-
+            
             for (int i = 0; i < sports.size(); i++) {
                 if (i < sports.size() - 1) {
                     sql.append("?,");
@@ -85,7 +86,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                 }
                 params.add(brands.get(i));
             }
-
+            
         }
         if (colors != null && !colors.isEmpty()) {
             sql.append(" AND c.color IN (");
@@ -114,33 +115,24 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
             params.add(max_price.get(0));
             sql.append(" AND p.price BETWEEN ? AND ?");
         }
-
+        
         List<Product> productList = query(sql.toString(), new ProductMapping(), params.toArray((String[]) new String[params.size()]));
         for (Product p : productList) {
             List<String> categoryList = queryProductCategories(p.getProductCode());
             p.setCategories(categoryList);
             p.setImageUrls(queryImageUrls(p.getProductCode()));
             p.setSizeQuantityMap(querySizeAndQuantity(p.getProductCode()));
+            p.updateStock();
         }
         return productList;
     }
-
-    public List<String> queryAllShoesSizes() {
-        String query = "select * from sizes";
-        return queryData(query, "size");
-    }
-
-    public List<String> queryAllShoesColor() {
-        String query = "select * from color";
-        return queryData(query, "color");
-    }
-
+    
     public List<String> queryImageUrls(String product_code) {
         String sql = " select * from [image]\n"
                 + "where product_code = ? ";
         return queryData(sql, "image_url", product_code);
     }
-
+    
     public Product queryProductByCode(String code) {
         String sql = "select * from product inner join brand on brand.brand_id = product.brand_id\n"
                 + "  inner join color on color.color_id = product.color_id  where product_code = ?";
@@ -152,7 +144,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         foundProduct.setSizeQuantityMap(querySizeAndQuantity(foundProduct.getProductCode()));
         return foundProduct;
     }
-
+    
     @Override
     public List<String> queryProductCategories(String product_code) {
         String sql = "select c.category_value  from category c\n"
@@ -161,7 +153,7 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
                 + "                    where p_c.product_code = ?";
         return queryData(sql, "category_value", product_code);
     }
-
+    
     public HashMap<String, Integer> querySizeAndQuantity(String product_code) {
         HashMap<String, Integer> hashmap = new HashMap<>();
         String sql = " select * from product_size_stock stock\n"
@@ -194,10 +186,66 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
             }
         }
     }
-
+    
     @Override
     public List<Product> queryProductBySearching(String search_value) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    @Override
+    public List<String> queryAllProductCategories(String categoryName) {
+        String sql = "select * from category where category_name = ? ";
+        return queryData(sql, "category_value", categoryName);
+    }
+    
+    @Override
+    public List<String> queryAllBrandName() {
+        String sql = "Select * from brand";
+        return queryData(sql, "brand_name");
+    }
+    
+    @Override
+    public List<String> queryAllColor() {
+        String sql = "Select * from color";
+        return queryData(sql, "color");
+    }
+    
+    @Override
+    public List<String> querySizeByGender(String gender) {
+        String sql = "SELECT * FROM sizes where size_gender = ?";
+        return queryData(sql, "size", gender);
+    }
+    @Override
+    public List<String> queryAllSizes() {
+        String sql = "SELECT * FROM sizes ";
+        List<String> queryList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection = db.getConnection();
+            statement = connection.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                queryList.add(rs.getString("size") + " " + rs.getString("size_gender"));
+            }
+            return queryList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+        return null;
+        
+    }
 }

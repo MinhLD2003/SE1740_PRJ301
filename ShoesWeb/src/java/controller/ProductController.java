@@ -66,11 +66,9 @@ public class ProductController extends HttpServlet {
 
         List<Product> productList = null;
         FilterCategory.resetFilterMap();
-        String gender = (String) SessionUtil.getInstance().getValue(request, "pageRequest");
-
+        String gender = (String) request.getAttribute("pageRequest");
         FilterCategory.addFilterCategory("gender", gender);
         String action = request.getParameter("action");
-
         if (action != null && action.equals("filter")) {
             String brands = request.getParameter("brand");
             String sports = request.getParameter("sport");
@@ -98,7 +96,7 @@ public class ProductController extends HttpServlet {
             }
             productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
             SessionUtil.getInstance().putValue(request, "productList", productList);
-            response.sendRedirect("frontend/views/client/productpage.jsp");
+            request.getRequestDispatcher("frontend/views/client/productpage.jsp").forward(request, response);
         } else if (action != null && action.equals("singleproduct")) {
             String productCode = request.getParameter("product_variant");
             Product singleProduct = IPService.queryProductByCode(productCode);
@@ -109,7 +107,7 @@ public class ProductController extends HttpServlet {
         } else {
             productList = IPService.queryProductsByCategories(FilterCategory.filterMap);
             SessionUtil.getInstance().putValue(request, "productList", productList);
-            response.sendRedirect("frontend/views/client/productpage.jsp");
+            request.getRequestDispatcher("frontend/views/client/productpage.jsp").forward(request, response);
         }
 
     }

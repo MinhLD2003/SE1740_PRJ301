@@ -25,6 +25,7 @@ public class UserMapping implements ObjectsMapping<UserAccount> {
            user.setPasswordHash(rs.getString("password_hash"));
            user.setPasswordSalt(rs.getString("password_salt"));
            user.setEmailAddress(rs.getString("email_address"));
+           user.setRoleName(rs.getString("role_name"));
            return user;    
        } catch(SQLException ex) {
             System.out.println(ex);

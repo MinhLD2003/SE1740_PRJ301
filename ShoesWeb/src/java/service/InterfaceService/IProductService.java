@@ -15,7 +15,20 @@ import model.Product;
 public interface IProductService {
 
     List<Product> queryAllProduct();
+
     List<Product> queryProductsByCategories(HashMap<String, List<String>> categories);
+
     Product queryProductByCode(String code);
+
     List<Product> queryProductBySearching(String search_value);
+
+    List<String> queryAllBrandName();
+
+    List<String> queryAllColor();
+
+    List<String> querySizeByGender(String gender);
+
+    List<String> queryAllProductCategories(String categoryName);
+    
+    List<String> queryAllSizes();
 }

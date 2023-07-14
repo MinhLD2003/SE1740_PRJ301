@@ -32,6 +32,15 @@
         <servlet-name>CartController</servlet-name>
         <servlet-class>controller.CartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminHomeServlet</servlet-name>
+        <servlet-class>controller.admin.AdminHomeServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ProductManagementServlet</servlet-name>
+        <servlet-class>controller.admin.ProductManagementServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -64,16 +73,14 @@
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
-    
-    <filter>  
-        <filter-name>ServletFilter</filter-name>  
-        <filter-class>utils.Authorization</filter-class>  
-    </filter>  
-   
-    <filter-mapping>  
-        <filter-name>Servlet</filter-name>  
-        <url-pattern>/*</url-pattern>  
-    </filter-mapping>  
+    <servlet-mapping>
+        <servlet-name>AdminHomeServlet</servlet-name>
+        <url-pattern>/admin-home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductManagementServlet</servlet-name>
+        <url-pattern>/admin-manage-product</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
