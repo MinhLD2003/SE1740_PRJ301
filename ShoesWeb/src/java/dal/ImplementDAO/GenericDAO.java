@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,16 +25,25 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     protected DBConnection db = new DBConnection();
 
     @Override
-
     public void update(String sql, Object... parameters) {
         PreparedStatement statement = null;
         Connection connection = null;
         try {
             connection = db.getConnection();
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
             statement.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
         } finally {
             try {
                 if (connection != null) {
@@ -50,15 +57,26 @@ public class GenericDAO<T> implements ICrudDAO<T> {
 
     @Override
     public void insert(String sql, Object... parameters) {
+
         PreparedStatement statement = null;
         Connection connection = null;
         try {
             connection = db.getConnection();
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
             statement.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            if (connection != null) {
+                try {
+
+                    connection.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
         } finally {
             try {
                 if (connection != null) {
@@ -82,6 +100,8 @@ public class GenericDAO<T> implements ICrudDAO<T> {
                     statement.setInt(index, (Integer) param);
                 } else if (param instanceof Timestamp) {
                     statement.setTimestamp(index, (Timestamp) param);
+                } else if (param instanceof Double) {
+                    statement.setDouble(index, (Double) param);
                 }
 
             }
@@ -96,7 +116,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
-        
+
         try {
             connection = db.getConnection();
             statement = connection.prepareStatement(sql);
@@ -124,7 +144,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         return null;
     }
 
-    public List<String> queryData(String sql, String queryCol ,Object... param) {
+    public List<String> queryData(String sql, String queryCol, Object... param) {
         List<String> queryList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -132,7 +152,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         try {
             connection = db.getConnection();
             statement = connection.prepareStatement(sql);
-            setParameters(statement,  param);
+            setParameters(statement, param);
             rs = statement.executeQuery();
             while (rs.next()) {
                 queryList.add(rs.getString(queryCol));
@@ -154,4 +174,67 @@ public class GenericDAO<T> implements ICrudDAO<T> {
         }
         return null;
     }
+
+    public int queryId(String sql, String queryCol, Object... param) {
+        int result = -1;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection = db.getConnection();
+            statement = connection.prepareStatement(sql);
+            setParameters(statement, param);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt(queryCol);
+            }
+            return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void delete(String sql, Object... parameters) {
+        PreparedStatement statement = null;
+        Connection connection = null;
+        try {
+            connection = db.getConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(sql);
+            setParameters(statement, parameters);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();   
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+    }
 }
+

@@ -49,10 +49,30 @@
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
                                                     <input type="text" id="form3Example1c" class="form-control" name="username" required/>
-                                                    <label class="form-label" for="form3Example1c">UserName</label>
+                                                    <label class="form-label" for="form3Example1c">User Name</label>
                                                 </div>
                                             </div>
-
+                                             <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" name="fullname" required/>
+                                                    <label class="form-label" for="form3Example1c">Full Name</label>
+                                                </div>
+                                            </div>
+                                             <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" name="phone" required/>
+                                                    <label class="form-label" for="form3Example1c">Phone</label>
+                                                </div>
+                                            </div>
+                                             <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-address-card fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" name="address" required/>
+                                                    <label class="form-label" for="form3Example1c">Address</label>
+                                                </div>
+                                            </div>
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">

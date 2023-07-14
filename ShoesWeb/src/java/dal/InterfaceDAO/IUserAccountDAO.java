@@ -5,6 +5,7 @@
 package dal.InterfaceDAO;
 
 import java.sql.Timestamp;
+import java.util.List;
 import model.UserAccount;
 
 /**
@@ -20,5 +21,8 @@ public interface IUserAccountDAO extends ICrudDAO<UserAccount> {
     public UserAccount getUserByAccountInfo(String sql, Object... parameters);
 
     public Timestamp getCreatedTime(String sql, Object... parameters);
-    public String getUserRole(String sql , UserAccount user ,Object... parameters);
+
+    public String getUserRole(String sql, UserAccount user, Object... parameters);
+    
+    public List<UserAccount> getAllUserAccount();
 }

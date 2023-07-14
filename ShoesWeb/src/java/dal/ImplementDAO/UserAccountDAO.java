@@ -63,8 +63,11 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
     @Override
     public UserAccount getUserByAccountInfo(String sql, Object... parameters) {
         List<UserAccount> list = query(sql, userMapping, parameters);
-        System.out.println(list);
-        return list.get(0);
+        if (list == null || list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
 
     @Override
@@ -101,46 +104,37 @@ public class UserAccountDAO extends GenericDAO<UserAccount> implements IUserAcco
 
     public int queryRoleId(String roleName) {
         String sql = "select role_id from role where role_name = ?";
-        Connection con = null;
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        int role_id = -1;
-        try {
-            con = db.getConnection();
-            statement = con.prepareStatement(sql);
-            setParameters(statement, roleName);
-            rs = statement.executeQuery();
-            if (rs.next()) {
-                role_id = rs.getInt("role_name");
-            }
-            return role_id;
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return -1;
+        return queryId(sql, "role_id", roleName);
     }
 
     public void setUserAccountRole(UserAccount user, String role) {
         String sql = "INSERT INTO user_role values( ? , ? , 1 )";
         int role_id = queryRoleId(role);
-        update(sql, user.getId(), role_id);
+        update(sql, getUserId(user), role_id);
     }
 
     @Override
     public String getUserRole(String sql, UserAccount user, Object... parameters) {
         List<String> result = queryData(sql, "role_name", parameters);
         return result.get(0);
+    }
+
+    public int getUserId(UserAccount user) {
+        String sql = "Select user_account_id from user_account where email_address = ?";
+        return queryId(sql, "user_account_id", user.getEmailAddress());
+    }
+
+    @Override
+    public List<UserAccount> getAllUserAccount() {
+        String sql = "select user_account.* , role.role_name"
+                + " from user_account inner join user_role"
+                + " on user_role.user_account_id = user_account.user_account_id\n"
+                + "inner join role on role.role_id = user_role.role_id";
+        return query(sql, userMapping);
+    }
+
+    public void setActivatedAccount(UserAccount user) {
+        String sql = "update user_account set is_active = 1 where email_address = ?";
+        update(sql, user.getEmailAddress());
     }
 }

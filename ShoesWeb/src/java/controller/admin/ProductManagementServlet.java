@@ -10,6 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import model.Product;
 import service.InterfaceService.IProductService;
@@ -64,7 +67,6 @@ public class ProductManagementServlet extends HttpServlet {
         String redirect = request.getParameter("redirect");
         List<String> brandList = pServ.queryAllBrandName();
         List<String> colorList = pServ.queryAllColor();
-
         List<String> sports = pServ.queryAllProductCategories("Sport");
         if (redirect != null && redirect.equals("edit")) {
             String productCode = request.getParameter("product_code");
@@ -82,7 +84,7 @@ public class ProductManagementServlet extends HttpServlet {
             List<String> sizeList = pServ.queryAllSizes();
             request.setAttribute("colors", colorList);
             request.setAttribute("brands", brandList);
-            request.setAttribute("sports", sizeList);
+            request.setAttribute("sizes", sizeList);
             request.setAttribute("sports", sports);
             request.setAttribute("productList", productList);
             request.getRequestDispatcher("frontend/views/admin/productmanagement.jsp").forward(request, response);
@@ -103,9 +105,61 @@ public class ProductManagementServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null && action.equals("add")) {
+            String productName = request.getParameter("product_name");
+            String productCode = request.getParameter("product_code");
+            double productCost = Double.parseDouble(request.getParameter("product_cost"));
+            double productPrice = Double.parseDouble(request.getParameter("product_price"));
+            String brand = request.getParameter("brand");
+            String color = request.getParameter("color");
+            String sport = request.getParameter("sport");
+            String gender = request.getParameter("gender");
+            String style = request.getParameter("style");
+            String description = request.getParameter("description");
+            String detail = request.getParameter("detail");
+            String[] sizes = request.getParameterValues("sizes");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            String[] images = request.getParameterValues("image");
+            HashMap<String, Integer> sizeQuantityMap = new HashMap<>();
+            for (String s : sizes) {
+                sizeQuantityMap.put(s.split(" ")[0], quantity);
+            }
+            Product product = new Product(productCode, productName, brand,
+                    new ArrayList<>(Arrays.asList(sport, gender, style)),
+                    detail, description, productPrice, productCost, color, gender, sizeQuantityMap,
+                    new ArrayList<>(Arrays.asList(images))
+            );
+            pServ.insertProduct(product);
 
+        } else if (action != null && action.equals("delete")) {
+            String productCode = request.getParameter("product_code_delete");
+            pServ.deleteProduct(productCode);
+        } else if (action != null && action.equals("edit")) {
+            String productName = request.getParameter("product_name");
+            String productCode = request.getParameter("product_code");
+            double productCost = Double.parseDouble(request.getParameter("product_cost"));
+            double productPrice = Double.parseDouble(request.getParameter("product_price"));
+            String brand = request.getParameter("brand");
+            String color = request.getParameter("color");
+            String sport = request.getParameter("sport");
+            String gender = request.getParameter("gender");
+            String style = request.getParameter("style");
+            String description = request.getParameter("description");
+            String detail = request.getParameter("detail");
+            String[] sizes = request.getParameterValues("sizes");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            String[] images = request.getParameterValues("image");
+            HashMap<String, Integer> sizeQuantityMap = new HashMap<>();
+            for (String s : sizes) {
+                sizeQuantityMap.put(s.split(" ")[0], quantity);
+            }
+            Product product = new Product(productCode, productName, brand,
+                    new ArrayList<>(Arrays.asList(sport, gender, style)),
+                    detail, description, productPrice, productCost, color, gender, sizeQuantityMap,
+                    new ArrayList<>(Arrays.asList(images))
+            );
+            pServ.editProduct(product);
         }
-
+        response.sendRedirect(request.getContextPath() + "/admin-manage-product");
     }
 
     /**

@@ -36,10 +36,13 @@
         <servlet-name>AdminHomeServlet</servlet-name>
         <servlet-class>controller.admin.AdminHomeServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ProductManagementServlet</servlet-name>
         <servlet-class>controller.admin.ProductManagementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAccountManagement</servlet-name>
+        <servlet-class>controller.admin.UserAccountManagement</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
@@ -80,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ProductManagementServlet</servlet-name>
         <url-pattern>/admin-manage-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAccountManagement</servlet-name>
+        <url-pattern>/admin-manage-account</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

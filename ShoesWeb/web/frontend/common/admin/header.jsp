@@ -34,9 +34,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse offset " id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Dashboard</a>
-                                </li>
+                               
                                 <li class="nav-item">
                                     <div class="collapse navbar-collapse" id="navbar-list-3">
                                         <ul class="navbar-nav">
@@ -45,32 +43,21 @@
                                                     Catalog
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item" href="#">Products</a>
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/home?redirect=productpage">Products</a>
                                                     <a class="dropdown-item" href="#">Categories<a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                               
                                                 </div>
                                             </li>   
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="index.html">Orders</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=orderpage">Orders</a>
                                 </li>
-                                <li class="nav-item ">
-                                    <div class="collapse navbar-collapse" id="navbar-list-3">
-                                        <ul class="navbar-nav">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                   Account
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                                                    <a class="dropdown-item" href="#">Customers</a>
-                                                    <a class="dropdown-item" href="#">Employee<a>    
-                                                </div>
-                                            </li>   
-                                        </ul>
-                                    </div>
+                                 <li class="nav-item ">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=accountpage">Account</a>
                                 </li>
+                               
 
                             </ul>
 
@@ -87,7 +74,7 @@
                                     <c:if test="${sessionScope.user != null}">
                                         <li><a class="dropdown-item" href="#">My profile</a></li>
                                         <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/home?action=logout">Logout</a></li>
 
                                     </c:if>
                                     <c:if test="${sessionScope.user == null}">

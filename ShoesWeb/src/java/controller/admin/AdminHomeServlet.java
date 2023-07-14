@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.SessionUtil;
 
 /**
  *
@@ -53,7 +54,23 @@ public class AdminHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        String redirect = request.getParameter("redirect");
+        if(action != null && action.equals("logout")) {
+            SessionUtil.getInstance().removeValue(request, "user");
+            response.sendRedirect(request.getContextPath() + "/frontend/views/client/homepage.jsp");
+        }
+        if(redirect != null && redirect.equals("orderpage")) {
+            request.getRequestDispatcher("/admin-manage-order").forward(request, response);
+        }
+        else if(redirect != null && redirect.equals("productpage")) {
+            request.getRequestDispatcher("/admin-manage-product").forward(request, response);
+        }
+        else if(redirect != null && redirect.equals("accountpage")) {
+            request.getRequestDispatcher("/admin-manage-account").forward(request, response);
+        }
+        else 
+        request.getRequestDispatcher("/admin-manage-account").forward(request, response);
     } 
 
     /** 
@@ -66,7 +83,7 @@ public class AdminHomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
 
     /** 

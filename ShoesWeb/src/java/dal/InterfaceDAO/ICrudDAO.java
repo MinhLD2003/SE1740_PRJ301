@@ -14,5 +14,6 @@ import dal.MappingDAO.ObjectsMapping;
 public interface ICrudDAO<T> {
     void update(String sql , Object... parameters);
     void insert(String sql , Object... parameters);
+    void delete(String sql , Object... parameters);
     <T> List<T> query(String sql , ObjectsMapping <T> mapping ,  Object... parameters);
 }

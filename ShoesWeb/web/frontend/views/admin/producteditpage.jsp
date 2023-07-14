@@ -41,19 +41,19 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" class="form-control" value="${product.name}">
+                                    <input type="text" name="product_name" class="form-control" value="${product.name}">
                             </div>
                             <div class="form-group">
                                 <label>Product Code</label>
-                                <input type="text" class="form-control" value="${product.productCode}" >
+                                <input type="text" name="product_code" class="form-control" value="${product.productCode}" readonly >
                             </div>
                             <div class="form-group">
                                 <label>Cost</label>
-                                <input type="number" class="form-control" min="0"  value="${product.productCost}">
+                                <input type="number" name="product_cost" class="form-control" min="0"  value="${product.productCost}">
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
-                                <input type="number" class="form-control" min="0"  value="${product.productSellingPrice}">
+                                <input type="number" name="product_price" class="form-control" min="0"  value="${product.productSellingPrice}">
                             </div>
                             <div class="d-flex justify-content-around align-content-center">
                                 <c:set var="brands" value="${requestScope.brands}"></c:set>
@@ -107,36 +107,35 @@
                                 <div class="form-group">
                                     <div>Gender</div>
                                     <select name="gender">
-                                        <option>Men</option>
-                                        <option>Women</option> 
+                                        <option value="Men">Men</option>
+                                        <option value="Women">Women</option> 
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <div>Style</div>
-                                    <select name="Style">
-                                        <option>High Top</option>
-                                        <option>Mid Top</option>
-                                        <option>Low Top</option>
+                                    <select name="style">
+                                        <option value="High Top">High Top</option>
+                                    <option value="Mid Top">Mid Top</option>
+                                    <option value="Low Top">Low Top</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" >${product.description}</textarea>
+                                <textarea class="form-control" name="description">${product.description}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Detail</label>
-                                <textarea class="form-control" >${product.detail}</textarea>
+                                <textarea class="form-control" name="detail" >${product.detail}</textarea>
                             </div>
                             <div class="form-group">
+                                <label>Size</label>
                                 <div class="container">
                                     <div class="row">
                                         <c:set var="sizes" value="${requestScope.sizes}"></c:set>
-                                            <select name="size"class="js-select2" multiple="multiple">
+                                            <select name="sizes"class="js-select2" multiple="multiple">
                                             <c:forEach items="${sizes}" var="size">
-
                                                 <c:set var="numSize" value="${fn:substringBefore(originalString, ' ')}" />
-
                                                 <c:choose>
                                                     <c:when test='${product.sizeQuantityMap.containsKey(size)}'>
                                                         <option value='${size}' data-badge="" selected>${size}</option>
@@ -150,11 +149,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" name="quantity" class="form-control" min="1" value="1">
+                            </div>
                             <c:forEach var="image" items="${product.imageUrls}">
                                 <div class="form-group">
                                     <label>URL Image</label>
-                                    <input type="text" class="form-control" value="${image}">
+                                    <input type="text" name="image" class="form-control" value="${image}">
                                 </div>
                             </c:forEach>
                         </div>
@@ -166,11 +168,11 @@
             </div>
         </div>
     </body>
-
+<%@include file="/frontend/common/client/footer.jsp" %> 
     <script type="text/javascript">
         $(".js-select2").select2({
             closeOnSelect: false,
-            placeholder: "Size",
+
             allowClear: true,
             tags: true
         });

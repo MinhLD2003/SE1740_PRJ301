@@ -15,6 +15,12 @@ public class TimestampHandler {
 
     private final double OTP_EXPIRY_TIME = 1;
 
+    public Timestamp getNow() {
+        long createdTimeMillis = System.currentTimeMillis();
+        Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);
+        return createdTimeTimeStamp;
+    }
+
     public void setRecoveryCreatedTime(UserAccount user) {
         long createdTimeMillis = System.currentTimeMillis();
         Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);

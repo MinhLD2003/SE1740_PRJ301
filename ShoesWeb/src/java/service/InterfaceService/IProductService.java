@@ -31,4 +31,10 @@ public interface IProductService {
     List<String> queryAllProductCategories(String categoryName);
     
     List<String> queryAllSizes();
+    
+    void insertProduct(Product product);
+    
+    void deleteProduct(String productCode);
+    
+    void editProduct(Product product);
 }

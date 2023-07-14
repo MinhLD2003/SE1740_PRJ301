@@ -26,6 +26,8 @@ public class Product extends ModelPage<Product> {
     private double productSellingPrice;
     private double productCost;
     private String color;
+    private String gender;
+
     private HashMap<String, Integer> sizeQuantityMap;
     private Timestamp createdTime;
     private Timestamp lastUpdateTime;
@@ -37,6 +39,21 @@ public class Product extends ModelPage<Product> {
         imageUrls = new ArrayList<>();
     }
 
+    public Product(String productCode, String name, String brand, List<String> categories, String detail, String description,  double productSellingPrice, double productCost, String color, String gender, HashMap<String, Integer> sizeQuantityMap, List<String> imageUrls) {
+        this.productCode = productCode;
+        this.name = name;
+        this.brand = brand;
+        this.categories = categories;
+        this.detail = detail;
+        this.description = description;
+        this.productSellingPrice = productSellingPrice;
+        this.productCost = productCost;
+        this.color = color;
+        this.gender = gender;
+        this.sizeQuantityMap = sizeQuantityMap;  
+        this.imageUrls = imageUrls;
+    }
+    
     public String getProductCode() {
         return productCode;
     }
@@ -138,6 +155,14 @@ public class Product extends ModelPage<Product> {
         }
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public HashMap<String, Integer> getSizeQuantityMap() {
         return sizeQuantityMap;
     }
@@ -162,7 +187,7 @@ public class Product extends ModelPage<Product> {
         int total = 0;
         for (Map.Entry<String, Integer> entry : sizeQuantityMap.entrySet()) {
             int value = entry.getValue();
-            total = total + value; 
+            total = total + value;
         }
         this.stock = total;
     }

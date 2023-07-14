@@ -5,6 +5,7 @@
 package service.InterfaceService;
 
 import java.sql.Timestamp;
+import java.util.List;
 import model.UserAccount;
 
 /**
@@ -12,8 +13,6 @@ import model.UserAccount;
  * @author Admin
  */
 public interface IUserAccountService {
-
-    public Timestamp getEmailConfCreatedTime(UserAccount user);
 
     public int getUserAccountId(UserAccount user);
 
@@ -28,4 +27,6 @@ public interface IUserAccountService {
     public UserAccount getUserByEmailAddress(String email);
 
     public void setUserAccountRole(UserAccount user , String role_name);
+     public void setActivatedAccount(UserAccount user);
+    public List<UserAccount> getAllUserAccount() ;
 }

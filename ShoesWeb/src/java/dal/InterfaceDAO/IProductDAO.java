@@ -31,4 +31,6 @@ public interface IProductDAO extends ICrudDAO<Product> {
     List<String> querySizeByGender(String gender);
 
     List<String> queryAllSizes();
+
+    void insertProduct(Product product);
 }

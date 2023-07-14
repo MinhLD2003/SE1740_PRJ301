@@ -6,7 +6,7 @@ package service;
 
 import model.UserAccount;
 import dal.ImplementDAO.UserAccountDAO;
-import java.sql.Timestamp;
+import java.util.List;
 import service.InterfaceService.IUserAccountService;
 
 /**
@@ -16,12 +16,6 @@ import service.InterfaceService.IUserAccountService;
 public class UserAccountService implements IUserAccountService {
 
     UserAccountDAO uADAO = new UserAccountDAO();
-
-    @Override
-    public Timestamp getEmailConfCreatedTime(UserAccount user) {
-        String sql = "select confirmation_created_timestamp from user_account where email_address = ?";
-        return uADAO.getCreatedTime(sql, user.getEmailAddress());
-    }
 
     @Override
     public int getUserAccountId(UserAccount user) {
@@ -42,17 +36,22 @@ public class UserAccountService implements IUserAccountService {
                 + "([user_name], "
                 + "[password_hash], "
                 + "[password_salt], "
+                + "[full_name],\n"
+                + "[address],\n"
+                + "[phone],"
                 + "[email_address], "
                 + "[is_active], "
                 + "[email_confirmation_code], "
                 + "[confirmation_created_timestamp]) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+                + "VALUES (?, ?, ?, ?, ?, ?, ? , ? , ? , ?)";
         uADAO.insert(
                 sql,
                 useraccount.getUsername(),
                 useraccount.getPasswordHash(),
                 useraccount.getPasswordSalt(),
+                useraccount.getFullName(),
+                useraccount.getAddress(),
+                useraccount.getPhoneNumber(),
                 useraccount.getEmailAddress(),
                 useraccount.getIsActive(),
                 useraccount.getEmailConfirmationCode(),
@@ -71,7 +70,7 @@ public class UserAccountService implements IUserAccountService {
         String sql = "SELECT user_account.* , role.role_name FROM user_account\n"
                 + "inner join user_role on user_role.user_account_id = user_account.user_account_id \n"
                 + "inner join role on role.role_id = user_role.role_id\n"
-                + "WHERE user_name = '?' and is_active = 1";
+                + "WHERE user_name = ? and is_active = 1";
         return uADAO.getUserByAccountInfo(sql, username);
     }
 
@@ -84,6 +83,16 @@ public class UserAccountService implements IUserAccountService {
     @Override
     public void setUserAccountRole(UserAccount account, String role) {
         uADAO.setUserAccountRole(account, role);
+    }
+
+    @Override
+    public List<UserAccount> getAllUserAccount() {
+        return uADAO.getAllUserAccount();
+    }
+
+    @Override
+    public void setActivatedAccount(UserAccount user) {
+        uADAO.setActivatedAccount(user);
     }
 
 }

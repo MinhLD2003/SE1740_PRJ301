@@ -1,7 +1,7 @@
 <%-- 
-    Document   : management
-    Created on : Jul 12, 2023, 9:00:40 AM
-    Author     : Admin
+Document   : management
+Created on : Jul 12, 2023, 9:00:40 AM
+Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -33,54 +33,63 @@
 
     </style>
     <%@include file="/frontend/common/admin/header.jsp" %>
-    <div class="container" style="margin-top:200px; margin-bottom: 50px;">
-        <div class="table-wrapper ">
-            <div class="table-title">
-                <div class="d-flex justify-content-between mt-3 mb-3">
-                    <div class="col-sm-6">
-                        <h2>Manage <b>Users</b></h2>
+    <c:set var="accountList" value="${requestScope.accountList}"></c:set>
+
+        <div class="container" style="margin-top:200px; margin-bottom: 50px;">
+            <div class="table-wrapper ">
+                <div class="table-title">
+                    <div class="d-flex justify-content-between mt-3 mb-3">
+                        <div class="col-sm-6">
+                            <h2>Manage <b>Users</b></h2>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
-                        <th>ID</th>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                            </th>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                <label for="checkbox5"></label>
-                            </span>
-                        </td>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td></td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                             data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
+                    <c:forEach items="${requestScope.accountList}" var="user" >
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox5" name="options[]" value="1">
+                                    <label for="checkbox5"></label>
+                                </span>
+                            </td>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>${user.emailAddress}</td>
+                            <td>${user.fullName}</td>
+                            <td>${user.phoneNumber}</td>
+                            <td>${user.address}</td>
+                            <td>${user.roleName}</td>
+
+                            <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
+                                                                                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                                                                                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <div class="clearfix">
@@ -100,45 +109,7 @@
     <!-- Add Modal HTML -->
 
     <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Product</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>User ID</label>
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>User Name</label>
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control"readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" class="form-control" >
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
-                    </div>
 
-                </form>
-            </div>
-        </div>
-    </div>
     <!-- Delete Modal HTML -->
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
@@ -164,7 +135,12 @@
 </body>
 <%@include file="/frontend/common/client/footer.jsp" %> 
 <script type="text/javascript">
+    function deleteProduct(link) {
+        var dataId = link.getAttribute('data-id');
+        let deleteProductInput = document.getElementById('delete_product_input');
+        deleteProductInput.value = dataId;
 
+    }
     document.addEventListener("DOMContentLoaded", function () {
         // Activate tooltip
         var tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
@@ -219,7 +195,7 @@
             }
         });
     });
-   
+
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -83,16 +83,16 @@ public class LoginServlet extends HttpServlet {
         String isRemembered = request.getParameter("remember");
 
         UserAccount foundAccount = uAService.getUserByUserName(username);
-
+        System.out.println(foundAccount);
         CodeProcessing codeProcess = new CodeProcessing();
         if (foundAccount == null) {
             String failLoginMess = "fail";
             request.setAttribute("failLoginMess", failLoginMess);
-            request.getRequestDispatcher("/frontend/views/client/auth/login.jsp").forward(request, response);
+             request.getRequestDispatcher( "frontend/views/client/auth/login.jsp").forward(request, response);
         } else {
             if (codeProcess.authenticate(password, foundAccount.getPasswordHash(), foundAccount.getPasswordSalt())) {
                 SessionUtil.getInstance().putValue(request, "user", foundAccount);
-
+              
                 if (foundAccount.getRoleName().equals("ADMIN")) {
                     response.sendRedirect(request.getContextPath() + "/admin-home");
                 } else if (foundAccount.getRoleName().equals("CLIENT")) {
@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 String failLoginMess = "fail";
                 request.setAttribute("failLoginMess", failLoginMess);
-                request.getRequestDispatcher(request.getContextPath() + "/frontend/views/client/auth/login.jsp").forward(request, response);
+                request.getRequestDispatcher("frontend/views/client/auth/login.jsp").forward(request, response);
             }
 
         }

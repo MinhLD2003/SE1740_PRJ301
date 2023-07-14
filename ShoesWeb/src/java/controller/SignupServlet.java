@@ -82,9 +82,12 @@ public class SignupServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String fullname = request.getParameter("fullname");
 
         //-------------------------------
-        UserAccount user = new UserAccount(username, email, password);
+        UserAccount user = new UserAccount(username, email, password, fullname, phone, address);
 
         // Check if email address is already in use
         if (uAService.getUserByEmailAddress(email) != null) {
@@ -95,14 +98,13 @@ public class SignupServlet extends HttpServlet {
             // Generate email confirmation code and set expiration
             CodeProcessing codeProcessing = new CodeProcessing();
             user.setEmailConfirmationCode(codeProcessing.getOtpCode());
-            timeHandler.setEmailCreatedTime(user);
-            // Send email
-            boolean isSent = emailSending.sendEmail(user);
 
+            boolean isSent = emailSending.sendEmail(user);
             if (isSent) {
+                timeHandler.setEmailCreatedTime(user);
+                uAService.insertUserAccount(user);
                 SessionUtil.getInstance().putValue(request, "user", user);
                 //-----------------------------
-                uAService.insertUserAccount(user);
                 response.sendRedirect(request.getContextPath() + "/frontend/views/client/auth/verification.jsp");
             } else {
                 // Handle email sending failure

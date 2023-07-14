@@ -10,11 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import model.UserAccount;
+import service.InterfaceService.IUserAccountService;
 import service.UserAccountService;
 import utils.OTPTracker;
+import utils.SessionUtil;
 import utils.TimestampHandler;
 
 /**
@@ -75,11 +76,9 @@ public class VerifyCode extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserAccountService uAService = new UserAccountService();
-        HttpSession session = request.getSession();
+        IUserAccountService uAService = new UserAccountService();
         TimestampHandler timeH = new TimestampHandler();
-
-        UserAccount user = (UserAccount) session.getAttribute("user");
+        UserAccount user = (UserAccount) SessionUtil.getInstance().getValue(request, "user");
         String authCode = request.getParameter("otpCode");
 
         if (user == null || authCode == null) {
@@ -87,12 +86,13 @@ public class VerifyCode extends HttpServlet {
             // Redirect to an error page or display an error message
             return;
         }
-        Timestamp otpCreatedTime = uAService.getEmailConfCreatedTime(user);
-        if (!timeH.isExpired(otpCreatedTime)) {
+       
+        if (!timeH.isExpired(user.getEmailCreatedTime())) {
 
-            if (uAService.getEmailConfirmationCode(user).equals(authCode)) {
-                setAccountActive(uAService, user);
-                response.sendRedirect(request.getContextPath() + "frontend/views/client/auth/login.jsp");
+            if (user.getEmailConfirmationCode().equals(authCode)) {
+                uAService.setActivatedAccount(user);
+                uAService.setUserAccountRole(user, "CLIENT");
+                response.sendRedirect(request.getContextPath() + "/frontend/views/client/homepage.jsp");
             } else {
                 handleInvalidAuthCode(request, response, user);
             }
@@ -108,11 +108,6 @@ public class VerifyCode extends HttpServlet {
 
     }
 
-    private void setAccountActive(UserAccountService userAccountService, UserAccount user) {
-        user.setIsActive(1);
-        userAccountService.updateActiveAccount(user);
-        userAccountService.setUserAccountRole(user, "CLIENT");
-    }
 
     private void handleInvalidAuthCode(HttpServletRequest request, HttpServletResponse response, UserAccount user) throws ServletException, IOException {
         OTPTracker.inputNewOtp(user);

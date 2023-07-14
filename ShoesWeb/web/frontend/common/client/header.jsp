@@ -76,7 +76,7 @@
                                     <c:if test="${sessionScope.user != null}">
                                         <li><a class="dropdown-item" href="#">My profile</a></li>
                                         <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/home?redirect=logout">Logout</a></li>
                                        
                                     </c:if>
                                         <c:if test="${sessionScope.user == null}">

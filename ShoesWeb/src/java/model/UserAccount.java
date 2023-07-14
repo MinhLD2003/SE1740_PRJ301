@@ -20,6 +20,9 @@ public class UserAccount {
     private String passwordHash;
     private String emailConfirmationCode;
     private String roleName;
+    private String fullName;
+    private String phoneNumber;
+    private String address;
     private Timestamp emailCreatedTime;
     private String passwordRecoveryCode;
     private Timestamp recoveryTime;
@@ -29,13 +32,16 @@ public class UserAccount {
     }
     private CodeProcessing codeProcessing = new CodeProcessing();
 
-    public UserAccount(String username, String emailAddress, String password) {
+    public UserAccount(String username, String emailAddress, String password , String fullname , String phone , String address) {
         byte[] salt = codeProcessing.generateSalt();
         byte[] passwordhash = codeProcessing.getEncryptedPassword(password, salt);
         this.username = username;
         this.passwordHash = codeProcessing.bytesToString(passwordhash);
         this.passwordSalt = codeProcessing.bytesToString(salt);
         this.emailAddress = emailAddress;
+        this.fullName = fullname;
+        this.phoneNumber = phone;
+        this.address = address;
         this.isActive = 0;
     }
 
@@ -134,5 +140,36 @@ public class UserAccount {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" + "id=" + id + ", username=" + username + ", emailAddress=" + emailAddress + ", passwordSalt=" + passwordSalt + ", passwordHash=" + passwordHash + ", emailConfirmationCode=" + emailConfirmationCode + ", roleName=" + roleName + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", address=" + address + ", emailCreatedTime=" + emailCreatedTime + ", passwordRecoveryCode=" + passwordRecoveryCode + ", recoveryTime=" + recoveryTime + ", isActive=" + isActive + ", codeProcessing=" + codeProcessing + '}';
+    }
+
+  
 
 }

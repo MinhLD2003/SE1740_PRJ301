@@ -8,6 +8,7 @@ package dal.MappingDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 import model.UserAccount;
 
 /**
@@ -26,6 +27,9 @@ public class UserMapping implements ObjectsMapping<UserAccount> {
            user.setPasswordSalt(rs.getString("password_salt"));
            user.setEmailAddress(rs.getString("email_address"));
            user.setRoleName(rs.getString("role_name"));
+           user.setFullName(rs.getString("full_name"));
+           user.setAddress(rs.getString("address"));
+           user.setPhoneNumber(rs.getString("phone"));
            return user;    
        } catch(SQLException ex) {
             System.out.println(ex);
