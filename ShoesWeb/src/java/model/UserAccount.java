@@ -23,6 +23,8 @@ public class UserAccount {
     private String fullName;
     private String phoneNumber;
     private String address;
+    private String dob;
+    private String city;
     private Timestamp emailCreatedTime;
     private String passwordRecoveryCode;
     private Timestamp recoveryTime;
@@ -168,6 +170,22 @@ public class UserAccount {
     @Override
     public String toString() {
         return "UserAccount{" + "id=" + id + ", username=" + username + ", emailAddress=" + emailAddress + ", passwordSalt=" + passwordSalt + ", passwordHash=" + passwordHash + ", emailConfirmationCode=" + emailConfirmationCode + ", roleName=" + roleName + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", address=" + address + ", emailCreatedTime=" + emailCreatedTime + ", passwordRecoveryCode=" + passwordRecoveryCode + ", recoveryTime=" + recoveryTime + ", isActive=" + isActive + ", codeProcessing=" + codeProcessing + '}';
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
   

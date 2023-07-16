@@ -4,6 +4,7 @@
  */
 package dal.ImplementDAO;
 
+import dal.DBConnection;
 import dal.InterfaceDAO.IProductDAO;
 import dal.MappingDAO.ProductMapping;
 import java.sql.Connection;
@@ -22,6 +23,8 @@ import utils.TimestampHandler;
  * @author Admin
  */
 public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
+
+    protected DBConnection db = new DBConnection();
 
     @Override
     public List<Product> queryAllProduct() {
@@ -216,10 +219,12 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
         String sql = "SELECT * FROM sizes where size_gender = ?";
         return queryData(sql, "size", gender);
     }
-    public int queryImageId(String productCode , String url) {
+
+    public int queryImageId(String productCode, String url) {
         String sql = "Select * from image where image_url = ? and product_code = ?";
-        return queryId(sql , "image_id" , url , productCode);
+        return queryId(sql, "image_id", url, productCode);
     }
+
     public int queryBrandId(String brand) {
         String sql = "select brand_id from brand where brand_name = ?";
         return queryId(sql, "brand_id", brand);
@@ -275,102 +280,169 @@ public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
 
     @Override
     public void insertProduct(Product product) {
+        Connection connection = null;
+        try {
+            connection = db.getConnection();
+            connection.setAutoCommit(false);
 
-        TimestampHandler timeH = new TimestampHandler();
-        String sql = "insert into [dbo].[product]("
-                + "            [product_code]\n"
-                + "           ,[name]\n"
-                + "           ,[product_cost]\n"
-                + "           ,[price]\n"
-                + "           ,[description]\n"
-                + "           ,[details]\n"
-                + "           ,[created_time]\n"
-                + "           ,[brand_id]\n"
-                + "           ,[color_id])\n"
-                + "values( ? , ? , ? , ? , ? , ? , ? ,?, ? )";
-        insert(sql,
-                product.getProductCode(),
-                product.getName(),
-                product.getProductCost(),
-                product.getProductSellingPrice(),
-                product.getDescription(),
-                product.getDetail(),
-                timeH.getNow(),
-                queryBrandId(product.getBrand()),
-                queryColorId(product.getColor()));
-        //--------------------------------------------------
-        String sql1 = "insert into product_category values( ? , ? )";
-        for (String category : product.getCategories()) {
-            insert(sql1, product.getProductCode(), queryCategoryId(category));
-        }
-        String sql2 = "insert into product_size_stock values(? , ? , ?)";
-        for (Map.Entry<String, Integer> entry : product.getSizeQuantityMap().entrySet()) {
-            insert(sql2, product.getProductCode(), querySizeId(entry.getKey(),
-                    product.getGender()), entry.getValue());
-        }
-        String sql3 = "insert into image values(? , ? )";
-        for (String s : product.getImageUrls()) {
-            insert(sql3, s, product.getProductCode());
-        }
+            TimestampHandler timeH = new TimestampHandler();
+            String sql = "INSERT INTO [dbo].[product]("
+                    + " [product_code], [name], [product_cost], [price], [description],"
+                    + " [details], [created_time], [brand_id], [color_id])"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            insert(connection, sql,
+                    product.getProductCode(),
+                    product.getName(),
+                    product.getProductCost(),
+                    product.getProductSellingPrice(),
+                    product.getDescription(),
+                    product.getDetail(),
+                    timeH.getNow(),
+                    queryBrandId(product.getBrand()),
+                    queryColorId(product.getColor()));
 
+            String sql1 = "INSERT INTO product_category VALUES (?, ?)";
+            for (String category : product.getCategories()) {
+                insert(connection, sql1, product.getProductCode(), queryCategoryId(category));
+            }
+
+            String sql2 = "INSERT INTO product_size_stock VALUES (?, ?, ?)";
+            for (Map.Entry<String, Integer> entry : product.getSizeQuantityMap().entrySet()) {
+                insert(connection, sql2, product.getProductCode(), querySizeId(entry.getKey(), product.getGender()), entry.getValue());
+            }
+
+            String sql3 = "INSERT INTO image VALUES (?, ?)";
+            for (String s : product.getImageUrls()) {
+                insert(connection, sql3, s, product.getProductCode());
+            }
+
+            // If everything is successful, commit the transaction
+            connection.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // If any exception occurs during the inserts, rollback the transaction
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
     }
 
     public void deleteProduct(String productCode) {
-        String sql = "DELETE FROM image where product_code = ?";
-        delete(sql, productCode);
+        Connection connection = null;
+        try {
+            connection = db.getConnection();
+            connection.setAutoCommit(false);
 
-        String sql1 = "DELETE FROM product_category where product_code = ?";
-        delete(sql1, productCode);
+            String sql = "DELETE FROM image WHERE product_code = ?";
+            delete(connection, sql, productCode);
 
-        String sql2 = "DELETE FROM product_size_stock where product_code = ?";
-        delete(sql2, productCode);
+            String sql1 = "DELETE FROM product_category WHERE product_code = ?";
+            delete(connection, sql1, productCode);
 
-        String sql3 = "DELETE FROM product where product_code = ?";
-        delete(sql3, productCode);
+            String sql2 = "DELETE FROM product_size_stock WHERE product_code = ?";
+            delete(connection, sql2, productCode);
 
+            String sql3 = "DELETE FROM product WHERE product_code = ?";
+            delete(connection, sql3, productCode);
+
+            // If everything is successful, commit the transaction
+            connection.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // If any exception occurs during the deletes, rollback the transaction
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
     }
-    
+
     public void editProduct(Product product) {
-        Product oldProduct = queryProductByCode(product.getProductCode());
-        
-        String sql3 = "Update image set image_url = ? where image_id = ?";
-        for(int i = 0 ;i < product.getImageUrls().size() ;i++) {
-            update(sql3 , product.getImageUrls().get(i) , 
-                    queryImageId(product.getProductCode(), oldProduct.getImageUrls().get(i)));
-        }
-        String sql2 = "update product_size_stock set quantity = ? where size_id = ? and product_code = ?";
-        for (Map.Entry<String, Integer> entry : product.getSizeQuantityMap().entrySet()) {
-            update(sql2, entry.getValue(),querySizeId(entry.getKey(), product.getGender()),  product.getProductCode());
-        }
-        String sql1 = "update product_category set category_id = ? where product_code = ?";
-        for (String category : product.getCategories()) {
-            update(sql1, queryCategoryId(category), product.getProductCode());
-        }
+        Connection connection = null;
+        try {
+            connection = db.getConnection();
+            connection.setAutoCommit(false);
 
-        TimestampHandler timeH = new TimestampHandler();
-        String sql = "UPDATE [dbo].[product]\n"
-                + "   SET "
-                + "       [name] = ?\n"
-                + "      ,[product_cost] = ?\n"
-                + "      ,[price] = ?\n"
-                + "      ,[description] = ?\n"
-                + "      ,[details] = ?\n"
-                + "      ,[last_update_time] = ?\n"
-                + "      ,[brand_id] = ?\n"
-                + "      ,[color_id] = ?\n"
-                + " WHERE product_code = ?\n";
+            Product oldProduct = queryProductByCode(product.getProductCode());
 
-        update(sql,
-                product.getName(),
-                product.getProductCost(),
-                product.getProductSellingPrice(),
-                product.getDescription(),
-                product.getDetail(),
-                timeH.getNow(),
-                queryBrandId(product.getBrand()),
-                queryColorId(product.getColor()),
-                product.getProductCode()
-                
-        );
+            String sql3 = "UPDATE image SET image_url = ? WHERE image_id = ?";
+            for (int i = 0; i < product.getImageUrls().size(); i++) {
+                update(connection, sql3, product.getImageUrls().get(i),
+                        queryImageId(product.getProductCode(), oldProduct.getImageUrls().get(i)));
+            }
+
+            String sql2 = "UPDATE product_size_stock SET quantity = ? WHERE size_id = ? AND product_code = ?";
+            for (Map.Entry<String, Integer> entry : product.getSizeQuantityMap().entrySet()) {
+                update(connection, sql2, entry.getValue(), querySizeId(entry.getKey(), product.getGender()), product.getProductCode());
+            }
+
+            String sql1 = "UPDATE product_category SET category_id = ? WHERE product_code = ?";
+            for (String category : product.getCategories()) {
+                update(connection, sql1, queryCategoryId(category), product.getProductCode());
+            }
+
+            TimestampHandler timeH = new TimestampHandler();
+            String sql = "UPDATE [dbo].[product] "
+                    + "SET [name] = ?, [product_cost] = ?, [price] = ?, [description] = ?, [details] = ?,"
+                    + "[last_update_time] = ?, [brand_id] = ?, [color_id] = ? "
+                    + "WHERE product_code = ?";
+
+            update(connection, sql,
+                    product.getName(),
+                    product.getProductCost(),
+                    product.getProductSellingPrice(),
+                    product.getDescription(),
+                    product.getDetail(),
+                    timeH.getNow(),
+                    queryBrandId(product.getBrand()),
+                    queryColorId(product.getColor()),
+                    product.getProductCode()
+            );
+
+            // If everything is successful, commit the transaction
+            connection.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // If any exception occurs during the updates, rollback the transaction
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
     }
+
 }

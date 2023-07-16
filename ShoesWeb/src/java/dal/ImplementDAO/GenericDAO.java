@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,10 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     protected DBConnection db = new DBConnection();
 
     @Override
-    public void update(String sql, Object... parameters) {
+    public void update(Connection connection, String sql, Object... parameters) {
         PreparedStatement statement = null;
-        Connection connection = null;
+
         try {
-            connection = db.getConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
@@ -56,12 +56,12 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     }
 
     @Override
-    public void insert(String sql, Object... parameters) {
+    public void insert(Connection connection, String sql, Object... parameters) {
 
         PreparedStatement statement = null;
-        Connection connection = null;
+
         try {
-            connection = db.getConnection();
+
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
@@ -207,9 +207,9 @@ public class GenericDAO<T> implements ICrudDAO<T> {
     }
 
     @Override
-    public void delete(String sql, Object... parameters) {
+    public void delete(Connection connection, String sql, Object... parameters) {
         PreparedStatement statement = null;
-        Connection connection = null;
+
         try {
             connection = db.getConnection();
             connection.setAutoCommit(false);
@@ -218,7 +218,7 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException ex) {
-            ex.printStackTrace();   
+            ex.printStackTrace();
             if (connection != null) {
                 try {
                     connection.rollback();
@@ -236,5 +236,48 @@ public class GenericDAO<T> implements ICrudDAO<T> {
             }
         }
     }
-}
 
+    @Override
+    public Long insert1(Connection connection, String sql, Object... parameters) {
+
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            Long id = null;
+
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            setParameters(statement, parameters);
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+            connection.commit();
+            return id;
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+        }
+        return null;
+    }
+}

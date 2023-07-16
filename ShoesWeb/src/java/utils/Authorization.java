@@ -34,7 +34,6 @@ public class Authorization implements Filter {
         HttpServletRequest request = (HttpServletRequest) sr;
         HttpServletResponse response = (HttpServletResponse) sr1;
         String uri = request.getRequestURI();
-        
         if (uri.startsWith("/shoesweb/admin")) {
             UserAccount user = (UserAccount) SessionUtil.getInstance().getValue(request, "user");
             if (user != null) {

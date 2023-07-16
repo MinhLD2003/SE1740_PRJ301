@@ -60,7 +60,8 @@ public class HomeController extends HttpServlet {
         if (redirect != null && redirect.equals("productpage")) {
             String page = request.getParameter("page");
             request.setAttribute("action", "filter");
-            request.setAttribute("pageRequest", page);
+            SessionUtil.getInstance().putValue(request, "pageRequest", page);
+         
             request.getRequestDispatcher("productcontroller").forward(request, response);
         } else if (redirect != null && redirect.equals("sign-in")) {
             response.sendRedirect(request.getContextPath() + "/frontend/views/client/auth/login.jsp");

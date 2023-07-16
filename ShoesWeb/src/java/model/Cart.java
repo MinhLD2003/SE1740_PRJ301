@@ -65,22 +65,29 @@ public class Cart {
 
     public void removeCartLine(String product_code, String size) {
         for (CartLine c : cartLine) {
-            if (c.getProduct().getProductCode().equals(product_code)
-                    && size.equals(c.getSize())) {
+            if (c.getProduct().getProductCode().equals(product_code) && size.equals(c.getSize())) {
                 cartLine.remove(c);
+                setTotal(calculateTotal());
                 return;
             }
         }
     }
 
+    public int isExistedCartLine(CartLine cart) {
+        for (CartLine c : cartLine) {
+            if (c.getProduct().getProductCode().equals(cart.getProduct().getProductCode()) && c.getSize().equals(cart.getSize())) {
+                return c.getQuantity();
+            }
+        }
+        return -1;
+    }
+
     public void updateCartLine(String product_code, int quantity, String size) {
         for (CartLine c : cartLine) {
-            if (c.getProduct().getProductCode().equals(product_code)) {
+            if (c.getProduct().getProductCode().equals(product_code) && c.getSize().equals(size)) {
                 c.setSize(size);
                 c.updateSubtotal(quantity);
                 setTotal(calculateTotal());
-                System.out.println(c.getProduct().getProductCode() + " " + c.getSubtotal());
-                
             }
         }
 
@@ -102,9 +109,11 @@ public class Cart {
 
         return totalSum;
     }
+
     public int sizeOfCart() {
         return cartLine.size();
     }
+
     @Override
     public String toString() {
         return "Cart{" + "tax=" + tax + ", shippingFee=" + shippingFee + ", discount=" + discount + ", total=" + total + ", cartLine=" + cartLine + '}';

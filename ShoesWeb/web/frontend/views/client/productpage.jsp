@@ -29,7 +29,7 @@
     <body>
         <%@include file="../../common/client/header.jsp" %>
         <section style="margin-top:250px">
-            <c:set var="page" value="${requestScope.pageRequest}"></c:set>
+            <c:set var="page" value="${sessionScope.pageRequest}"></c:set>
                 <section id="category mt-6">
                     <div class="container-fluid">
                         <div class="ml-4 mt-5">

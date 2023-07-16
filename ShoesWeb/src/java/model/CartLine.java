@@ -9,7 +9,7 @@ package model;
  * @author Admin
  */
 public class CartLine {
-
+    
     private Product product;
     private String size;
     private int quantity;

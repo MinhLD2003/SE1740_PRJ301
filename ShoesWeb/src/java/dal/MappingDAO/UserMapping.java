@@ -29,7 +29,9 @@ public class UserMapping implements ObjectsMapping<UserAccount> {
            user.setRoleName(rs.getString("role_name"));
            user.setFullName(rs.getString("full_name"));
            user.setAddress(rs.getString("address"));
-           user.setPhoneNumber(rs.getString("phone"));
+           user.setPhoneNumber(rs.getString("phone_number"));
+           user.setCity(rs.getString("city"));
+           user.setDob(rs.getDate("dob").toString());
            return user;    
        } catch(SQLException ex) {
             System.out.println(ex);

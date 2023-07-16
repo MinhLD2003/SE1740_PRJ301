@@ -43,7 +43,7 @@
                                                     Catalog
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/home?redirect=productpage">Products</a>
+                                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/admin-home?redirect=productpage">Products</a>
                                                     <a class="dropdown-item" href="#">Categories<a>
                                                
                                                 </div>
@@ -52,10 +52,10 @@
                                     </div>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=orderpage">Orders</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/admin-home?redirect=orderpage">Orders</a>
                                 </li>
                                  <li class="nav-item ">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/home?redirect=accountpage">Account</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/admin-home?redirect=accountpage">Account</a>
                                 </li>
                                
 

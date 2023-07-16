@@ -83,10 +83,11 @@ Author     : Admin
                             <td>${user.roleName}</td>
 
                             <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                                     data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="${pageContext.request.contextPath}/admin-manage-account?redirect=edit&email=${user.emailAddress}" class="edit"><i class="material-icons"
+                                                                                                                                                           data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
+                                    <i class="material-icons"
+                                       data-toggle="tooltip" onclick="deleteAccount(this)" data-id="${user.id}"title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -114,7 +115,7 @@ Author     : Admin
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form action="<c:url value='/admin-manage-account?action=delete'></c:url>" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Delete Employee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -125,6 +126,7 @@ Author     : Admin
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="hidden" name="userIdForDelete"id="userAccountId" value="">
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </div>
                 </form>
@@ -135,11 +137,11 @@ Author     : Admin
 </body>
 <%@include file="/frontend/common/client/footer.jsp" %> 
 <script type="text/javascript">
-    function deleteProduct(link) {
+    function deleteAccount(link) {
         var dataId = link.getAttribute('data-id');
-        let deleteProductInput = document.getElementById('delete_product_input');
-        deleteProductInput.value = dataId;
-
+        let deleteAccount = document.getElementById('userAccountId');
+        deleteAccount.value = dataId;
+        console.log(dataId);
     }
     document.addEventListener("DOMContentLoaded", function () {
         // Activate tooltip
@@ -196,7 +198,7 @@ Author     : Admin
         });
     });
 
-    }
+    
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

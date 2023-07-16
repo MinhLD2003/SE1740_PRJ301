@@ -25,4 +25,6 @@ public interface IUserAccountDAO extends ICrudDAO<UserAccount> {
     public String getUserRole(String sql, UserAccount user, Object... parameters);
     
     public List<UserAccount> getAllUserAccount();
+    
+    public void editAccount(UserAccount user) ;
 }

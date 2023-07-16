@@ -44,6 +44,18 @@
         <servlet-name>UserAccountManagement</servlet-name>
         <servlet-class>controller.admin.UserAccountManagement</servlet-class>
     </servlet>
+    <filter>
+        <filter-name>ServletFilter</filter-name>
+        <filter-class>utils.Authorization</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>controller.CheckoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -87,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>UserAccountManagement</servlet-name>
         <url-pattern>/admin-manage-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

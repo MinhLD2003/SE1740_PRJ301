@@ -26,7 +26,11 @@ public interface IUserAccountService {
 
     public UserAccount getUserByEmailAddress(String email);
 
-    public void setUserAccountRole(UserAccount user , String role_name);
-     public void setActivatedAccount(UserAccount user);
-    public List<UserAccount> getAllUserAccount() ;
+    public void setUserAccountRole(UserAccount user, String role_name);
+
+    public void setActivatedAccount(UserAccount user);
+
+    public List<UserAccount> getAllUserAccount();
+    public void deleteAccount(int userId);
+    public void editAccount(UserAccount user) ;
 }

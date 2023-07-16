@@ -10,18 +10,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Cart;
-import model.CartLine;
-import model.Product;
-import service.InterfaceService.IProductService;
-import service.ProductService;
-import utils.SessionUtil;
+import model.ShippingAddress;
 
 /**
  *
  * @author Admin
  */
-public class CartController extends HttpServlet {
+public class CheckoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +35,10 @@ public class CartController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartController</title>");
+            out.println("<title>Servlet CheckoutServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CheckoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,42 +53,13 @@ public class CartController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private IProductService IPService = new ProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String product_code = request.getParameter("product_code");
-        String size = request.getParameter("size");
-        Product product = IPService.queryProductByCode(product_code);
-        Cart cart = null;
-        if (SessionUtil.getInstance().containsKey(request, "shoppingcart")) {
-            cart = (Cart) SessionUtil.getInstance().getValue(request, "shoppingcart");
-        } else {
-            cart = new Cart();
-            SessionUtil.getInstance().putValue(request, "shoppingcart", cart);
-        }
-        if (action != null && action.equals("add_item")) {
-            CartLine cartLine = new CartLine(product, size);
-            if (cart.isExistedCartLine(cartLine) != -1) {
-                cart.updateCartLine(product_code, cart.isExistedCartLine(cartLine) + 1, size);
-            } else {
-                cart.addCartLine(cartLine);
-            }
-            response.sendRedirect(request.getContextPath() + "/frontend/views/client/singleproductpage.jsp");
+        String action = (String) request.getParameter("action");
+        if (action != null && action.equals("member_checkout")) {
 
-        } else if (action != null && action.equals("remove_item")) {
-
-            System.out.println(size);
-            cart.removeCartLine(product_code, size);
-            response.sendRedirect(request.getContextPath() + "/frontend/views/client/cart.jsp");
-        } else if (action != null && action.equals("update_qty")) {
-            String size_selected = request.getParameter("size");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            cart.updateCartLine(product_code, quantity, size_selected);
-            System.out.println(product_code + " " + size + " " + quantity);
-            response.sendRedirect(request.getContextPath() + "/frontend/views/client/cart.jsp");
+            request.getRequestDispatcher("frontend/views/client/checkout.jsp").forward(request, response);
         }
     }
 
@@ -108,7 +74,23 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String action = request.getParameter("action");
+        if (action != null && action.equals("complete_checkout")) {
+
+            String address2 = request.getParameter("addr2") == null ? "" : request.getParameter("addr2");
+            String city = request.getParameter("city");
+            String zip = request.getParameter("zip");
+            String orderNote = request.getParameter("ordernote");
+            String fullName = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String address1 = request.getParameter("addr1");
+
+            ShippingAddress shippingAddress = new ShippingAddress(fullName, phone, email, address1, address2, city, zip);
+
+        }
+
     }
 
     /**

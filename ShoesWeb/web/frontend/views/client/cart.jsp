@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/nice-select.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/magnific-popup.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/cssPlugins/style.css">
-
         <style>
             .wrapper{
                 width:200px;
@@ -81,24 +80,15 @@
                                             <td>
 
                                                 <div class="product_count">
-                                                    <select name="size" class="size_selection" data ="${productCart.productCode}">
-                                                        <c:forEach var="productSize" items='${productCart.sizeQuantityMap}'>
-                                                            <c:choose>
-                                                                <c:when test='${itemCart.size == productSize.key}'>
-                                                                    <option value='${productSize.key}' selected>${productSize.key}</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <option value='${productSize.key}'>${productSize.key}</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:forEach>
+                                                    <select name="size" class="size_selection" data ="${productCart.productCode}" data-auto-id="${itemCart.size}">
+                                                        <option value='${itemCart.size}' selected>${itemCart.size}</option>
                                                     </select>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="product_count" >
                                                     <div class="wrapper">
-                                                        <select class="product_quantity" onchange="updateQuantity('${productCart.productCode}')"class="form-control" data ="${productCart.productCode}">
+                                                        <select class="product_quantity" onchange="updateQuantity('${productCart.productCode}','${itemCart.size}')"class="form-control" data-auto-id="${itemCart.size}" data ="${productCart.productCode}">
                                                             <c:forEach var="iteratorQty" begin="1" end="${itemCart.getSizeStock()}">
                                                                 <c:choose>
                                                                     <c:when test='${itemCart.quantity == iteratorQty}'>
@@ -115,7 +105,7 @@
                                             <td>
                                                 <h5>$${itemCart.subtotal}</h5>
                                             </td>
-                                            <td><button class="btn" id="removeBtn" style="color:white;background-color:red;">
+                                            <td><button class="btn" id="removeBtn" onclick="remove('${productCart.productCode}','${itemCart.size}')"style="color:white;background-color:red;">
                                                     <span>Remove</span>
                                                 </button>
                                             </td>
@@ -138,8 +128,8 @@
                     </div>
                     <div class="out_button_area mt-3">
                         <div class=" d-flex align-items-center">
-                            <a class="button_function" href="#">Guest CheckOut</a>
-                            <a class="button_function" href="#">Member CheckOut</a>
+                            <a class="button_function" href="${pageContext.request.contextPath}/checkout?action=member_checkout">Member CheckOut</a>
+                            <a class="button_function" href="${pageContext.request.contextPath}/checkout?action=guest_checkout">Guest CheckOut</a>
                         </div>
                     </div>
 
@@ -149,24 +139,23 @@
         <script type="text/javascript">
 
 
-            function updateQuantity(productCode) {
+            function updateQuantity(productCode, size) {
                 var sizeBtn = document.querySelectorAll(".size_selection");
                 var selectedSize = '';
-                console.log(sizeBtn);
+              
                 sizeBtn.forEach((btn) => {
-                  
-                    if (btn.getAttribute('data') === productCode) {
+                    if (btn.getAttribute('data') === productCode && size === btn.getAttribute('data-auto-id')) {
                         selectedSize = btn.value;
-
                     }
                 });
+                  
                 var url = '${pageContext.request.contextPath}/cart?action=update_qty&product_code=';
                 url = url + productCode + '&size=';
                 url = url + selectedSize + '&quantity=';
                 var selectElement = document.querySelectorAll('.product_quantity');
                 var select_quantity = '';
                 selectElement.forEach((btn) => {
-                    if (btn.getAttribute('data') === productCode) {
+                    if (btn.getAttribute('data') === productCode && size === btn.getAttribute('data-auto-id')) {
                         select_quantity = btn.value;
                     }
                 });
@@ -174,11 +163,10 @@
                 url = url + select_quantity;
                 window.location.href = url;
             }
-            const removeBtn = document.querySelector('#removeBtn');
-            removeBtn.addEventListener('click', () => {
-                var url = "${pageContext.request.contextPath}/cart?action=remove_item&product_code=${product.productCode}";
-                        window.location.href = url;
-                    });
+           function remove(productCode , size) {
+               var url = "${pageContext.request.contextPath}/cart?action=remove_item&product_code="+productCode+"&size=" +size;
+             window.location.href = url;
+           }
         </script>
         <%@include file="/frontend/common/client/footer.jsp" %>
         <script src="<c:url value='/frontend/template/jsPlugins/vendor/jquery-2.2.4.min.js'/>"></script>

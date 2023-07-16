@@ -210,7 +210,6 @@
                             <label>Quantity</label>
                             <input type="number" name="quantity" class="form-control"required min="1">
                         </div>
-
                         <div class="form-group">
                             <label>URL Image</label>
                             <input type="text" name="image" class="form-control"required>

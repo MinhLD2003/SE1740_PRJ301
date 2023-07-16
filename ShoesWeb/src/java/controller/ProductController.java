@@ -66,7 +66,8 @@ public class ProductController extends HttpServlet {
 
         List<Product> productList = null;
         FilterCategory.resetFilterMap();
-        String gender = (String) request.getAttribute("pageRequest");
+        String gender =(String) SessionUtil.getInstance().getValue(request, "pageRequest");
+       
         FilterCategory.addFilterCategory("gender", gender);
         String action = request.getParameter("action");
         if (action != null && action.equals("filter")) {
